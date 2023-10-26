@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pet_bnb/start_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

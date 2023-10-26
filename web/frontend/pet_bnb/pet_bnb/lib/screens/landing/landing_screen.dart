@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pet_bnb/profile_screen.dart';
-import 'package:pet_bnb/start_screen.dart';
+import 'package:pet_bnb/models/users/vet_profile.dart';
+import 'package:pet_bnb/screens/login/start_screen.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key});
