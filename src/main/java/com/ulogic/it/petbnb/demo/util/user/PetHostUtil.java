@@ -1,5 +1,7 @@
 package com.ulogic.it.petbnb.demo.util.user;
 
+import org.springframework.stereotype.Component;
+
 /**
  * <p>
  * </p>
@@ -7,5 +9,6 @@ package com.ulogic.it.petbnb.demo.util.user;
  * @author dannymunoz on 2023-10-23
  * @project demo
  */
+@Component
 public class PetHostUtil {
 }

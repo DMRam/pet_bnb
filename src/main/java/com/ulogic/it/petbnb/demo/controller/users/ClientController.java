@@ -72,10 +72,10 @@ public class ClientController {
      *
      * @param client
      */
-    @PutMapping("/update")
+    @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateClient(@RequestBody Client client) {
-        clientDataServices.updateClientById(client);
+    public void updateClient(@PathVariable String id, @RequestBody Client client) {
+        clientDataServices.updateClientById(client, id);
     }
 
 

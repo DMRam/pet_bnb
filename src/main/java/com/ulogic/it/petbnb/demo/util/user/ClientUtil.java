@@ -3,6 +3,7 @@ package com.ulogic.it.petbnb.demo.util.user;
 import com.google.firebase.database.DataSnapshot;
 import com.ulogic.it.petbnb.demo.model.pet.Pet;
 import com.ulogic.it.petbnb.demo.model.users.Client;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * @author dannymunoz on 2023-10-23
  * @project demo
  */
+@Component
 public class ClientUtil {
 
     public List<Client> clientsListFactory(DataSnapshot dataSnapshot) {

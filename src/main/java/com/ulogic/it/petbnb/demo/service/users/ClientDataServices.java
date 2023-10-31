@@ -5,6 +5,7 @@ import com.google.firebase.database.*;
 import com.ulogic.it.petbnb.demo.model.users.Client;
 import com.ulogic.it.petbnb.demo.util.user.ClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.concurrent.CompletableFuture;
  * @author dannymunoz on 2023-10-23
  * @project demo
  */
+@Service
 public class ClientDataServices {
 
     @Autowired
@@ -130,9 +132,9 @@ public class ClientDataServices {
      *
      * @param client
      */
-    public void updateClientById(Client client) {
+    public void updateClientById(Client client, String id) {
         try {
-            DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_clients/" + client.getId());
+            DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_clients/" + id);
 
             ref.setValue(client, new DatabaseReference.CompletionListener() {
                 @Override
