@@ -16,14 +16,6 @@ class _LandingScreen extends State<LandingScreen> {
 
   var activeScreen = "start-screen";
 
-  // Widget? activeScreen;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   activeScreen = StartScreen(switchScreen);
-  // }
-
   void switchScreen() {
     setState(() {
       activeScreen = 'profile-screen';

@@ -3,4 +3,6 @@ import 'package:pet_bnb/screens/landing/landing_screen.dart';
 
 void main() {
   runApp(const LandingScreen());
+
+  // TEST
 }
