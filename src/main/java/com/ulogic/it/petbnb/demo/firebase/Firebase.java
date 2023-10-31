@@ -16,11 +16,11 @@ public class Firebase {
     @Bean
     public FirebaseApp firebaseApp() throws IOException {
         FileInputStream serviceAccount = new FileInputStream(
-                "");
+                "static/petbnb-c5acb-firebase-adminsdk-me4tn-e6c7803f3a.json");
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .setDatabaseUrl("")
+                .setDatabaseUrl("https://petbnb-c5acb-default-rtdb.firebaseio.com")
                 .build();
 
         return FirebaseApp.initializeApp(options);
