@@ -6,7 +6,7 @@ build/
 !**/src/test/**/build/
 
 ### JSON ###
-./demo/src/main/resources/static/petbnb-c5acb-firebase-adminsdk-me4tn-e6c7803f3a.json
+src/main/resources/static/petbnb-c5acb-firebase-adminsdk-me4tn-e6c7803f3a.json
 
 ### STS ###
 .apt_generated
