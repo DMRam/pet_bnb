@@ -1,7 +1,6 @@
 package com.ulogic.it.petbnb.demo.model.pet;
 
 import com.ulogic.it.petbnb.demo.model.users.Client;
-import com.ulogic.it.petbnb.demo.model.users.User;
 
 /**
  * <p>
