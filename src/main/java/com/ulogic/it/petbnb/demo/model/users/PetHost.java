@@ -8,4 +8,9 @@ package com.ulogic.it.petbnb.demo.model.users;
  * @project demo
  */
 public class PetHost extends User {
+
+    public PetHost(String id, String name, String lastName, String password) {
+        super(id, name, lastName, password);
+    }
+
 }
