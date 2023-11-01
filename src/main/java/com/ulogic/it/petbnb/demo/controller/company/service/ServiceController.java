@@ -1,6 +1,6 @@
 package com.ulogic.it.petbnb.demo.controller.company.service;
 
-import com.ulogic.it.petbnb.demo.model.company.service.Service;
+import com.ulogic.it.petbnb.demo.model.company.service.PetService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,20 +19,20 @@ import java.util.List;
 public class ServiceController {
 
     @GetMapping("/get_all")
-    public ResponseEntity<List<Service>> getServices() {
+    public ResponseEntity<List<PetService>> getServices() {
 
         return null;
     }
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.OK)
-    public void addService(@RequestBody Service Service) {
+    public void addService(@RequestBody PetService PetService) {
 
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    public void updateService(@RequestBody Service Service) {
+    public void updateService(@RequestBody PetService PetService) {
 
     }
 

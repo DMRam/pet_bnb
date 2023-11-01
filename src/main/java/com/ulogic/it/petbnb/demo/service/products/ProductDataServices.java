@@ -2,7 +2,7 @@ package com.ulogic.it.petbnb.demo.service.products;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.*;
-import com.ulogic.it.petbnb.demo.model.company.products.Product;
+import com.ulogic.it.petbnb.demo.model.company.products.PetProduct;
 import com.ulogic.it.petbnb.demo.util.products.ProductUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,9 +41,9 @@ public class ProductDataServices {
      *
      * @return
      */
-    public CompletableFuture<List<Product>> getProductsData() {
+    public CompletableFuture<List<PetProduct>> getProductsData() {
 
-        CompletableFuture<List<Product>> future = new CompletableFuture<>();
+        CompletableFuture<List<PetProduct>> future = new CompletableFuture<>();
 
         try {
             DatabaseReference databaseReference = firebaseDatabase.getReference("pet_bnb_products");
@@ -79,13 +79,13 @@ public class ProductDataServices {
      * Adding products to Firebase
      * </p>
      */
-    public void addProductData(@RequestBody Product product) {
+    public void addProductData(@RequestBody PetProduct petProduct) {
         try {
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("pet_bnb_products").push();
             String key = ref.getKey();
-            product.setId(key);
+            petProduct.setId(key);
 
-            ref.setValue(product, new DatabaseReference.CompletionListener() {
+            ref.setValue(petProduct, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError error, DatabaseReference ref) {
                     if (error != null) {
@@ -135,13 +135,13 @@ public class ProductDataServices {
      * Update Product by Id
      * </p>
      *
-     * @param product
+     * @param petProduct
      */
-    public void updateProductById(Product product, String id) {
+    public void updateProductById(PetProduct petProduct, String id) {
         try {
             DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_products/" + id);
 
-            ref.setValue(product, new DatabaseReference.CompletionListener() {
+            ref.setValue(petProduct, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError error, DatabaseReference ref) {
                     if (error != null) {

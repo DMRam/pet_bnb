@@ -1,8 +1,8 @@
-package com.ulogic.it.petbnb.demo.util.products;
+package com.ulogic.it.petbnb.demo.util.services;
 
 import com.google.firebase.database.DataSnapshot;
-import com.ulogic.it.petbnb.demo.model.company.products.PetProduct;
-import com.ulogic.it.petbnb.demo.model.users.ProductSeller;
+import com.ulogic.it.petbnb.demo.model.company.service.PetService;
+import com.ulogic.it.petbnb.demo.model.users.ServiceSeller;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -16,10 +16,10 @@ import java.util.List;
  * @project demo
  */
 @Component
-public class ProductUtil {
+public class PetServiceUtil {
 
-    public List<PetProduct> productsListFactory(DataSnapshot dataSnapshot) {
-        List<PetProduct> productsList = new ArrayList<>();
+    public List<PetService> petServicesListFactory(DataSnapshot dataSnapshot) {
+        List<PetService> petServicesList = new ArrayList<>();
         try {
             if (dataSnapshot.exists()) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
@@ -27,15 +27,15 @@ public class ProductUtil {
                     String name = childSnapshot.child("name").getValue(String.class);
                     String description = childSnapshot.child("description").getValue(String.class);
                     double price = childSnapshot.child("price").getValue(double.class);
-                    ProductSeller productSeller = childSnapshot.child(("productSeller")).getValue(ProductSeller.class);
-                    PetProduct petProduct = new PetProduct(id, name, description, price, productSeller);
-                    productsList.add(petProduct);
+                    ServiceSeller serviceSeller = childSnapshot.child("serviceSeller").getValue(ServiceSeller.class);
+                    PetService petService = new PetService(id, name, description, price, serviceSeller);
+                    petServicesList.add(petService);
                 }
             }
-            return productsList;
+            return petServicesList;
 
         } catch (Exception e) {
-            System.out.println("EXCEPTION UTIL PRODUCT: " + e);
+            System.out.println("EXCEPTION UTIL PET SERVICES: " + e);
         }
         return null;
     }

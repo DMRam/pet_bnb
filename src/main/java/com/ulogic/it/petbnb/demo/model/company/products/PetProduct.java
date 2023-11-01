@@ -9,7 +9,7 @@ import com.ulogic.it.petbnb.demo.model.users.ProductSeller;
  * @author dannymunoz on 2023-10-23
  * @project demo
  */
-public class Product {
+public class PetProduct {
 
     private String id;
     private String name;
@@ -19,7 +19,7 @@ public class Product {
 
     private ProductSeller productSeller;
 
-    public Product(String id, String name, String description, double price, ProductSeller productSeller) {
+    public PetProduct(String id, String name, String description, double price, ProductSeller productSeller) {
         this.id = id;
         this.name = name;
         this.description = description;
