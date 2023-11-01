@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pet_bnb/services/api/users/users_get_call.dart';
+import 'package:pet_bnb/services/util/future_builder.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -27,6 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text('Profile Page'),
+              UsersGetAPICall(),
             ],
           ),
         )

@@ -1,38 +1,39 @@
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class ClientClass extends StatefulWidget {
+  final String name;
+  final String lastName;
+
+  ClientClass(this.name, this.lastName, {Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _ProfileScreenState();
+    return _ClientClass();
   }
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ClientClass extends State<ClientClass> {
   static const colorList = [Colors.lightGreen, Colors.lightBlue];
 
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
     return Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: colorList,
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: colorList,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        child: const Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Profile Page'),
-            ],
-          ),
-        )
-        // activeScreen == 'start-screen'
-        // ? StartScreen(switchScreen)
-        // : const QuestionsScreen(),
-        );
+      ),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(widget.name),
+            Text(widget.lastName),
+          ],
+        ),
+      ),
+    );
   }
 }

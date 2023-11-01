@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_bnb/models/users/vet_profile.dart';
 import 'package:pet_bnb/screens/login/start_screen.dart';
+import 'package:pet_bnb/services/api/users/users_get_call.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key});
@@ -36,7 +37,7 @@ class _LandingScreen extends State<LandingScreen> {
         ),
         child: activeScreen == 'start-screen'
             ? StartScreen(switchScreen)
-            : const ProfileScreen(),
+            : const UsersGetAPICall(),
       )),
     );
   }
