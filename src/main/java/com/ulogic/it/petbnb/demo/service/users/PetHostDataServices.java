@@ -2,8 +2,8 @@ package com.ulogic.it.petbnb.demo.service.users;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.*;
-import com.ulogic.it.petbnb.demo.model.users.Client;
-import com.ulogic.it.petbnb.demo.util.user.ClientUtil;
+import com.ulogic.it.petbnb.demo.model.users.PetHost;
+import com.ulogic.it.petbnb.demo.util.user.PetHostUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +27,7 @@ public class PetHostDataServices {
     @Autowired
     private FirebaseDatabase firebaseDatabase;
     @Autowired
-    ClientUtil clientUtil;
+    PetHostUtil petHostUtil;
 
 
     /**
@@ -37,23 +37,23 @@ public class PetHostDataServices {
      *
      * @return
      */
-    public CompletableFuture<List<Client>> getClientsData() {
+    public CompletableFuture<List<PetHost>> getPetHostData() {
 
-        CompletableFuture<List<Client>> future = new CompletableFuture<>();
+        CompletableFuture<List<PetHost>> future = new CompletableFuture<>();
 
         try {
-            DatabaseReference databaseReference = firebaseDatabase.getReference("pet_bnb_clients");
+            DatabaseReference databaseReference = firebaseDatabase.getReference("pet_bnb_pet_host");
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 /**
                  * <p>
-                 *     Passing DataSnapshot util method is returning a list of Client
+                 *     Passing DataSnapshot util method is returning a list of {@link PetHost}
                  * </p>
                  * @param dataSnapshot The current data at the location
                  */
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     // BusinessUtil creates List of Business from DataSnapshot
-                    future.complete(clientUtil.clientsListFactory(dataSnapshot));
+                    future.complete(petHostUtil.petHostsListFactory(dataSnapshot));
                 }
 
                 @Override
@@ -72,16 +72,16 @@ public class PetHostDataServices {
 
     /**
      * <p>
-     * Adding clients to Firebase
+     * Adding {@link PetHost} to Firebase
      * </p>
      */
-    public void addClientData(@RequestBody Client client) {
+    public void addPetHostData(@RequestBody PetHost petHost) {
         try {
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("pet_bnb_clients").push();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("pet_bnb_pet_host").push();
             String key = ref.getKey();
-            client.setId(key);
+            petHost.setId(key);
 
-            ref.setValue(client, new DatabaseReference.CompletionListener() {
+            ref.setValue(petHost, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError error, DatabaseReference ref) {
                     if (error != null) {
@@ -101,15 +101,15 @@ public class PetHostDataServices {
 
     /**
      * <p>
-     * Delete Client
+     * Delete {@link PetHost}
      * </p>
      *
      * @param id
      */
-    public void deleteClientById(String id) {
+    public void deletePetHostById(String id) {
 
         try {
-            DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_clients/" + id);
+            DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_pet_host/" + id);
 
             System.out.println("Reference to be removed: " + ref);
 
@@ -128,16 +128,16 @@ public class PetHostDataServices {
 
     /**
      * <p>
-     * Update Client by Id
+     * Update {@link PetHost} by Id
      * </p>
      *
-     * @param client
+     * @param petHost
      */
-    public void updateClientById(Client client, String id) {
+    public void updatePetHostById(PetHost petHost, String id) {
         try {
-            DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_clients/" + id);
+            DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_pet_host/" + id);
 
-            ref.setValue(client, new DatabaseReference.CompletionListener() {
+            ref.setValue(petHost, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError error, DatabaseReference ref) {
                     if (error != null) {

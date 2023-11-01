@@ -7,5 +7,9 @@ package com.ulogic.it.petbnb.demo.model.users;
  * @author dannymunoz on 2023-10-31
  * @project demo
  */
-public class ServiceSeller {
+public class ServiceSeller extends User {
+    public ServiceSeller(String id, String name, String lastName, String password) {
+        super(id, name, lastName, password);
+    }
+
 }

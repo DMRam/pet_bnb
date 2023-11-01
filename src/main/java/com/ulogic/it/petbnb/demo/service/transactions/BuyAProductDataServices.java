@@ -2,8 +2,8 @@ package com.ulogic.it.petbnb.demo.service.transactions;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.*;
-import com.ulogic.it.petbnb.demo.model.users.Client;
-import com.ulogic.it.petbnb.demo.util.user.ClientUtil;
+import com.ulogic.it.petbnb.demo.model.transactions.BuyAProduct;
+import com.ulogic.it.petbnb.demo.util.transaction.BuyAProductUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +27,7 @@ public class BuyAProductDataServices {
     @Autowired
     private FirebaseDatabase firebaseDatabase;
     @Autowired
-    ClientUtil clientUtil;
+    BuyAProductUtil buyAProductUtil;
 
 
     /**
@@ -37,23 +37,23 @@ public class BuyAProductDataServices {
      *
      * @return
      */
-    public CompletableFuture<List<Client>> getClientsData() {
+    public CompletableFuture<List<BuyAProduct>> getBuyAProductData() {
 
-        CompletableFuture<List<Client>> future = new CompletableFuture<>();
+        CompletableFuture<List<BuyAProduct>> future = new CompletableFuture<>();
 
         try {
-            DatabaseReference databaseReference = firebaseDatabase.getReference("pet_bnb_clients");
+            DatabaseReference databaseReference = firebaseDatabase.getReference("pet_bnb_buy_product");
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 /**
                  * <p>
-                 *     Passing DataSnapshot util method is returning a list of Client
+                 *     Passing DataSnapshot util method is returning a list of {@link BuyAProduct}
                  * </p>
                  * @param dataSnapshot The current data at the location
                  */
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     // BusinessUtil creates List of Business from DataSnapshot
-                    future.complete(clientUtil.clientsListFactory(dataSnapshot));
+                    future.complete(buyAProductUtil.buyAProductsListFactory(dataSnapshot));
                 }
 
                 @Override
@@ -72,16 +72,16 @@ public class BuyAProductDataServices {
 
     /**
      * <p>
-     * Adding clients to Firebase
+     * Adding buyAProduct to Firebase
      * </p>
      */
-    public void addClientData(@RequestBody Client client) {
+    public void addBuyAProductData(@RequestBody BuyAProduct buyAProduct) {
         try {
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("pet_bnb_clients").push();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("pet_bnb_buy_product").push();
             String key = ref.getKey();
-            client.setId(key);
+            buyAProduct.setId(key);
 
-            ref.setValue(client, new DatabaseReference.CompletionListener() {
+            ref.setValue(buyAProduct, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError error, DatabaseReference ref) {
                     if (error != null) {
@@ -101,15 +101,15 @@ public class BuyAProductDataServices {
 
     /**
      * <p>
-     * Delete Client
+     * Delete {@link BuyAProduct}
      * </p>
      *
      * @param id
      */
-    public void deleteClientById(String id) {
+    public void deleteBuyAProductById(String id) {
 
         try {
-            DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_clients/" + id);
+            DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_buy_product/" + id);
 
             System.out.println("Reference to be removed: " + ref);
 
@@ -128,16 +128,16 @@ public class BuyAProductDataServices {
 
     /**
      * <p>
-     * Update Client by Id
+     * Update {@link BuyAProduct} by Id
      * </p>
      *
-     * @param client
+     * @param buyAProduct
      */
-    public void updateClientById(Client client, String id) {
+    public void updateBuyAProductById(BuyAProduct buyAProduct, String id) {
         try {
-            DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_clients/" + id);
+            DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_buy_product/" + id);
 
-            ref.setValue(client, new DatabaseReference.CompletionListener() {
+            ref.setValue(buyAProduct, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError error, DatabaseReference ref) {
                     if (error != null) {

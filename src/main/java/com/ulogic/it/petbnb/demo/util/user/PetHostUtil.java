@@ -3,6 +3,7 @@ package com.ulogic.it.petbnb.demo.util.user;
 import com.google.firebase.database.DataSnapshot;
 import com.ulogic.it.petbnb.demo.model.pet.Pet;
 import com.ulogic.it.petbnb.demo.model.users.Client;
+import com.ulogic.it.petbnb.demo.model.users.PetHost;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,8 +19,8 @@ import java.util.List;
 @Component
 public class PetHostUtil {
 
-    public List<Client> clientsListFactory(DataSnapshot dataSnapshot) {
-        List<Client> clientsList = new ArrayList<>();
+    public List<PetHost> petHostsListFactory(DataSnapshot dataSnapshot) {
+        List<PetHost> petHostList = new ArrayList<>();
         try {
             if (dataSnapshot.exists()) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
@@ -28,14 +29,14 @@ public class PetHostUtil {
                     String lastName = childSnapshot.child("lastName").getValue(String.class);
                     String password = childSnapshot.child("password").getValue(String.class);
                     Pet pet = childSnapshot.child("pet").getValue(Pet.class);
-                    Client client = new Client(id, userName, lastName, password, pet);
-                    clientsList.add(client);
+                    PetHost petHost = new PetHost(id, userName, lastName, password);
+                    petHostList.add(petHost);
                 }
             }
-            return clientsList;
+            return petHostList;
 
         } catch (Exception e) {
-            System.out.println("EXCEPTION UTIL CLIENTS: " + e);
+            System.out.println("EXCEPTION UTIL PET HOST: " + e);
         }
         return null;
     }

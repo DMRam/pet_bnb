@@ -1,11 +1,14 @@
 package com.ulogic.it.petbnb.demo.controller.company.products;
 
 import com.ulogic.it.petbnb.demo.model.company.products.PetProduct;
+import com.ulogic.it.petbnb.demo.service.products.ProductDataServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * <p>
@@ -18,28 +21,32 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
 
-    @GetMapping("/get_all")
-    public ResponseEntity<List<PetProduct>> getProducts() {
+    @Autowired
+    ProductDataServices productDataServices;
 
-        return null;
+    @GetMapping("/get_all")
+    public ResponseEntity<List<PetProduct>> getProducts() throws ExecutionException, InterruptedException {
+
+        return new ResponseEntity<>(productDataServices.getProductsData().get(), HttpStatus.OK);
     }
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.OK)
     public void addProduct(@RequestBody PetProduct petProduct) {
 
+        productDataServices.addProductData(petProduct);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateProduct(@RequestBody PetProduct petProduct) {
-
+    public void updateProduct(@RequestBody PetProduct petProduct, @RequestParam String id) {
+        productDataServices.updateProductById(petProduct, id);
     }
 
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteProduct() {
-
+    public void deleteProduct(@RequestBody String id) {
+        productDataServices.deleteProductById(id);
     }
 
 }

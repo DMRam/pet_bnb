@@ -2,8 +2,9 @@ package com.ulogic.it.petbnb.demo.service.users;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.*;
-import com.ulogic.it.petbnb.demo.model.users.Client;
-import com.ulogic.it.petbnb.demo.util.user.ClientUtil;
+
+import com.ulogic.it.petbnb.demo.model.users.Vet;
+import com.ulogic.it.petbnb.demo.util.user.VetUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +28,7 @@ public class VetDataServices {
     @Autowired
     private FirebaseDatabase firebaseDatabase;
     @Autowired
-    ClientUtil clientUtil;
+    VetUtil vetUtil;
 
 
     /**
@@ -37,23 +38,23 @@ public class VetDataServices {
      *
      * @return
      */
-    public CompletableFuture<List<Client>> getClientsData() {
+    public CompletableFuture<List<Vet>> getVetData() {
 
-        CompletableFuture<List<Client>> future = new CompletableFuture<>();
+        CompletableFuture<List<Vet>> future = new CompletableFuture<>();
 
         try {
-            DatabaseReference databaseReference = firebaseDatabase.getReference("pet_bnb_clients");
+            DatabaseReference databaseReference = firebaseDatabase.getReference("pet_bnb_vets");
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 /**
                  * <p>
-                 *     Passing DataSnapshot util method is returning a list of Client
+                 *     Passing DataSnapshot util method is returning a list of {@link Vet}
                  * </p>
                  * @param dataSnapshot The current data at the location
                  */
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     // BusinessUtil creates List of Business from DataSnapshot
-                    future.complete(clientUtil.clientsListFactory(dataSnapshot));
+                    future.complete(vetUtil.vetsListFactory(dataSnapshot));
                 }
 
                 @Override
@@ -72,16 +73,16 @@ public class VetDataServices {
 
     /**
      * <p>
-     * Adding clients to Firebase
+     * Adding {@link Vet} to Firebase
      * </p>
      */
-    public void addClientData(@RequestBody Client client) {
+    public void addVetData(@RequestBody Vet vet) {
         try {
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("pet_bnb_clients").push();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("pet_bnb_vets").push();
             String key = ref.getKey();
-            client.setId(key);
+            vet.setId(key);
 
-            ref.setValue(client, new DatabaseReference.CompletionListener() {
+            ref.setValue(vet, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError error, DatabaseReference ref) {
                     if (error != null) {
@@ -101,15 +102,15 @@ public class VetDataServices {
 
     /**
      * <p>
-     * Delete Client
+     * Delete {@link Vet}
      * </p>
      *
      * @param id
      */
-    public void deleteClientById(String id) {
+    public void deleteVetById(String id) {
 
         try {
-            DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_clients/" + id);
+            DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_vets/" + id);
 
             System.out.println("Reference to be removed: " + ref);
 
@@ -128,16 +129,16 @@ public class VetDataServices {
 
     /**
      * <p>
-     * Update Client by Id
+     * Update {@link Vet} by Id
      * </p>
      *
-     * @param client
+     * @param vet
      */
-    public void updateClientById(Client client, String id) {
+    public void updateVetById(Vet vet, String id) {
         try {
-            DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_clients/" + id);
+            DatabaseReference ref = firebaseDatabase.getReference("pet_bnb_vets/" + id);
 
-            ref.setValue(client, new DatabaseReference.CompletionListener() {
+            ref.setValue(vet, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError error, DatabaseReference ref) {
                     if (error != null) {

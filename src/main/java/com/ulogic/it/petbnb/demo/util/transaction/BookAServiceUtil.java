@@ -2,7 +2,9 @@ package com.ulogic.it.petbnb.demo.util.transaction;
 
 import com.google.firebase.database.DataSnapshot;
 import com.ulogic.it.petbnb.demo.model.pet.Pet;
+import com.ulogic.it.petbnb.demo.model.transactions.BookAService;
 import com.ulogic.it.petbnb.demo.model.users.Client;
+import com.ulogic.it.petbnb.demo.model.users.ServiceSeller;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,24 +20,24 @@ import java.util.List;
 @Component
 public class BookAServiceUtil {
 
-    public List<Client> clientsListFactory(DataSnapshot dataSnapshot) {
-        List<Client> clientsList = new ArrayList<>();
+    public List<BookAService> bookAServicesListFactory(DataSnapshot dataSnapshot) {
+        List<BookAService> bookAServices = new ArrayList<>();
         try {
             if (dataSnapshot.exists()) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     String id = childSnapshot.getKey();
-                    String userName = childSnapshot.child("name").getValue(String.class);
-                    String lastName = childSnapshot.child("lastName").getValue(String.class);
-                    String password = childSnapshot.child("password").getValue(String.class);
-                    Pet pet = childSnapshot.child("pet").getValue(Pet.class);
-                    Client client = new Client(id, userName, lastName, password, pet);
-                    clientsList.add(client);
+                    String serviceName = childSnapshot.child("serviceName").getValue(String.class);
+                    double price = childSnapshot.child("price").getValue(double.class);
+                    ServiceSeller serviceSeller = childSnapshot.child("serviceSeller").getValue(ServiceSeller.class);
+                    Client client = childSnapshot.child("client").getValue(Client.class);
+                    BookAService bookAService = new BookAService(id, serviceName, price, serviceSeller, client);
+                    bookAServices.add(bookAService);
                 }
             }
-            return clientsList;
+            return bookAServices;
 
         } catch (Exception e) {
-            System.out.println("EXCEPTION UTIL CLIENTS: " + e);
+            System.out.println("EXCEPTION UTIL BOOK A SERVICE: " + e);
         }
         return null;
     }

@@ -2,7 +2,9 @@ package com.ulogic.it.petbnb.demo.util.transaction;
 
 import com.google.firebase.database.DataSnapshot;
 import com.ulogic.it.petbnb.demo.model.pet.Pet;
+import com.ulogic.it.petbnb.demo.model.transactions.BuyAProduct;
 import com.ulogic.it.petbnb.demo.model.users.Client;
+import com.ulogic.it.petbnb.demo.model.users.ProductSeller;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,24 +20,24 @@ import java.util.List;
 @Component
 public class BuyAProductUtil {
 
-    public List<Client> clientsListFactory(DataSnapshot dataSnapshot) {
-        List<Client> clientsList = new ArrayList<>();
+    public List<BuyAProduct> buyAProductsListFactory(DataSnapshot dataSnapshot) {
+        List<BuyAProduct> buyAProductList = new ArrayList<>();
         try {
             if (dataSnapshot.exists()) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     String id = childSnapshot.getKey();
-                    String userName = childSnapshot.child("name").getValue(String.class);
-                    String lastName = childSnapshot.child("lastName").getValue(String.class);
-                    String password = childSnapshot.child("password").getValue(String.class);
-                    Pet pet = childSnapshot.child("pet").getValue(Pet.class);
-                    Client client = new Client(id, userName, lastName, password, pet);
-                    clientsList.add(client);
+                    String productName = childSnapshot.child("productName").getValue(String.class);
+                    double price = childSnapshot.child("price").getValue(double.class);
+                    ProductSeller productSeller = childSnapshot.child("productSeller").getValue(ProductSeller.class);
+                    Client client = childSnapshot.child("client").getValue(Client.class);
+                    BuyAProduct buyAProduct = new BuyAProduct(id, productName, price, productSeller, client);
+                    buyAProductList.add(buyAProduct);
                 }
             }
-            return clientsList;
+            return buyAProductList;
 
         } catch (Exception e) {
-            System.out.println("EXCEPTION UTIL CLIENTS: " + e);
+            System.out.println("EXCEPTION UTIL BUY A PRODUCT: " + e);
         }
         return null;
     }

@@ -25,8 +25,6 @@ public class PetUtil {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     String id = childSnapshot.getKey();
                     String userName = childSnapshot.child("name").getValue(String.class);
-                    String lastName = childSnapshot.child("lastName").getValue(String.class);
-                    String password = childSnapshot.child("password").getValue(String.class);
                     Client client = childSnapshot.child(("owner")).getValue(Client.class);
                     Pet pet = new Pet(id, userName, client);
                     petsList.add(pet);

@@ -2,7 +2,9 @@ package com.ulogic.it.petbnb.demo.util.transaction;
 
 import com.google.firebase.database.DataSnapshot;
 import com.ulogic.it.petbnb.demo.model.pet.Pet;
+import com.ulogic.it.petbnb.demo.model.transactions.BookAPlace;
 import com.ulogic.it.petbnb.demo.model.users.Client;
+import com.ulogic.it.petbnb.demo.model.users.PetHost;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,24 +20,24 @@ import java.util.List;
 @Component
 public class BookAPlaceUtil {
 
-    public List<Client> clientsListFactory(DataSnapshot dataSnapshot) {
-        List<Client> clientsList = new ArrayList<>();
+    public List<BookAPlace> bookAPlacesListFactory(DataSnapshot dataSnapshot) {
+        List<BookAPlace> bookAPlacesList = new ArrayList<>();
         try {
             if (dataSnapshot.exists()) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     String id = childSnapshot.getKey();
-                    String userName = childSnapshot.child("name").getValue(String.class);
-                    String lastName = childSnapshot.child("lastName").getValue(String.class);
-                    String password = childSnapshot.child("password").getValue(String.class);
-                    Pet pet = childSnapshot.child("pet").getValue(Pet.class);
-                    Client client = new Client(id, userName, lastName, password, pet);
-                    clientsList.add(client);
+                    String placeName = childSnapshot.child("placeName").getValue(String.class);
+                    double price = childSnapshot.child("price").getValue(double.class);
+                    PetHost petHost = childSnapshot.child("petHost").getValue(PetHost.class);
+                    Client client = childSnapshot.child("client").getValue(Client.class);
+                    BookAPlace bookAPlace = new BookAPlace(id, placeName, price, petHost, client);
+                    bookAPlacesList.add(bookAPlace);
                 }
             }
-            return clientsList;
+            return bookAPlacesList;
 
         } catch (Exception e) {
-            System.out.println("EXCEPTION UTIL CLIENTS: " + e);
+            System.out.println("EXCEPTION UTIL BOOK A PLACE: " + e);
         }
         return null;
     }
