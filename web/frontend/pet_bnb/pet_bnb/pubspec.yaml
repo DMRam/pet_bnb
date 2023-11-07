@@ -28,6 +28,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  path_provider: ^2.1.1
+  path_provider_foundation: ^2.3.1
   flutter:
     sdk: flutter
 

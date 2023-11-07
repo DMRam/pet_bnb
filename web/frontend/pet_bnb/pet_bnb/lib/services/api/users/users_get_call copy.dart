@@ -13,25 +13,15 @@ class APICalls extends StatefulWidget {
 class _APICalls extends State<APICalls> {
   Future<String> fetchData() async {
     try {
-
       print('IN FETCH ------');
-      var url = Uri.parse('http://10.0.2.2:8080/client/all');
+      var url = Uri.parse('http://localhost:8080/client/all');
 
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
-        // If server returns a 200 OK response, parse the JSON
-        // You can use the `dart:convert` library to parse JSON
-        // For example, if the response is a list of posts:
-        // List<Post> posts = (json.decode(response.body) as List)
-        //     .map((data) => Post.fromJson(data))
-        //     .toList();
-
         print('Response: ${response.body}');
         return response.body;
       } else {
-        // If the server did not return a 200 OK response,
-        // throw an exception.
         throw Exception('Failed to load data');
       }
     } catch (e) {
@@ -46,7 +36,7 @@ class _APICalls extends State<APICalls> {
       future: fetchData(),
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator(); // Return a loading indicator while waiting for data
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
