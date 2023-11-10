@@ -36,56 +36,38 @@ class _UsersGetAPICall extends State<UsersGetAPICall> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        bottom: PreferredSize(
-          preferredSize:
-              const Size.fromHeight(30.0), // Adjust the height as needed
-          child: Container(
-            alignment: Alignment.bottomCenter,
-            padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
-            child: const Text(
-              'API',
-              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-      ),
-      body: Center(
-        // Center the entire content
-        child: FutureBuilder<List<Map<String, dynamic>>?>(
-          future: fetchData(),
-          builder: (BuildContext context,
-              AsyncSnapshot<List<Map<String, dynamic>>?> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child:
-                    CircularProgressIndicator(), // Center the loading indicator
-              );
-            } else if (snapshot.hasError || snapshot.data == null) {
-              return Text('Error: ${snapshot.error}');
-            } else {
-              return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return SizedBox(
-                    width: double.infinity,
-                    child: Container(
-                      child: Column(
-                        children: [
-                          ClientClass(
-                            snapshot.data![index]['name'],
-                            snapshot.data![index]['lastName'],
-                          ),
-                        ],
+    return Center(
+      // Center the entire content
+      child: FutureBuilder<List<Map<String, dynamic>>?>(
+        future: fetchData(),
+        builder: (BuildContext context,
+            AsyncSnapshot<List<Map<String, dynamic>>?> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child:
+                  CircularProgressIndicator(), // Center the loading indicator
+            );
+          } else if (snapshot.hasError || snapshot.data == null) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (BuildContext context, int index) {
+                return SizedBox(
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      ClientClass(
+                        snapshot.data![index]['name'],
+                        snapshot.data![index]['lastName'],
                       ),
-                    ),
-                  );
-                },
-              );
-            }
-          },
-        ),
+                    ],
+                  ),
+                );
+              },
+            );
+          }
+        },
       ),
     );
   }
