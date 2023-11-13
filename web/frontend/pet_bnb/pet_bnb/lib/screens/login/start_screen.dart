@@ -27,7 +27,6 @@ class _StartScreenState extends State<StartScreen> {
   }
 }
 
-
 // const Center(
       //   child: Column(
       //     mainAxisSize: MainAxisSize.min,
