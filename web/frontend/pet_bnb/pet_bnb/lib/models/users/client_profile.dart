@@ -13,7 +13,7 @@ class ClientClass extends StatefulWidget {
 }
 
 class _ClientClass extends State<ClientClass> {
-  static const colorList = [Colors.lightGreen, Colors.lightBlue];
+  static const colorList = [Colors.white, Colors.white30];
 
   @override
   Widget build(BuildContext context) {

@@ -10,7 +10,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  static const colorList = [Colors.lightGreen, Colors.lightBlue];
+  static const colorList = [Colors.white, Colors.white30];
 
   @override
   Widget build(context) {

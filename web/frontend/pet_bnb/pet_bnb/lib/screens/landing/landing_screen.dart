@@ -11,7 +11,7 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreen extends State<LandingScreen> {
-  static const colorList = [Colors.lightGreen, Colors.lightBlue];
+  static const colorList = [Colors.white, Colors.white30];
 
   var activeScreen = "start-screen";
 

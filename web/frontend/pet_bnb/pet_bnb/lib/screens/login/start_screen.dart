@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pet_bnb/configuration/presentation/widgets/scrollable_row.dart';
 import 'package:pet_bnb/screens/card/card_list.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
-  static const colorList = [Colors.lightGreen, Colors.lightBlue];
+  static const colorList = [Colors.white, Colors.white30];
 
   @override
   State<StartScreen> createState() => _StartScreenState();
@@ -11,7 +12,7 @@ class StartScreen extends StatefulWidget {
 
 class _StartScreenState extends State<StartScreen> {
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -20,12 +21,18 @@ class _StartScreenState extends State<StartScreen> {
           end: Alignment.bottomRight,
         ),
       ),
-      child: const CardList(),
-
-      
+      child: const Column(
+        children: [
+          MyScrollableRow(),
+          Expanded(
+            child: CardList(),
+          ),
+        ],
+      ),
     );
   }
 }
+
 
 // const Center(
       //   child: Column(

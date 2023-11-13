@@ -29,6 +29,7 @@ class _NavigationExampleState extends State<NavigationExample> {
     return Scaffold(
       appBar: AppBar(
         title: Text(tittleForAppBar ),
+        backgroundColor: Color.fromARGB(192, 96, 125, 139),
       ),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
@@ -37,7 +38,7 @@ class _NavigationExampleState extends State<NavigationExample> {
           });
           titleHandler(currentPageIndex);
         },
-        indicatorColor: Color.fromARGB(217, 187, 255, 0),
+        indicatorColor: Color.fromARGB(192, 119, 129, 134),
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
           NavigationDestination(
