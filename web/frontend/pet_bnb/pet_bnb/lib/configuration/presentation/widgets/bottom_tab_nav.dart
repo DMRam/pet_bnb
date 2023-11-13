@@ -12,7 +12,7 @@ class NavigationExample extends StatefulWidget {
 
 class _NavigationExampleState extends State<NavigationExample> {
   int currentPageIndex = 0;
-  String tittleForAppBar = '';
+  String tittleForAppBar = 'Start';
 
   void titleHandler(index) {
     if (index == 1) {
@@ -28,7 +28,7 @@ class _NavigationExampleState extends State<NavigationExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(tittleForAppBar),
+        title: Text(tittleForAppBar ),
       ),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
@@ -37,7 +37,7 @@ class _NavigationExampleState extends State<NavigationExample> {
           });
           titleHandler(currentPageIndex);
         },
-        indicatorColor: Colors.amber[800],
+        indicatorColor: Color.fromARGB(217, 187, 255, 0),
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
           NavigationDestination(
