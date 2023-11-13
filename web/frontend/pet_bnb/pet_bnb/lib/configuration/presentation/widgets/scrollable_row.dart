@@ -55,6 +55,36 @@ class MyScrollableRow extends StatelessWidget {
               child: const Text('Services'),
             ),
           ),
+          const SizedBox(width: 16.0), // Adjust spacing as needed
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Handle button click
+                print('Button Clicked');
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color.fromARGB(255, 175, 76, 76), // Change button color
+                shape: const StadiumBorder(),
+              ),
+              child: const Text('Services'),
+            ),
+          ),
+          const SizedBox(width: 16.0), // Adjust spacing as needed
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Handle button click
+                print('Button Clicked');
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 157, 76, 175), // Change button color
+                shape: const StadiumBorder(),
+              ),
+              child: const Text('Services'),
+            ),
+          ),
           // Add more buttons as needed
         ],
       ),
