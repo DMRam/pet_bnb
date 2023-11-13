@@ -22,7 +22,13 @@ class _StartScreenState extends State<StartScreen> {
       ),
       child: const CardList(),
 
-      // const Center(
+      
+    );
+  }
+}
+
+
+// const Center(
       //   child: Column(
       //     mainAxisSize: MainAxisSize.min,
       //     children: [
@@ -46,6 +52,3 @@ class _StartScreenState extends State<StartScreen> {
       // activeScreen == 'start-screen'
       // ? StartScreen(switchScreen)
       // : const QuestionsScreen(),
-    );
-  }
-}
