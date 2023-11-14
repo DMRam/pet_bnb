@@ -22,7 +22,8 @@ class CardInfo extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
                 gradient: const LinearGradient(
                   colors: [
-                    Colors.white, Colors.white30
+                    Colors.white,
+                    Colors.white30
                   ], // Adjust gradient colors
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -34,10 +35,20 @@ class CardInfo extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      flex: 2,
+                      flex: 3,
                       child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: ImageBubble(),
+                        padding: EdgeInsets.all(4.0),
+                        child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                ImageBubble(),
+                                ImageBubble(),
+                                ImageBubble(),
+                                ImageBubble(),
+                                ImageBubble(),
+                              ],
+                            )),
                       ),
                     ),
                     Expanded(

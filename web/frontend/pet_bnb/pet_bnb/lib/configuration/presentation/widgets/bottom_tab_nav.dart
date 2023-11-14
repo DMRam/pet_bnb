@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:pet_bnb/configuration/presentation/providers/app_provider.dart';
+import 'package:pet_bnb/configuration/presentation/widgets/toggle_map_list_button.dart';
 import 'package:pet_bnb/screens/login/start_screen.dart';
 import 'package:pet_bnb/screens/profile/profile_screen.dart';
 import 'package:pet_bnb/services/api/users/users_get_call.dart';
+import 'package:provider/provider.dart';
 
-class NavigationExample extends StatefulWidget {
-  const NavigationExample({super.key});
+class MyNavigationBottom extends StatefulWidget {
+  const MyNavigationBottom({super.key});
 
   @override
-  State<NavigationExample> createState() => _NavigationExampleState();
+  State<MyNavigationBottom> createState() => _MyNavigationBottomState();
 }
 
-class _NavigationExampleState extends State<NavigationExample> {
+class _MyNavigationBottomState extends State<MyNavigationBottom> {
   int currentPageIndex = 0;
   String tittleForAppBar = 'Start';
 
@@ -26,9 +29,13 @@ class _NavigationExampleState extends State<NavigationExample> {
 
   @override
   Widget build(BuildContext context) {
+
+    final appProvider = context.watch<MyAppProvider>();
+
+    appProvider.initialToMap;
     return Scaffold(
       appBar: AppBar(
-        title: Text(tittleForAppBar ),
+        title: Text(tittleForAppBar),
         backgroundColor: Color.fromARGB(192, 96, 125, 139),
       ),
       bottomNavigationBar: NavigationBar(
@@ -43,17 +50,18 @@ class _NavigationExampleState extends State<NavigationExample> {
         destinations: const <Widget>[
           NavigationDestination(
             selectedIcon: Icon(Icons.home),
-            icon: Icon(Icons.home_outlined),
+            icon: Icon(Icons.home),
             label: 'Home',
           ),
           NavigationDestination(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            selectedIcon: Icon(Icons.pets_outlined),
+            icon: Icon(Icons.pets_outlined),
+            label: 'My Pet',
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.school),
-            icon: Icon(Icons.school_outlined),
-            label: 'School',
+            selectedIcon: Icon(Icons.person),
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),
@@ -61,7 +69,8 @@ class _NavigationExampleState extends State<NavigationExample> {
         const StartScreen(),
         const UsersGetAPICall(),
         const MyProfileScreen(),
-      ][currentPageIndex],
+      ][appProvider.initialToMap? 1 : currentPageIndex],
+      floatingActionButton: const MyFloatingButton(),
     );
   }
 }
