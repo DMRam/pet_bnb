@@ -25,6 +25,8 @@ class _MyFloatingButtonState extends State<MyFloatingButton> {
   Widget build(BuildContext context) {
     final appProvider = context.watch<MyAppProvider>();
 
+    appProvider.switchToMap();
+
     return FloatingActionButton(
       onPressed: () {
         appProvider.switchToMap();
@@ -35,7 +37,10 @@ class _MyFloatingButtonState extends State<MyFloatingButton> {
       foregroundColor: customizations[index].$1,
       backgroundColor: customizations[index].$2,
       shape: customizations[index].$3,
-      child: const Icon(Icons.navigation),
+      child: appProvider.switchToMap()
+          ? const Icon(Icons.list_rounded)
+          : const Icon(Icons.map_outlined),
     );
   }
 }
+

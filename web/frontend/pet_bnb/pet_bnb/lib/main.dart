@@ -14,8 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => MyAppProvider())],
-      child: const MaterialApp(
-          debugShowCheckedModeBanner: false, home: MyNavigationBottom()),
+      child: MaterialApp(
+          theme: ThemeData.dark(useMaterial3: false),
+          debugShowCheckedModeBanner: false,
+          home: const MyNavigationBottom()),
     );
   }
 }

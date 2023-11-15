@@ -10,20 +10,22 @@ class CardInfo extends StatelessWidget {
       padding: const EdgeInsets.all(8.0), // Add padding here
       child: Center(
         child: Material(
-          elevation: 30,
-          borderRadius: BorderRadius.circular(5),
+          elevation: 10,
+          borderRadius: BorderRadius.circular(10),
           child: InkWell(
             onTap: () {
               // Handle card press
               print('Card Pressed');
             },
             child: Ink(
+              
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
+                
+                borderRadius: BorderRadius.circular(10),
                 gradient: const LinearGradient(
                   colors: [
-                    Colors.white,
-                    Colors.white30
+                    Colors.black12,
+                    Colors.white10
                   ], // Adjust gradient colors
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -33,14 +35,18 @@ class CardInfo extends StatelessWidget {
                 width: 350,
                 height: 150,
                 child: Row(
+
                   children: [
                     Expanded(
+                    
                       flex: 3,
                       child: Padding(
                         padding: EdgeInsets.all(4.0),
                         child: SingleChildScrollView(
+
                             scrollDirection: Axis.horizontal,
                             child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 ImageBubble(),
                                 ImageBubble(),
@@ -54,7 +60,7 @@ class CardInfo extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: Padding(
-                        padding: const EdgeInsets.all(30.0),
+                        padding: EdgeInsets.all(30.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -74,7 +80,7 @@ class CardInfo extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(15.0),
                         child: Text(
                           'Price \n \u0024\u0024\u0024',
                           style: TextStyle(
