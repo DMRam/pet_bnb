@@ -199,8 +199,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                         Container(
                           width: 178.0,
                           height: 178.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).secondary,
+                          decoration: const BoxDecoration(
+                            color: Color(0x80188DAA),
                             shape: BoxShape.circle,
                           ),
                           child: Padding(

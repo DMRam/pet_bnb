@@ -178,13 +178,17 @@ class _PhoneSignInScreenWidgetState extends State<PhoneSignInScreenWidget> {
                                 child: TextFormField(
                                   controller: _model.phoneNumberController,
                                   focusNode: _model.phoneNumberFocusNode,
-                                  textInputAction: TextInputAction.done,
+                                  textInputAction: TextInputAction.send,
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     labelText: 'Your Phone Number...',
                                     hintText: '+1 (234) 123-1234',
                                     hintStyle: FlutterFlowTheme.of(context)
-                                        .headlineMedium,
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
@@ -232,7 +236,6 @@ class _PhoneSignInScreenWidgetState extends State<PhoneSignInScreenWidget> {
                                   validator: _model
                                       .phoneNumberControllerValidator
                                       .asValidator(context),
-                                  inputFormatters: [_model.phoneNumberMask],
                                 ),
                               ),
                             ],
@@ -248,9 +251,7 @@ class _PhoneSignInScreenWidgetState extends State<PhoneSignInScreenWidget> {
                               FFButtonWidget(
                                 onPressed: () async {
                                   final phoneNumberVal =
-                                      (_model.phoneNumberFocusNode?.hasFocus ??
-                                              false)
-                                          .toString();
+                                      _model.phoneNumberController.text;
                                   if (phoneNumberVal.isEmpty ||
                                       !phoneNumberVal.startsWith('+')) {
                                     ScaffoldMessenger.of(context).showSnackBar(

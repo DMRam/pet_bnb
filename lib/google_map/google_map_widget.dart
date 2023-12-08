@@ -144,7 +144,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
                               () async {
                                 await showModalBottomSheet(
                                   isScrollControlled: true,
-                                  backgroundColor: Colors.transparent,
+                                  backgroundColor: const Color(0x95000000),
                                   enableDrag: false,
                                   context: context,
                                   builder: (context) {
@@ -177,7 +177,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
                       showZoomControls: true,
                       showLocation: true,
                       showCompass: false,
-                      showMapToolbar: false,
+                      showMapToolbar: true,
                       showTraffic: false,
                       centerMapOnMarkerTap: true,
                     );

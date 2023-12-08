@@ -607,7 +607,19 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                                   Colors.transparent,
                                               onTap: () async {
                                                 context.goNamed(
-                                                    'PhoneSignInScreen');
+                                                  'PhoneSignInScreen',
+                                                  extra: <String, dynamic>{
+                                                    kTransitionInfoKey:
+                                                        const TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                      duration: Duration(
+                                                          milliseconds: 500),
+                                                    ),
+                                                  },
+                                                );
                                               },
                                               child: Container(
                                                 width: 50.0,
@@ -1038,13 +1050,27 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                             await UsersRecord.collection
                                                 .doc(user.uid)
                                                 .update(createUsersRecordData(
-                                                  email: '',
-                                                  displayName: '',
+                                                  email: _model
+                                                      .emailAddressController
+                                                      .text,
+                                                  displayName: _model
+                                                      .nameController.text,
                                                 ));
 
-                                            context.goNamedAuth(
-                                                'DashboardScreen',
-                                                context.mounted);
+                                            context.pushNamedAuth(
+                                              'AuthenticationScreen',
+                                              context.mounted,
+                                              extra: <String, dynamic>{
+                                                kTransitionInfoKey:
+                                                    const TransitionInfo(
+                                                  hasTransition: true,
+                                                  transitionType:
+                                                      PageTransitionType.fade,
+                                                  duration: Duration(
+                                                      milliseconds: 500),
+                                                ),
+                                              },
+                                            );
                                           },
                                           text: 'Create Account',
                                           options: FFButtonOptions(
