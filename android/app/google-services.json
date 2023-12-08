@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "176858987512",
+    "project_id": "ulogic-it-petbnb-tklpne",
+    "storage_bucket": "ulogic-it-petbnb-tklpne.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176858987512:android:b7e6ed20438d42104bb40d",
+        "android_client_info": {
+          "package_name": "com.ulogicIt.ulogicitpetbnb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "176858987512-0fdh42nf8qcunklqiv2ojqvbmi6ncds5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ulogicIt.ulogicitpetbnb",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "176858987512-l7us5vi5o4oirlovh80lr09fkefmg3dv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3DPvcX5vUjfA_uFrM_KhNrFNcBEbxtaE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "176858987512-l7us5vi5o4oirlovh80lr09fkefmg3dv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "176858987512-8loutisa63tjash5hif6hb9l89fd65jo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ulogicIt.ulogicitpetbnb"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
