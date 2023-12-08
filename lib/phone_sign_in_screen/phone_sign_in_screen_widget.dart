@@ -206,21 +206,18 @@ class _PhoneSignInScreenWidgetState extends State<PhoneSignInScreenWidget> {
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
-                                        color: Color(0x00000000),
+                                        color: Color(0xFFEA0A0A),
                                         width: 2.0,
                                       ),
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
-                                        color: Color(0x00000000),
+                                        color: Color(0xFFEA0A0A),
                                         width: 2.0,
                                       ),
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
-                                    filled: true,
-                                    fillColor: FlutterFlowTheme.of(context)
-                                        .primaryBtnText,
                                     contentPadding:
                                         const EdgeInsetsDirectional.fromSTEB(
                                             16.0, 24.0, 0.0, 24.0),
@@ -228,9 +225,7 @@ class _PhoneSignInScreenWidgetState extends State<PhoneSignInScreenWidget> {
                                   style:
                                       FlutterFlowTheme.of(context).bodyMedium,
                                   maxLines: null,
-                                  keyboardType:
-                                      const TextInputType.numberWithOptions(
-                                          signed: true, decimal: true),
+                                  keyboardType: TextInputType.phone,
                                   cursorColor:
                                       FlutterFlowTheme.of(context).primaryText,
                                   validator: _model

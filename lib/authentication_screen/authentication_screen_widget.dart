@@ -27,6 +27,7 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
   late AuthenticationScreenModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -1019,6 +1020,10 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                             0.0, 24.0, 0.0, 0.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
+                                            currentUserLocationValue =
+                                                await getCurrentUserLocation(
+                                                    defaultLocation:
+                                                        const LatLng(0.0, 0.0));
                                             GoRouter.of(context)
                                                 .prepareAuthEvent();
                                             if (_model
@@ -1050,11 +1055,11 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                             await UsersRecord.collection
                                                 .doc(user.uid)
                                                 .update(createUsersRecordData(
-                                                  email: _model
-                                                      .emailAddressController
-                                                      .text,
+                                                  email: widget.email,
                                                   displayName: _model
                                                       .nameController.text,
+                                                  location:
+                                                      currentUserLocationValue,
                                                 ));
 
                                             context.pushNamedAuth(
@@ -1146,6 +1151,10 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                currentUserLocationValue =
+                                                    await getCurrentUserLocation(
+                                                        defaultLocation:
+                                                            const LatLng(0.0, 0.0));
                                                 GoRouter.of(context)
                                                     .prepareAuthEvent();
                                                 final user = await authManager
@@ -1192,6 +1201,10 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                currentUserLocationValue =
+                                                    await getCurrentUserLocation(
+                                                        defaultLocation:
+                                                            const LatLng(0.0, 0.0));
                                                 GoRouter.of(context)
                                                     .prepareAuthEvent();
                                                 final user = await authManager
@@ -1238,6 +1251,10 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                currentUserLocationValue =
+                                                    await getCurrentUserLocation(
+                                                        defaultLocation:
+                                                            const LatLng(0.0, 0.0));
                                                 GoRouter.of(context)
                                                     .prepareAuthEvent();
                                                 final user = await authManager

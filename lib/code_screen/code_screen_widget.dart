@@ -158,17 +158,7 @@ class _CodeScreenWidgetState extends State<CodeScreenWidget> {
                       return;
                     }
 
-                    context.goNamedAuth(
-                      'DashboardScreen',
-                      context.mounted,
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: const TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.fade,
-                          duration: Duration(milliseconds: 500),
-                        ),
-                      },
-                    );
+                    context.goNamedAuth('DashboardScreen', context.mounted);
                   },
                   text: 'Verify code',
                   options: FFButtonOptions(
