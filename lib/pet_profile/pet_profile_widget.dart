@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'pet_profile_model.dart';
 export 'pet_profile_model.dart';
@@ -22,6 +23,11 @@ class _PetProfileWidgetState extends State<PetProfileWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PetProfileModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setDarkModeSetting(context, ThemeMode.system);
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }

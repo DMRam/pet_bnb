@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'dashboard_screen_model.dart';
 export 'dashboard_screen_model.dart';
@@ -25,6 +26,11 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DashboardScreenModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setDarkModeSetting(context, ThemeMode.system);
+    });
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
