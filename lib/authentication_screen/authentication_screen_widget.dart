@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -26,6 +27,7 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
   late AuthenticationScreenModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -1018,6 +1020,10 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                             0.0, 24.0, 0.0, 0.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
+                                            currentUserLocationValue =
+                                                await getCurrentUserLocation(
+                                                    defaultLocation:
+                                                        const LatLng(0.0, 0.0));
                                             GoRouter.of(context)
                                                 .prepareAuthEvent();
                                             if (_model
@@ -1046,7 +1052,17 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                               return;
                                             }
 
-                                            context.pushNamedAuth(
+                                            await UsersRecord.collection
+                                                .doc()
+                                                .set(createUsersRecordData(
+                                                  email: widget.email,
+                                                  displayName: _model
+                                                      .nameController.text,
+                                                  location:
+                                                      currentUserLocationValue,
+                                                ));
+
+                                            context.goNamedAuth(
                                               'AuthenticationScreen',
                                               context.mounted,
                                               extra: <String, dynamic>{
