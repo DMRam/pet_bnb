@@ -10,5 +10,5 @@ export '/phone_sign_in_screen/phone_sign_in_screen_widget.dart'
     show PhoneSignInScreenWidget;
 export '/profile/profile_widget.dart' show ProfileWidget;
 export '/pet_profile/pet_profile_widget.dart' show PetProfileWidget;
-export '/google_map/google_map_widget.dart' show GoogleMapWidget;
 export '/welcome/welcome_widget.dart' show WelcomeWidget;
+export '/maps/maps_widget.dart' show MapsWidget;

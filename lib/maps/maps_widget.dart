@@ -6,18 +6,18 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'google_map_model.dart';
-export 'google_map_model.dart';
+import 'maps_model.dart';
+export 'maps_model.dart';
 
-class GoogleMapWidget extends StatefulWidget {
-  const GoogleMapWidget({super.key});
+class MapsWidget extends StatefulWidget {
+  const MapsWidget({super.key});
 
   @override
-  _GoogleMapWidgetState createState() => _GoogleMapWidgetState();
+  _MapsWidgetState createState() => _MapsWidgetState();
 }
 
-class _GoogleMapWidgetState extends State<GoogleMapWidget> {
-  late GoogleMapModel _model;
+class _MapsWidgetState extends State<MapsWidget> {
+  late MapsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   LatLng? currentUserLocationValue;
@@ -25,7 +25,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => GoogleMapModel());
+    _model = createModel(context, () => MapsModel());
 
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
@@ -93,7 +93,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
             },
           ),
           title: Text(
-            'Hosters near by',
+            'Hosters near...',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Readex Pro',
                   color: Colors.white,
@@ -111,9 +111,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
             children: [
               Expanded(
                 child: StreamBuilder<List<UsersRecord>>(
-                  stream: queryUsersRecord(
-                    limit: 10,
-                  ),
+                  stream: queryUsersRecord(),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
@@ -144,7 +142,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
                               () async {
                                 await showModalBottomSheet(
                                   isScrollControlled: true,
-                                  backgroundColor: const Color(0x95000000),
+                                  backgroundColor: const Color(0x82000000),
                                   enableDrag: false,
                                   context: context,
                                   builder: (context) {
@@ -171,13 +169,13 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
                       markerColor: GoogleMarkerColor.violet,
                       mapType: MapType.normal,
                       style: GoogleMapStyle.standard,
-                      initialZoom: 10.0,
+                      initialZoom: 14.0,
                       allowInteraction: true,
                       allowZoom: true,
                       showZoomControls: true,
                       showLocation: true,
                       showCompass: false,
-                      showMapToolbar: true,
+                      showMapToolbar: false,
                       showTraffic: false,
                       centerMapOnMarkerTap: true,
                     );
