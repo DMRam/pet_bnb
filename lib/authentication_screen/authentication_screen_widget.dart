@@ -1,5 +1,4 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -27,7 +26,6 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
   late AuthenticationScreenModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -1020,10 +1018,6 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                             0.0, 24.0, 0.0, 0.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
-                                            currentUserLocationValue =
-                                                await getCurrentUserLocation(
-                                                    defaultLocation:
-                                                        const LatLng(0.0, 0.0));
                                             GoRouter.of(context)
                                                 .prepareAuthEvent();
                                             if (_model
@@ -1051,16 +1045,6 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                             if (user == null) {
                                               return;
                                             }
-
-                                            await UsersRecord.collection
-                                                .doc(user.uid)
-                                                .update(createUsersRecordData(
-                                                  email: widget.email,
-                                                  displayName: _model
-                                                      .nameController.text,
-                                                  location:
-                                                      currentUserLocationValue,
-                                                ));
 
                                             context.pushNamedAuth(
                                               'AuthenticationScreen',
@@ -1104,198 +1088,6 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                               width: 1.0,
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            20.0, 20.0, 20.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Expanded(
-                                              child: Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 12.0, 0.0, 0.0),
-                                                child: Text(
-                                                  'Or use a social account to create account',
-                                                  textAlign: TextAlign.center,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .titleSmall
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color:
-                                                            const Color(0xC8FFFFFF),
-                                                      ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 16.0, 0.0, 8.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                currentUserLocationValue =
-                                                    await getCurrentUserLocation(
-                                                        defaultLocation:
-                                                            const LatLng(0.0, 0.0));
-                                                GoRouter.of(context)
-                                                    .prepareAuthEvent();
-                                                final user = await authManager
-                                                    .signInWithGoogle(context);
-                                                if (user == null) {
-                                                  return;
-                                                }
-
-                                                context.goNamedAuth(
-                                                    'DashboardScreen',
-                                                    context.mounted);
-                                              },
-                                              child: Container(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  boxShadow: const [
-                                                    BoxShadow(
-                                                      blurRadius: 5.0,
-                                                      color: Color(0x3314181B),
-                                                      offset: Offset(0.0, 2.0),
-                                                    )
-                                                  ],
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                alignment: const AlignmentDirectional(
-                                                    0.00, 0.00),
-                                                child: FaIcon(
-                                                  FontAwesomeIcons.google,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryBackground,
-                                                  size: 24.0,
-                                                ),
-                                              ),
-                                            ),
-                                            InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                currentUserLocationValue =
-                                                    await getCurrentUserLocation(
-                                                        defaultLocation:
-                                                            const LatLng(0.0, 0.0));
-                                                GoRouter.of(context)
-                                                    .prepareAuthEvent();
-                                                final user = await authManager
-                                                    .signInWithApple(context);
-                                                if (user == null) {
-                                                  return;
-                                                }
-
-                                                context.goNamedAuth(
-                                                    'DashboardScreen',
-                                                    context.mounted);
-                                              },
-                                              child: Container(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  boxShadow: const [
-                                                    BoxShadow(
-                                                      blurRadius: 5.0,
-                                                      color: Color(0x3314181B),
-                                                      offset: Offset(0.0, 2.0),
-                                                    )
-                                                  ],
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                alignment: const AlignmentDirectional(
-                                                    0.00, 0.00),
-                                                child: FaIcon(
-                                                  FontAwesomeIcons.apple,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryBackground,
-                                                  size: 24.0,
-                                                ),
-                                              ),
-                                            ),
-                                            InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                currentUserLocationValue =
-                                                    await getCurrentUserLocation(
-                                                        defaultLocation:
-                                                            const LatLng(0.0, 0.0));
-                                                GoRouter.of(context)
-                                                    .prepareAuthEvent();
-                                                final user = await authManager
-                                                    .signInWithFacebook(
-                                                        context);
-                                                if (user == null) {
-                                                  return;
-                                                }
-
-                                                context.goNamedAuth(
-                                                    'DashboardScreen',
-                                                    context.mounted);
-                                              },
-                                              child: Container(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  boxShadow: const [
-                                                    BoxShadow(
-                                                      blurRadius: 5.0,
-                                                      color: Color(0x3314181B),
-                                                      offset: Offset(0.0, 2.0),
-                                                    )
-                                                  ],
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                alignment: const AlignmentDirectional(
-                                                    0.00, 0.00),
-                                                child: FaIcon(
-                                                  FontAwesomeIcons.facebookF,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryBackground,
-                                                  size: 24.0,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
                                         ),
                                       ),
                                     ],

@@ -128,16 +128,14 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                           ),
                         ),
                         Expanded(
-                          child: AuthUserStreamWidget(
-                            builder: (context) => Text(
-                              'Welcome $currentUserDisplayName',
-                              style: FlutterFlowTheme.of(context)
-                                  .headlineMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    fontSize: 20.0,
-                                  ),
-                            ),
+                          child: Text(
+                            'Welcome $currentUserDisplayName',
+                            style: FlutterFlowTheme.of(context)
+                                .headlineMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  fontSize: 20.0,
+                                ),
                           ),
                         ),
                         Padding(
