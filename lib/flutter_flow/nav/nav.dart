@@ -125,14 +125,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : const PetProfileWidget(),
         ),
         FFRoute(
-          name: 'GoogleMap',
-          path: '/googleMap',
-          builder: (context, params) => const GoogleMapWidget(),
-        ),
-        FFRoute(
           name: 'Welcome',
           path: '/welcome',
           builder: (context, params) => const WelcomeWidget(),
+        ),
+        FFRoute(
+          name: 'Maps',
+          path: '/maps',
+          builder: (context, params) => const MapsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

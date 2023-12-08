@@ -154,12 +154,12 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                             ),
                             onPressed: () async {
                               context.pushNamed(
-                                'GoogleMap',
+                                'Maps',
                                 extra: <String, dynamic>{
                                   kTransitionInfoKey: const TransitionInfo(
                                     hasTransition: true,
                                     transitionType: PageTransitionType.fade,
-                                    duration: Duration(milliseconds: 1500),
+                                    duration: Duration(milliseconds: 500),
                                   ),
                                 },
                               );

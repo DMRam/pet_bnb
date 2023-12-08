@@ -96,10 +96,7 @@ class _BottomComponentMapMarkerWidgetState
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 12.0, 0.0),
                             child: Text(
-                              valueOrDefault<String>(
-                                widget.refLocation?.displayName,
-                                'USER',
-                              ),
+                              cardModalBasicUsersRecord.displayName,
                               style:
                                   FlutterFlowTheme.of(context).headlineMedium,
                             ),
@@ -128,10 +125,7 @@ class _BottomComponentMapMarkerWidgetState
                       color: FlutterFlowTheme.of(context).primaryBackground,
                     ),
                     Text(
-                      valueOrDefault<String>(
-                        widget.refLocation?.phoneNumber,
-                        'PHONE',
-                      ),
+                      cardModalBasicUsersRecord.phoneNumber,
                       style: FlutterFlowTheme.of(context).labelMedium,
                     ),
                     Padding(
