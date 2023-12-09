@@ -93,7 +93,7 @@ class _MapsWidgetState extends State<MapsWidget> {
             },
           ),
           title: Text(
-            'Hosters near...',
+            'Pet stay nearby...',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Readex Pro',
                   color: Colors.white,
@@ -175,7 +175,7 @@ class _MapsWidgetState extends State<MapsWidget> {
                       showZoomControls: true,
                       showLocation: true,
                       showCompass: false,
-                      showMapToolbar: false,
+                      showMapToolbar: true,
                       showTraffic: false,
                       centerMapOnMarkerTap: true,
                     );

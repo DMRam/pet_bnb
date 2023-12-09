@@ -262,7 +262,7 @@ class _PhoneSignInScreenWidgetState extends State<PhoneSignInScreenWidget> {
                                     phoneNumber: phoneNumberVal,
                                     onCodeSent: (context) async {
                                       context.goNamedAuth(
-                                        'codeScreen',
+                                        'CodeScreen',
                                         context.mounted,
                                         ignoreRedirect: true,
                                       );
