@@ -70,7 +70,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: Image.network(
-                  'https://media.istockphoto.com/id/1189999060/vector/animal-paw-seamless-pattern-stock-illustration.jpg?s=612x612&w=0&k=20&c=8PcXcUSFigk0kyxYXfcQ-D6XcNUy16TQbKjNGM2i66U=',
+                  '',
                 ).image,
               ),
             ),
@@ -297,8 +297,8 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                             style:
                                 FlutterFlowTheme.of(context).bodyLarge.override(
                                       fontFamily: 'Inter',
-                                      color: const Color(0xFFFF30CD),
-                                      fontSize: 22.0,
+                                      color: const Color(0xFF3071FF),
+                                      fontSize: 20.0,
                                       fontWeight: FontWeight.w800,
                                     ),
                           ),
@@ -825,12 +825,12 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                         Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                             image: DecorationImage(
                               fit: BoxFit.cover,
                               image: Image.network(
-                                'https://media.istockphoto.com/id/1189999060/vector/animal-paw-seamless-pattern-stock-illustration.jpg?s=612x612&w=0&k=20&c=8PcXcUSFigk0kyxYXfcQ-D6XcNUy16TQbKjNGM2i66U=',
+                                '',
                               ).image,
                             ),
                           ),
@@ -847,7 +847,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                       .bodyLarge
                                       .override(
                                         fontFamily: 'Inter',
-                                        color: const Color(0xFFFF30CD),
+                                        color: const Color(0xFF3071FF),
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),

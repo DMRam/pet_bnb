@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'welcome_model.dart';
 export 'welcome_model.dart';
 
@@ -86,7 +87,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
       effects: [
         VisibilityEffect(duration: 400.ms),
         FadeEffect(
-          curve: Curves.easeInOut,
+          curve: Curves.easeIn,
           delay: 400.ms,
           duration: 400.ms,
           begin: 0.0,
@@ -168,11 +169,11 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                     gradient: LinearGradient(
                       colors: [
                         const Color(0x00FFFFFF),
-                        FlutterFlowTheme.of(context).secondaryBackground
+                        FlutterFlowTheme.of(context).lineColor
                       ],
                       stops: const [0.0, 1.0],
-                      begin: const AlignmentDirectional(0.0, -1.0),
-                      end: const AlignmentDirectional(0, 1.0),
+                      begin: const AlignmentDirectional(1.0, -1.0),
+                      end: const AlignmentDirectional(-1.0, 1.0),
                     ),
                   ),
                   child: InkWell(
@@ -227,10 +228,23 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               44.0, 8.0, 44.0, 0.0),
-                          child: Text(
-                            'Thanks for joining! Access or create your account below, and get started on your journey!',
+                          child: GradientText(
+                            'Where pets feels at Home away from Home',
                             textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context).labelMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  color: const Color(0xFF010901),
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                            colors: [
+                              FlutterFlowTheme.of(context).primary,
+                              FlutterFlowTheme.of(context).secondary
+                            ],
+                            gradientDirection: GradientDirection.ltr,
+                            gradientType: GradientType.linear,
                           ).animateOnPageLoad(
                               animationsMap['textOnPageLoadAnimation2']!),
                         ),
