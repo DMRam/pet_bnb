@@ -586,8 +586,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     GoRouter.of(context)
                                         .clearRedirectLocation();
 
-                                    context.goNamedAuth(
-                                        'Welcome', context.mounted);
+                                    context.goNamedAuth('AuthenticationScreen',
+                                        context.mounted);
                                   },
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
