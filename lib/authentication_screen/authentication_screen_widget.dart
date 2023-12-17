@@ -364,9 +364,7 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                           },
                                           text: 'Login',
                                           options: FFButtonOptions(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    5.0, 5.0, 5.0, 5.0),
+                                            padding: const EdgeInsets.all(5.0),
                                             iconPadding:
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
@@ -497,7 +495,7 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                                   shape: BoxShape.circle,
                                                 ),
                                                 alignment: const AlignmentDirectional(
-                                                    0.00, 0.00),
+                                                    0.0, 0.0),
                                                 child: FaIcon(
                                                   FontAwesomeIcons.google,
                                                   color: FlutterFlowTheme.of(
@@ -543,7 +541,7 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                                   shape: BoxShape.circle,
                                                 ),
                                                 alignment: const AlignmentDirectional(
-                                                    0.00, 0.00),
+                                                    0.0, 0.0),
                                                 child: FaIcon(
                                                   FontAwesomeIcons.apple,
                                                   color: FlutterFlowTheme.of(
@@ -590,7 +588,7 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                                   shape: BoxShape.circle,
                                                 ),
                                                 alignment: const AlignmentDirectional(
-                                                    0.00, 0.00),
+                                                    0.0, 0.0),
                                                 child: FaIcon(
                                                   FontAwesomeIcons.facebookF,
                                                   color: FlutterFlowTheme.of(
@@ -639,7 +637,7 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                                   shape: BoxShape.circle,
                                                 ),
                                                 alignment: const AlignmentDirectional(
-                                                    0.00, 0.00),
+                                                    0.0, 0.0),
                                                 child: Icon(
                                                   Icons.phone_sharp,
                                                   color: FlutterFlowTheme.of(
@@ -1079,9 +1077,7 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                           },
                                           text: 'Create Account',
                                           options: FFButtonOptions(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    5.0, 5.0, 5.0, 5.0),
+                                            padding: const EdgeInsets.all(5.0),
                                             iconPadding:
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),

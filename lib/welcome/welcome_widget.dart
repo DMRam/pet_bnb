@@ -205,8 +205,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                             shape: BoxShape.circle,
                           ),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                8.0, 8.0, 8.0, 8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: Image.network(
                               'https://sykesvillevetclinic.com/wp-content/uploads/2019/10/footer-icon.png',
                               width: 120.0,

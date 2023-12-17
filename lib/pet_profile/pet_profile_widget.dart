@@ -88,7 +88,7 @@ class _PetProfileWidgetState extends State<PetProfileWidget> {
           elevation: 0.0,
         ),
         body: Align(
-          alignment: const AlignmentDirectional(0.00, 0.00),
+          alignment: const AlignmentDirectional(0.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -97,7 +97,7 @@ class _PetProfileWidgetState extends State<PetProfileWidget> {
                 child: Stack(
                   children: [
                     Align(
-                      alignment: const AlignmentDirectional(0.00, 0.00),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
@@ -110,8 +110,7 @@ class _PetProfileWidgetState extends State<PetProfileWidget> {
                             shape: BoxShape.circle,
                           ),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                2.0, 2.0, 2.0, 2.0),
+                            padding: const EdgeInsets.all(2.0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(50.0),
                               child: Image.network(
@@ -126,7 +125,7 @@ class _PetProfileWidgetState extends State<PetProfileWidget> {
                       ),
                     ),
                     Align(
-                      alignment: const AlignmentDirectional(1.00, 0.00),
+                      alignment: const AlignmentDirectional(1.0, 0.0),
                       child: Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
@@ -145,8 +144,7 @@ class _PetProfileWidgetState extends State<PetProfileWidget> {
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  4.0, 4.0, 4.0, 4.0),
+                              padding: const EdgeInsets.all(4.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(50.0),
                                 child: Image.asset(
@@ -206,7 +204,7 @@ class _PetProfileWidgetState extends State<PetProfileWidget> {
                                     .secondaryBackground,
                                 shape: BoxShape.circle,
                               ),
-                              alignment: const AlignmentDirectional(0.00, 0.00),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Icon(
                                 Icons.work_outline,
                                 color: FlutterFlowTheme.of(context).primaryText,
@@ -240,7 +238,7 @@ class _PetProfileWidgetState extends State<PetProfileWidget> {
                                       .secondaryBackground,
                                   shape: BoxShape.circle,
                                 ),
-                                alignment: const AlignmentDirectional(0.00, 0.00),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Icon(
                                   Icons.notifications_outlined,
                                   color:
@@ -273,7 +271,7 @@ class _PetProfileWidgetState extends State<PetProfileWidget> {
                                     .secondaryBackground,
                                 shape: BoxShape.circle,
                               ),
-                              alignment: const AlignmentDirectional(0.00, 0.00),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Icon(
                                 Icons.help_outline_outlined,
                                 color: FlutterFlowTheme.of(context).primaryText,

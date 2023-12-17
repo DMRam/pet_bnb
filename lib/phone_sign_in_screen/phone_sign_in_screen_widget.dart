@@ -65,7 +65,7 @@ class _PhoneSignInScreenWidgetState extends State<PhoneSignInScreenWidget> {
             color: FlutterFlowTheme.of(context).primaryBackground,
           ),
           child: Align(
-            alignment: const AlignmentDirectional(0.00, 1.00),
+            alignment: const AlignmentDirectional(0.0, 1.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -271,10 +271,8 @@ class _PhoneSignInScreenWidgetState extends State<PhoneSignInScreenWidget> {
                                 },
                                 text: 'Sign In',
                                 options: FFButtonOptions(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 10.0, 10.0, 10.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
+                                  padding: const EdgeInsets.all(10.0),
+                                  iconPadding: const EdgeInsets.all(0.0),
                                   color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall

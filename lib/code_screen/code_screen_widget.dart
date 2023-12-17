@@ -65,7 +65,7 @@ class _CodeScreenWidgetState extends State<CodeScreenWidget> {
           elevation: 0.0,
         ),
         body: Align(
-          alignment: const AlignmentDirectional(0.00, -1.00),
+          alignment: const AlignmentDirectional(0.0, -1.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -113,7 +113,12 @@ class _CodeScreenWidgetState extends State<CodeScreenWidget> {
                           fieldHeight: 60.0,
                           fieldWidth: 60.0,
                           borderWidth: 2.0,
-                          borderRadius: BorderRadius.circular(12.0),
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(12.0),
+                            bottomRight: Radius.circular(12.0),
+                            topLeft: Radius.circular(12.0),
+                            topRight: Radius.circular(12.0),
+                          ),
                           shape: PinCodeFieldShape.box,
                           activeColor: FlutterFlowTheme.of(context).primary,
                           inactiveColor:
@@ -162,8 +167,7 @@ class _CodeScreenWidgetState extends State<CodeScreenWidget> {
                   },
                   text: 'Verify code',
                   options: FFButtonOptions(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                    padding: const EdgeInsets.all(10.0),
                     iconPadding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: const Color(0xFF355E76),

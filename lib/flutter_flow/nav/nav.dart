@@ -133,6 +133,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Maps',
           path: '/maps',
           builder: (context, params) => const MapsWidget(),
+        ),
+        FFRoute(
+          name: 'HostCalendar',
+          path: '/hostCalendar',
+          builder: (context, params) => const HostCalendarWidget(),
+        ),
+        FFRoute(
+          name: 'HostAds',
+          path: '/hostAds',
+          builder: (context, params) => const HostAdsWidget(),
+        ),
+        FFRoute(
+          name: 'HostMessages',
+          path: '/hostMessages',
+          builder: (context, params) => const HostMessagesWidget(),
+        ),
+        FFRoute(
+          name: 'HostProfile',
+          path: '/hostProfile',
+          builder: (context, params) => const HostProfileWidget(),
+        ),
+        FFRoute(
+          name: 'HostDashb',
+          path: '/hostDashb',
+          builder: (context, params) => const HostDashbWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -331,13 +356,20 @@ class FFRoute {
                   key: state.pageKey,
                   child: child,
                   transitionDuration: transitionInfo.duration,
-                  transitionsBuilder: PageTransition(
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) =>
+                          PageTransition(
                     type: transitionInfo.transitionType,
                     duration: transitionInfo.duration,
                     reverseDuration: transitionInfo.duration,
                     alignment: transitionInfo.alignment,
                     child: child,
-                  ).transitionsBuilder,
+                  ).buildTransitions(
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ),
                 )
               : MaterialPage(key: state.pageKey, child: child);
         },

@@ -84,7 +84,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           elevation: 0.0,
         ),
         body: Align(
-          alignment: const AlignmentDirectional(0.00, 0.00),
+          alignment: const AlignmentDirectional(0.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -93,7 +93,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 child: Stack(
                   children: [
                     Align(
-                      alignment: const AlignmentDirectional(0.00, 0.00),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
@@ -106,8 +106,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             shape: BoxShape.circle,
                           ),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                2.0, 2.0, 2.0, 2.0),
+                            padding: const EdgeInsets.all(2.0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(50.0),
                               child: Image.network(
@@ -122,7 +121,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ),
                     ),
                     Align(
-                      alignment: const AlignmentDirectional(1.00, 0.00),
+                      alignment: const AlignmentDirectional(1.0, 0.0),
                       child: Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
@@ -141,8 +140,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  4.0, 4.0, 4.0, 4.0),
+                              padding: const EdgeInsets.all(4.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(50.0),
                                 child: Image.asset(
@@ -235,7 +233,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     .secondaryBackground,
                                 shape: BoxShape.circle,
                               ),
-                              alignment: const AlignmentDirectional(0.00, 0.00),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Icon(
                                 Icons.work_outline,
                                 color: FlutterFlowTheme.of(context).primaryText,
@@ -269,7 +267,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       .secondaryBackground,
                                   shape: BoxShape.circle,
                                 ),
-                                alignment: const AlignmentDirectional(0.00, 0.00),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Icon(
                                   Icons.notifications_outlined,
                                   color:
@@ -302,7 +300,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     .secondaryBackground,
                                 shape: BoxShape.circle,
                               ),
-                              alignment: const AlignmentDirectional(0.00, 0.00),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Icon(
                                 Icons.help_outline_outlined,
                                 color: FlutterFlowTheme.of(context).primaryText,
@@ -537,39 +535,59 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 8.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 8.0, 16.0, 8.0),
-                                      child: Icon(
-                                        Icons.notifications_active,
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed(
+                                      'HostDashb',
+                                      extra: <String, dynamic>{
+                                        kTransitionInfoKey: const TransitionInfo(
+                                          hasTransition: true,
+                                          transitionType:
+                                              PageTransitionType.fade,
+                                          duration: Duration(milliseconds: 300),
+                                        ),
+                                      },
+                                    );
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 8.0, 16.0, 8.0),
+                                        child: Icon(
+                                          Icons.route,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 24.0,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 12.0, 0.0),
+                                          child: Text(
+                                            'Switch to host',
+                                            textAlign: TextAlign.start,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryText,
                                         size: 24.0,
                                       ),
-                                    ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 12.0, 0.0),
-                                        child: Text(
-                                          'Notification Settings',
-                                          textAlign: TextAlign.start,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.chevron_right_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 24.0,
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                               Padding(
