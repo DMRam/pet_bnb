@@ -561,7 +561,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 8.0, 16.0, 8.0),
                                         child: Icon(
-                                          Icons.route,
+                                          Icons.crop_rotate_outlined,
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryText,
                                           size: 24.0,

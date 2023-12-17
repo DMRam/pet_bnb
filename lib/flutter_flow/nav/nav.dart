@@ -135,16 +135,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const MapsWidget(),
         ),
         FFRoute(
-          name: 'HostCalendar',
-          path: '/hostCalendar',
-          builder: (context, params) => const HostCalendarWidget(),
-        ),
-        FFRoute(
-          name: 'HostAds',
-          path: '/hostAds',
-          builder: (context, params) => const HostAdsWidget(),
-        ),
-        FFRoute(
           name: 'HostMessages',
           path: '/hostMessages',
           builder: (context, params) => const HostMessagesWidget(),
@@ -158,6 +148,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'HostDashb',
           path: '/hostDashb',
           builder: (context, params) => const HostDashbWidget(),
+        ),
+        FFRoute(
+          name: 'HostCalendar',
+          path: '/hostCalendar',
+          builder: (context, params) => const HostCalendarWidget(),
+        ),
+        FFRoute(
+          name: 'HostAds',
+          path: '/hostAds',
+          builder: (context, params) => const HostAdsWidget(),
+        ),
+        FFRoute(
+          name: 'HostPetDetails',
+          path: '/hostPetDetails',
+          builder: (context, params) => const HostPetDetailsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

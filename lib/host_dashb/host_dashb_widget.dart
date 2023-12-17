@@ -168,11 +168,6 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: Stack(
           children: [
-            wrapWithModel(
-              model: _model.hostNavBarModel1,
-              updateCallback: () => setState(() {}),
-              child: const HostNavBarWidget(),
-            ),
             SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -252,266 +247,283 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 12.0, 12.0, 12.0),
-                          child: Container(
-                            width: 230.0,
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              boxShadow: const [
-                                BoxShadow(
-                                  blurRadius: 4.0,
-                                  color: Color(0x34090F13),
-                                  offset: Offset(0.0, 2.0),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Container(
-                                  width: double.infinity,
-                                  height: 140.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBtnText,
-                                    borderRadius: const BorderRadius.only(
-                                      bottomLeft: Radius.circular(0.0),
-                                      bottomRight: Radius.circular(0.0),
-                                      topLeft: Radius.circular(12.0),
-                                      topRight: Radius.circular(12.0),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed('HostPetDetails');
+                            },
+                            child: Container(
+                              width: 230.0,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    blurRadius: 4.0,
+                                    color: Color(0x34090F13),
+                                    offset: Offset(0.0, 2.0),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Container(
+                                    width: double.infinity,
+                                    height: 140.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
+                                      borderRadius: const BorderRadius.only(
+                                        bottomLeft: Radius.circular(0.0),
+                                        bottomRight: Radius.circular(0.0),
+                                        topLeft: Radius.circular(12.0),
+                                        topRight: Radius.circular(12.0),
+                                      ),
                                     ),
-                                  ),
-                                  child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
-                                    child: SizedBox(
-                                      width: double.infinity,
-                                      height: 180.0,
-                                      child: CarouselSlider(
-                                        items: [
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: Image.network(
-                                              'https://picsum.photos/seed/829/600',
-                                              width: 300.0,
-                                              height: 200.0,
-                                              fit: BoxFit.cover,
+                                    child: Align(
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      child: SizedBox(
+                                        width: double.infinity,
+                                        height: 180.0,
+                                        child: CarouselSlider(
+                                          items: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.network(
+                                                'https://clinicacanis.com/wp-content/uploads/el-huron-como-mascota-1040x650.jpg',
+                                                width: 300.0,
+                                                height: 200.0,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
-                                          ),
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: Image.network(
-                                              'https://picsum.photos/seed/883/600',
-                                              width: 300.0,
-                                              height: 200.0,
-                                              fit: BoxFit.cover,
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.network(
+                                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_2EEw_1ZjT0Dai0LVmInEnOD_3RFa6CVIHVoFSquXNu2NgrWFQF-DTOS1VHa1V6x51DY&usqp=CAU',
+                                                width: 300.0,
+                                                height: 200.0,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
-                                          ),
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: Image.network(
-                                              'https://picsum.photos/seed/612/600',
-                                              width: 300.0,
-                                              height: 200.0,
-                                              fit: BoxFit.cover,
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.network(
+                                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOJbSjFC_rE4AlCjL6KHYjHO4WMPV00hKBjEOhjW_OlrQptXrKx5UBw1WBFxuqbo2uyD8&usqp=CAU',
+                                                width: 300.0,
+                                                height: 200.0,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
-                                          ),
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: Image.network(
-                                              'https://picsum.photos/seed/573/600',
-                                              width: 300.0,
-                                              height: 200.0,
-                                              fit: BoxFit.cover,
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.network(
+                                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWUvOWt8ZBu65y25eYdYIhaXJxTVOolhQ6-zj7yGRyfQqfmagfz1FKqP7Y5aNfsEP8ygY&usqp=CAU',
+                                                width: 300.0,
+                                                height: 200.0,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
+                                          ],
+                                          carouselController:
+                                              _model.carouselController1 ??=
+                                                  CarouselController(),
+                                          options: CarouselOptions(
+                                            initialPage: 1,
+                                            viewportFraction: 0.5,
+                                            disableCenter: true,
+                                            enlargeCenterPage: true,
+                                            enlargeFactor: 0.25,
+                                            enableInfiniteScroll: true,
+                                            scrollDirection: Axis.horizontal,
+                                            autoPlay: true,
+                                            autoPlayAnimationDuration:
+                                                const Duration(milliseconds: 800),
+                                            autoPlayInterval: const Duration(
+                                                milliseconds: (800 + 4000)),
+                                            autoPlayCurve: Curves.linear,
+                                            pauseAutoPlayInFiniteScroll: true,
+                                            onPageChanged: (index, _) => _model
+                                                .carouselCurrentIndex1 = index,
                                           ),
-                                        ],
-                                        carouselController:
-                                            _model.carouselController1 ??=
-                                                CarouselController(),
-                                        options: CarouselOptions(
-                                          initialPage: 1,
-                                          viewportFraction: 0.5,
-                                          disableCenter: true,
-                                          enlargeCenterPage: true,
-                                          enlargeFactor: 0.25,
-                                          enableInfiniteScroll: true,
-                                          scrollDirection: Axis.horizontal,
-                                          autoPlay: true,
-                                          autoPlayAnimationDuration:
-                                              const Duration(milliseconds: 800),
-                                          autoPlayInterval: const Duration(
-                                              milliseconds: (800 + 4000)),
-                                          autoPlayCurve: Curves.linear,
-                                          pauseAutoPlayInFiniteScroll: true,
-                                          onPageChanged: (index, _) => _model
-                                              .carouselCurrentIndex1 = index,
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Align(
-                                  alignment: const AlignmentDirectional(-1.0, 0.0),
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        5.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Tom',
-                                      textAlign: TextAlign.start,
-                                      style: FlutterFlowTheme.of(context)
-                                          .displaySmall
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            fontSize: 24.0,
-                                          ),
+                                  Align(
+                                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Tom',
+                                        textAlign: TextAlign.start,
+                                        style: FlutterFlowTheme.of(context)
+                                            .displaySmall
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 24.0,
+                                            ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Align(
-                                  alignment: const AlignmentDirectional(-1.0, 0.0),
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        5.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Ferret - 2 years old ',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                  Align(
+                                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Ferret - 2 years old ',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Divider(
-                                  thickness: 1.0,
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      'From',
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineSmall
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            fontSize: 20.0,
-                                          ),
-                                    ),
-                                    Text(
-                                      'Until',
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineSmall
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            fontSize: 20.0,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 10.0, 0.0, 0.0),
-                                  child: Row(
+                                  Divider(
+                                    thickness: 1.0,
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                  ),
+                                  Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Text(
-                                        'Tuesday, 10:00am',
+                                        'From',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
+                                            .headlineSmall
                                             .override(
-                                              fontFamily: 'Inter',
-                                              fontSize: 12.0,
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 20.0,
                                             ),
                                       ),
                                       Text(
-                                        'Tuesday, 10:00am',
+                                        'Until',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
+                                            .headlineSmall
                                             .override(
-                                              fontFamily: 'Inter',
-                                              fontSize: 12.0,
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 20.0,
                                             ),
                                       ),
                                     ],
                                   ),
-                                ),
-                                Divider(
-                                  height: 24.0,
-                                  thickness: 1.0,
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    decoration: const BoxDecoration(),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 10.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          'Tuesday, 10:00am',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                fontSize: 12.0,
+                                              ),
+                                        ),
+                                        Text(
+                                          'Tuesday, 10:00am',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                fontSize: 12.0,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Divider(
+                                    height: 10.0,
+                                    thickness: 1.0,
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                  ),
+                                  Expanded(
                                     child: Align(
-                                      alignment:
-                                          const AlignmentDirectional(0.0, -1.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    5.0, 20.0, 0.0, 0.0),
-                                            child: Text(
-                                              'Friendly ',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Inter',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    fontSize: 17.0,
-                                                    fontWeight: FontWeight.w800,
-                                                  ),
-                                            ),
-                                          ),
-                                          RatingBar.builder(
-                                            onRatingUpdate: (newValue) =>
-                                                setState(() =>
-                                                    _model.ratingBarValue1 =
-                                                        newValue),
-                                            itemBuilder: (context, index) =>
-                                                Icon(
-                                              Icons.star_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      child: Container(
+                                        decoration: const BoxDecoration(),
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(0.0, -1.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        5.0, 20.0, 0.0, 0.0),
+                                                child: Text(
+                                                  'Friendly ',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        fontSize: 17.0,
+                                                        fontWeight:
+                                                            FontWeight.w800,
+                                                      ),
+                                                ),
+                                              ),
+                                              RatingBar.builder(
+                                                onRatingUpdate: (newValue) =>
+                                                    setState(() =>
+                                                        _model.ratingBarValue1 =
+                                                            newValue),
+                                                itemBuilder: (context, index) =>
+                                                    Icon(
+                                                  Icons.star_rounded,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .tertiary,
-                                            ),
-                                            direction: Axis.horizontal,
-                                            initialRating:
-                                                _model.ratingBarValue1 ??= 3.0,
-                                            unratedColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .accent3,
-                                            itemCount: 5,
-                                            itemPadding: const EdgeInsets.fromLTRB(
-                                                0.0, 15.0, 0.0, 0.0),
-                                            itemSize: 18.0,
-                                            glowColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .tertiary,
+                                                ),
+                                                direction: Axis.horizontal,
+                                                initialRating: _model
+                                                    .ratingBarValue1 ??= 3.0,
+                                                unratedColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .accent3,
+                                                itemCount: 5,
+                                                itemPadding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        0.0, 15.0, 0.0, 0.0),
+                                                itemSize: 18.0,
+                                                glowColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .tertiary,
+                                              ),
+                                            ],
                                           ),
-                                        ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ).animateOnPageLoad(
                               animationsMap['containerOnPageLoadAnimation1']!),
@@ -559,7 +571,7 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                         items: [
                                           ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                BorderRadius.circular(6.0),
                                             child: Image.network(
                                               'https://picsum.photos/seed/829/600',
                                               width: 300.0,
@@ -569,7 +581,7 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                           ),
                                           ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                BorderRadius.circular(6.0),
                                             child: Image.network(
                                               'https://picsum.photos/seed/883/600',
                                               width: 300.0,
@@ -579,7 +591,7 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                           ),
                                           ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                BorderRadius.circular(6.0),
                                             child: Image.network(
                                               'https://picsum.photos/seed/612/600',
                                               width: 300.0,
@@ -589,7 +601,7 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                           ),
                                           ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                BorderRadius.circular(6.0),
                                             child: Image.network(
                                               'https://picsum.photos/seed/573/600',
                                               width: 300.0,
@@ -711,7 +723,7 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                   ),
                                 ),
                                 Divider(
-                                  height: 24.0,
+                                  height: 10.0,
                                   thickness: 1.0,
                                   color: FlutterFlowTheme.of(context).alternate,
                                 ),
@@ -788,7 +800,7 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                               16.0, 12.0, 12.0, 12.0),
                           child: Container(
                             width: 230.0,
-                            height: 50.0,
+                            height: 79.0,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
@@ -826,7 +838,7 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                         items: [
                                           ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                BorderRadius.circular(6.0),
                                             child: Image.network(
                                               'https://picsum.photos/seed/829/600',
                                               width: 300.0,
@@ -836,7 +848,7 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                           ),
                                           ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                BorderRadius.circular(6.0),
                                             child: Image.network(
                                               'https://picsum.photos/seed/883/600',
                                               width: 300.0,
@@ -846,7 +858,7 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                           ),
                                           ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                BorderRadius.circular(6.0),
                                             child: Image.network(
                                               'https://picsum.photos/seed/612/600',
                                               width: 300.0,
@@ -856,7 +868,7 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                           ),
                                           ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                BorderRadius.circular(6.0),
                                             child: Image.network(
                                               'https://picsum.photos/seed/573/600',
                                               width: 300.0,
@@ -978,7 +990,7 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                   ),
                                 ),
                                 Divider(
-                                  height: 24.0,
+                                  height: 10.0,
                                   thickness: 1.0,
                                   color: FlutterFlowTheme.of(context).alternate,
                                 ),
@@ -1133,138 +1145,123 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                           padding:
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 12.0),
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              context.pushNamed('HostCalendar');
-                                            },
-                                            child: Container(
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
+                                          child: Container(
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                              border: Border.all(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                borderRadius:
-                                                    BorderRadius.circular(12.0),
-                                                border: Border.all(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .alternate,
-                                                  width: 2.0,
-                                                ),
+                                                        .alternate,
+                                                width: 2.0,
                                               ),
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(12.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Design Template Screens',
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(12.0),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Design Template Screens',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .headlineSmall,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 4.0,
+                                                                0.0, 0.0),
+                                                    child: Text(
+                                                      'Create template screen for task todo app.',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .headlineSmall,
+                                                              .labelMedium,
                                                     ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  4.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        'Create template screen for task todo app.',
+                                                  ),
+                                                  Divider(
+                                                    height: 24.0,
+                                                    thickness: 1.0,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate,
+                                                  ),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        'Due',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelMedium,
+                                                                .bodyMedium,
                                                       ),
-                                                    ),
-                                                    Divider(
-                                                      height: 24.0,
-                                                      thickness: 1.0,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                    ),
-                                                    Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          'Due',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium,
-                                                        ),
-                                                        Expanded(
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        8.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child: Text(
-                                                              'Tuesday, 10:00am',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Inter',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          width: 100.0,
-                                                          height: 32.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondary,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        32.0),
-                                                          ),
-                                                          alignment:
-                                                              const AlignmentDirectional(
-                                                                  0.0, 0.0),
+                                                      Expanded(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      8.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
                                                           child: Text(
-                                                            'In Progress',
+                                                            'Tuesday, 10:00am',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium
                                                                 .override(
                                                                   fontFamily:
                                                                       'Inter',
-                                                                  color: Colors
-                                                                      .white,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
                                                                 ),
                                                           ),
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
+                                                      ),
+                                                      Container(
+                                                        width: 100.0,
+                                                        height: 32.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondary,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      32.0),
+                                                        ),
+                                                        alignment:
+                                                            const AlignmentDirectional(
+                                                                0.0, 0.0),
+                                                        child: Text(
+                                                          'In Progress',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ).animateOnPageLoad(animationsMap[
@@ -1921,7 +1918,7 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
               ),
             ),
             wrapWithModel(
-              model: _model.hostNavBarModel2,
+              model: _model.hostNavBarModel,
               updateCallback: () => setState(() {}),
               child: const HostNavBarWidget(),
             ),

@@ -8,8 +8,6 @@ class HostDashbModel extends FlutterFlowModel<HostDashbWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Model for HostNavBar component.
-  late HostNavBarModel hostNavBarModel1;
   // State field(s) for Carousel widget.
   CarouselController? carouselController1;
 
@@ -37,22 +35,20 @@ class HostDashbModel extends FlutterFlowModel<HostDashbWidget> {
       tabBarController != null ? tabBarController!.index : 0;
 
   // Model for HostNavBar component.
-  late HostNavBarModel hostNavBarModel2;
+  late HostNavBarModel hostNavBarModel;
 
   /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
-    hostNavBarModel1 = createModel(context, () => HostNavBarModel());
-    hostNavBarModel2 = createModel(context, () => HostNavBarModel());
+    hostNavBarModel = createModel(context, () => HostNavBarModel());
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    hostNavBarModel1.dispose();
     tabBarController?.dispose();
-    hostNavBarModel2.dispose();
+    hostNavBarModel.dispose();
   }
 
   /// Action blocks are added here.

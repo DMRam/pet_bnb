@@ -72,8 +72,8 @@ class _HostNavBarWidgetState extends State<HostNavBarWidget> {
                               color: Color(0xFF616264),
                               size: 24.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              context.pushNamed('HostDashb');
                             },
                           ),
                         ),
@@ -123,8 +123,8 @@ class _HostNavBarWidgetState extends State<HostNavBarWidget> {
                               color: Color(0xFF616264),
                               size: 24.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              context.pushNamed('HostCalendar');
                             },
                           ),
                         ),
@@ -174,8 +174,8 @@ class _HostNavBarWidgetState extends State<HostNavBarWidget> {
                               color: Color(0xFF616264),
                               size: 24.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              context.pushNamed('HostAds');
                             },
                           ),
                         ),
@@ -225,8 +225,8 @@ class _HostNavBarWidgetState extends State<HostNavBarWidget> {
                               color: Color(0xFF616264),
                               size: 24.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              context.pushNamed('HostMessages');
                             },
                           ),
                         ),
@@ -276,8 +276,8 @@ class _HostNavBarWidgetState extends State<HostNavBarWidget> {
                               color: Color(0xFF616264),
                               size: 24.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              context.pushNamed('HostProfile');
                             },
                           ),
                         ),
