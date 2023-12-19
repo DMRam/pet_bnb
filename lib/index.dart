@@ -19,3 +19,4 @@ export '/host_calendar/host_calendar_widget.dart' show HostCalendarWidget;
 export '/host_ads/host_ads_widget.dart' show HostAdsWidget;
 export '/host_pet_details/host_pet_details_widget.dart'
     show HostPetDetailsWidget;
+export '/host_create_ads/host_create_ads_widget.dart' show HostCreateAdsWidget;

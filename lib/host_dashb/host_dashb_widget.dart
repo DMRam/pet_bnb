@@ -1,5 +1,6 @@
 import '/components/host_nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -178,6 +179,7 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                         const EdgeInsetsDirectional.fromSTEB(16.0, 44.0, 16.0, 12.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -219,6 +221,28 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                 ),
                               ),
                             ],
+                          ),
+                        ),
+                        Align(
+                          alignment: const AlignmentDirectional(1.0, 0.0),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                100.0, 0.0, 0.0, 0.0),
+                            child: FlutterFlowIconButton(
+                              borderColor: const Color(0x8419DB8A),
+                              borderRadius: 20.0,
+                              borderWidth: 1.0,
+                              buttonSize: 50.0,
+                              fillColor: FlutterFlowTheme.of(context).warning,
+                              icon: Icon(
+                                Icons.add,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                context.pushNamed('HostCreateAds');
+                              },
+                            ),
                           ),
                         ),
                       ],

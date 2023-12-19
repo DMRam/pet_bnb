@@ -163,6 +163,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'HostPetDetails',
           path: '/hostPetDetails',
           builder: (context, params) => const HostPetDetailsWidget(),
+        ),
+        FFRoute(
+          name: 'HostCreateAds',
+          path: '/hostCreateAds',
+          builder: (context, params) => const HostCreateAdsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
