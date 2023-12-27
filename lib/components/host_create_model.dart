@@ -1,4 +1,6 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'host_create_widget.dart' show HostCreateWidget;
 import 'package:flutter/material.dart';
 
@@ -6,22 +8,23 @@ class HostCreateModel extends FlutterFlowModel<HostCreateWidget> {
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
-  // State field(s) for projectName widget.
-  FocusNode? projectNameFocusNode;
-  TextEditingController? projectNameController;
-  String? Function(BuildContext, String?)? projectNameControllerValidator;
+  DateTime? datePicked;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController1;
+  String? Function(BuildContext, String?)? textController1Validator;
+  // State field(s) for CheckboxGroup widget.
+  List<String>? checkboxGroupValues;
+  FormFieldController<List<String>>? checkboxGroupValueController;
+  // State field(s) for DropDown widget.
+  List<String>? dropDownValue;
+  FormFieldController<String>? dropDownValueController;
   // State field(s) for description widget.
   FocusNode? descriptionFocusNode;
   TextEditingController? descriptionController;
   String? Function(BuildContext, String?)? descriptionControllerValidator;
-  // State field(s) for projectURL widget.
-  FocusNode? projectURLFocusNode;
-  TextEditingController? projectURLController;
-  String? Function(BuildContext, String?)? projectURLControllerValidator;
-  // State field(s) for clonableURL widget.
-  FocusNode? clonableURLFocusNode;
-  TextEditingController? clonableURLController;
-  String? Function(BuildContext, String?)? clonableURLControllerValidator;
+  // Stores action output result for [Backend Call - API (Geocode API)] action in Button widget.
+  ApiCallResponse? apiResultvtz;
 
   /// Initialization and disposal methods.
 
@@ -30,17 +33,11 @@ class HostCreateModel extends FlutterFlowModel<HostCreateWidget> {
 
   @override
   void dispose() {
-    projectNameFocusNode?.dispose();
-    projectNameController?.dispose();
+    textFieldFocusNode?.dispose();
+    textController1?.dispose();
 
     descriptionFocusNode?.dispose();
     descriptionController?.dispose();
-
-    projectURLFocusNode?.dispose();
-    projectURLController?.dispose();
-
-    clonableURLFocusNode?.dispose();
-    clonableURLController?.dispose();
   }
 
   /// Action blocks are added here.
