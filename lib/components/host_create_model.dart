@@ -8,11 +8,16 @@ class HostCreateModel extends FlutterFlowModel<HostCreateWidget> {
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
-  DateTime? datePicked;
+  // Stores action output result for [Backend Call - API (Geocode API)] action in Column widget.
+  ApiCallResponse? apiResult6k0;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController1;
   String? Function(BuildContext, String?)? textController1Validator;
+  // Stores action output result for [Backend Call - API (Geocode API)] action in TextField widget.
+  ApiCallResponse? apiResult9w1;
+  // Stores action output result for [Backend Call - API (Geocode API)] action in Button widget.
+  ApiCallResponse? apiResultr9w;
   // State field(s) for CheckboxGroup widget.
   List<String>? checkboxGroupValues;
   FormFieldController<List<String>>? checkboxGroupValueController;
@@ -23,8 +28,6 @@ class HostCreateModel extends FlutterFlowModel<HostCreateWidget> {
   FocusNode? descriptionFocusNode;
   TextEditingController? descriptionController;
   String? Function(BuildContext, String?)? descriptionControllerValidator;
-  // Stores action output result for [Backend Call - API (Geocode API)] action in Button widget.
-  ApiCallResponse? apiResultvtz;
 
   /// Initialization and disposal methods.
 

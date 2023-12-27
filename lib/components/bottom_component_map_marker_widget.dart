@@ -13,7 +13,7 @@ class BottomComponentMapMarkerWidget extends StatefulWidget {
     required this.refLocation,
   });
 
-  final UsersRecord? refLocation;
+  final HostsAdsRecord? refLocation;
 
   @override
   _BottomComponentMapMarkerWidgetState createState() =>
@@ -51,8 +51,8 @@ class _BottomComponentMapMarkerWidgetState
       alignment: const AlignmentDirectional(0.0, 0.0),
       child: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
-        child: StreamBuilder<UsersRecord>(
-          stream: UsersRecord.getDocument(widget.refLocation!.reference),
+        child: StreamBuilder<HostsAdsRecord>(
+          stream: HostsAdsRecord.getDocument(widget.refLocation!.reference),
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
             if (!snapshot.hasData) {
@@ -68,7 +68,7 @@ class _BottomComponentMapMarkerWidgetState
                 ),
               );
             }
-            final cardModalBasicUsersRecord = snapshot.data!;
+            final cardModalBasicHostsAdsRecord = snapshot.data!;
             return Container(
               width: double.infinity,
               height: 500.0,
@@ -96,7 +96,7 @@ class _BottomComponentMapMarkerWidgetState
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 12.0, 0.0),
                             child: Text(
-                              cardModalBasicUsersRecord.displayName,
+                              cardModalBasicHostsAdsRecord.comments,
                               style:
                                   FlutterFlowTheme.of(context).headlineMedium,
                             ),
@@ -125,7 +125,10 @@ class _BottomComponentMapMarkerWidgetState
                       color: FlutterFlowTheme.of(context).primaryBackground,
                     ),
                     Text(
-                      cardModalBasicUsersRecord.phoneNumber,
+                      (cardModalBasicHostsAdsRecord.servicesIncluded
+                              .sortedList()
+                              .isNotEmpty)
+                          .toString(),
                       style: FlutterFlowTheme.of(context).labelMedium,
                     ),
                     Padding(

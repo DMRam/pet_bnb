@@ -110,8 +110,8 @@ class _MapsWidgetState extends State<MapsWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
-                child: StreamBuilder<List<UsersRecord>>(
-                  stream: queryUsersRecord(),
+                child: StreamBuilder<List<HostsAdsRecord>>(
+                  stream: queryHostsAdsRecord(),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
@@ -127,18 +127,19 @@ class _MapsWidgetState extends State<MapsWidget> {
                         ),
                       );
                     }
-                    List<UsersRecord> googleMapUsersRecordList = snapshot.data!;
+                    List<HostsAdsRecord> googleMapHostsAdsRecordList =
+                        snapshot.data!;
                     return FlutterFlowGoogleMap(
                       controller: _model.googleMapsController,
                       onCameraIdle: (latLng) =>
                           _model.googleMapsCenter = latLng,
                       initialLocation: _model.googleMapsCenter ??=
                           currentUserLocationValue!,
-                      markers: googleMapUsersRecordList
+                      markers: googleMapHostsAdsRecordList
                           .map(
-                            (googleMapUsersRecord) => FlutterFlowMarker(
-                              googleMapUsersRecord.reference.path,
-                              googleMapUsersRecord.location!,
+                            (googleMapHostsAdsRecord) => FlutterFlowMarker(
+                              googleMapHostsAdsRecord.reference.path,
+                              googleMapHostsAdsRecord.hostPlaceLocation!,
                               () async {
                                 await showModalBottomSheet(
                                   isScrollControlled: true,
@@ -156,7 +157,7 @@ class _MapsWidgetState extends State<MapsWidget> {
                                         padding:
                                             MediaQuery.viewInsetsOf(context),
                                         child: BottomComponentMapMarkerWidget(
-                                          refLocation: googleMapUsersRecord,
+                                          refLocation: googleMapHostsAdsRecord,
                                         ),
                                       ),
                                     );
