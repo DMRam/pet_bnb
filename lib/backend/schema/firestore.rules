@@ -14,5 +14,36 @@ service cloud.firestore {
       allow write: if true;
       allow delete: if true;
     }
+
+    match /booking_pet_host/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /booking_pet_host/{parent}/hostInfo/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /{path=**}/hostInfo/{document} {
+      allow read: if true;
+    }
+
+
+    match /booking_pet_host/{parent}/petInfo/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /{path=**}/petInfo/{document} {
+      allow read: if true;
+    }
+
   }
 }

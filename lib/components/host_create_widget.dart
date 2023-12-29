@@ -72,7 +72,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
 
     _model.descriptionController ??= TextEditingController();
     _model.descriptionFocusNode ??= FocusNode();
-
+    _model.descriptionFocusNode!.addListener(() => setState(() {}));
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -1063,6 +1063,15 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                                   },
                                                                 ),
                                                               });
+                                                              if (formGeocodeAPIResponse
+                                                                  .succeeded) {
+                                                                context.pushNamed(
+                                                                    'HostDashb');
+
+                                                                return;
+                                                              } else {
+                                                                return;
+                                                              }
                                                             },
                                                             text: 'Create Ad',
                                                             options:

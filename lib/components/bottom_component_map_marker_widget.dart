@@ -166,10 +166,10 @@ class _BottomComponentMapMarkerWidgetState
                             ),
                           ),
                           FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
+                            onPressed: () async {
+                              context.pushNamed('UserDatePicker');
                             },
-                            text: 'Create Task',
+                            text: 'Book',
                             options: FFButtonOptions(
                               width: 130.0,
                               height: 40.0,

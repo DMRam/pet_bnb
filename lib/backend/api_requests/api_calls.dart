@@ -9,7 +9,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
 class GeocodeAPICall {
   static Future<ApiCallResponse> call({
-    String? address = '739 rue roberge sherbrooke',
+    String? address = '739 rue roberge',
     String? apiKey = 'AIzaSyCuTHCM866oQ7LBGF6KCPHzEpnTjMW5-1g',
   }) async {
     return ApiManager.instance.makeApiCall(
@@ -29,11 +29,11 @@ class GeocodeAPICall {
 
   static double? apiLat(dynamic response) => castToType<double>(getJsonField(
         response,
-        r'''$.results[0]..bounds.northeast.lat''',
+        r'''$.results[:].geometry.location.lat''',
       ));
   static double? apiLng(dynamic response) => castToType<double>(getJsonField(
         response,
-        r'''$.results[0]..bounds.northeast.lng''',
+        r'''$.results[:].geometry.location.lng''',
       ));
 }
 

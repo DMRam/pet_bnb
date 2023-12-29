@@ -168,6 +168,24 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'HostCreateAds',
           path: '/hostCreateAds',
           builder: (context, params) => const HostCreateAdsWidget(),
+        ),
+        FFRoute(
+          name: 'UserDatePicker',
+          path: '/userDatePicker',
+          builder: (context, params) => const UserDatePickerWidget(),
+        ),
+        FFRoute(
+          name: 'UserSummary',
+          path: '/userSummary',
+          builder: (context, params) => UserSummaryWidget(
+            dateFrom: params.getParam('dateFrom', ParamType.DateTime),
+            dateTo: params.getParam('dateTo', ParamType.DateTime),
+          ),
+        ),
+        FFRoute(
+          name: 'CalendarRange',
+          path: '/calendarRange',
+          builder: (context, params) => const CalendarRangeWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
