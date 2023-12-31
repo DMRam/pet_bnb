@@ -45,5 +45,19 @@ service cloud.firestore {
       allow read: if true;
     }
 
+
+    match /Booking_petbnb/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /owners_pet/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
   }
 }

@@ -14,14 +14,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 final today = DateUtils.dateOnly(DateTime.now());
 
 class DateRangePicker extends StatefulWidget {
-  const DateRangePicker({
-    Key? key,
-    this.width,
-    this.height,
-  }) : super(key: key);
+  const DateRangePicker(
+      {Key? key, this.width, this.height, required this.updatePageUI})
+      : super(key: key);
 
   final double? width;
   final double? height;
+  final Future<dynamic> Function() updatePageUI;
 
   @override
   _DateRangePickerState createState() => _DateRangePickerState();
@@ -32,6 +31,41 @@ class _DateRangePickerState extends State<DateRangePicker> {
     DateUtils.dateOnly(DateTime.now()),
     DateUtils.dateOnly(DateTime.now().add(Duration(days: 5))),
   ];
+  List<DateTime?> _singleDatePickerValueWithDefaultValue = [
+    DateTime.now(),
+  ];
+  List<DateTime?> _multiDatePickerValueWithDefaultValue = [
+    DateTime(today.year, today.month, 1),
+    DateTime(today.year, today.month, 5),
+    DateTime(today.year, today.month, 14),
+    DateTime(today.year, today.month, 17),
+    DateTime(today.year, today.month, 25),
+  ];
+  List<DateTime?> _rangeDatePickerValueWithDefaultValue = [
+    DateTime(1999, 5, 6),
+    DateTime(1999, 5, 21),
+  ];
+
+  List<DateTime?> _rangeDatePickerWithActionButtonsWithValue = [
+    DateTime.now(),
+    DateTime.now().add(const Duration(days: 5)),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: SizedBox(
+          width: 375,
+          child: ListView(
+            children: <Widget>[
+              _buildCalendarDialogButton(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   String _getValueText(
     CalendarDatePicker2Type datePickerType,
@@ -55,7 +89,12 @@ class _DateRangePickerState extends State<DateRangePicker> {
         final endDate = values.length > 1
             ? values[1].toString().replaceAll('00:00:00.000', '')
             : 'null';
+
+        // TODO Convertir a Date desde string
         valueText = '$startDate to $endDate';
+        FFAppState().startDate = startDate;
+        FFAppState().endDate = endDate;
+        widget.updatePageUI();
       } else {
         return 'null';
       }
@@ -64,11 +103,18 @@ class _DateRangePickerState extends State<DateRangePicker> {
     return valueText;
   }
 
-  @override
-  Widget build(BuildContext context) {
+  _buildCalendarDialogButton() {
+    const dayTextStyle =
+        TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
+    final weekendTextStyle =
+        TextStyle(color: Colors.grey[500], fontWeight: FontWeight.w600);
+    final anniversaryTextStyle = TextStyle(
+      color: Colors.red[400],
+      fontWeight: FontWeight.w700,
+      decoration: TextDecoration.underline,
+    );
     final config = CalendarDatePicker2WithActionButtonsConfig(
-      dayTextStyle:
-          const TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
+      dayTextStyle: dayTextStyle,
       calendarType: CalendarDatePicker2Type.range,
       selectedDayHighlightColor: Colors.purple[800],
       closeDialogOnCancelTapped: true,
@@ -77,22 +123,135 @@ class _DateRangePickerState extends State<DateRangePicker> {
         color: Colors.black87,
         fontWeight: FontWeight.bold,
       ),
-      // Add other config settings as needed
+      controlsTextStyle: const TextStyle(
+        color: Colors.black,
+        fontSize: 15,
+        fontWeight: FontWeight.bold,
+      ),
+      centerAlignModePicker: true,
+      customModePickerIcon: const SizedBox(),
+      selectedDayTextStyle: dayTextStyle.copyWith(color: Colors.white),
+      dayTextStylePredicate: ({required date}) {
+        TextStyle? textStyle;
+        if (date.weekday == DateTime.saturday ||
+            date.weekday == DateTime.sunday) {
+          textStyle = weekendTextStyle;
+        }
+        if (DateUtils.isSameDay(date, DateTime(2021, 1, 25))) {
+          textStyle = anniversaryTextStyle;
+        }
+        return textStyle;
+      },
+      dayBuilder: ({
+        required date,
+        textStyle,
+        decoration,
+        isSelected,
+        isDisabled,
+        isToday,
+      }) {
+        Widget? dayWidget;
+        if (date.day % 3 == 0 && date.day % 9 != 0) {
+          dayWidget = Container(
+            decoration: decoration,
+            child: Center(
+              child: Stack(
+                alignment: AlignmentDirectional.center,
+                children: [
+                  Text(
+                    MaterialLocalizations.of(context).formatDecimal(date.day),
+                    style: textStyle,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 27.5),
+                    child: Container(
+                      height: 4,
+                      width: 4,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: isSelected == true
+                            ? Colors.white
+                            : Colors.grey[500],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+        return dayWidget;
+      },
+      yearBuilder: ({
+        required year,
+        decoration,
+        isCurrentYear,
+        isDisabled,
+        isSelected,
+        textStyle,
+      }) {
+        return Center(
+          child: Container(
+            decoration: decoration,
+            height: 36,
+            width: 72,
+            child: Center(
+              child: Semantics(
+                selected: isSelected,
+                button: true,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      year.toString(),
+                      style: textStyle,
+                    ),
+                    if (isCurrentYear == true)
+                      Container(
+                        padding: const EdgeInsets.all(5),
+                        margin: const EdgeInsets.only(left: 5),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.redAccent,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
-
-    return Container(
-      width: widget.width,
-      height: widget.height,
-      child: CalendarDatePicker2(
-        config: config,
-        value: _dialogCalendarPickerValue,
-        onValueChanged: (values) {
-          if (values != null) {
-            setState(() {
-              _dialogCalendarPickerValue = values;
-            });
-          }
-        },
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () async {
+              final values = await showCalendarDatePicker2Dialog(
+                context: context,
+                config: config,
+                dialogSize: const Size(325, 400),
+                borderRadius: BorderRadius.circular(15),
+                value: _dialogCalendarPickerValue,
+                dialogBackgroundColor: Colors.white,
+              );
+              if (values != null) {
+                // ignore: avoid_print
+                print(_getValueText(
+                  config.calendarType,
+                  values,
+                ));
+                setState(() {
+                  _dialogCalendarPickerValue = values;
+                });
+              }
+            },
+            child: const Text('Open Calendar Dialog'),
+          ),
+        ],
       ),
     );
   }

@@ -3,7 +3,9 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'bottom_component_map_marker_model.dart';
 export 'bottom_component_map_marker_model.dart';
 
@@ -47,6 +49,8 @@ class _BottomComponentMapMarkerWidgetState
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Align(
       alignment: const AlignmentDirectional(0.0, 0.0),
       child: Padding(
@@ -95,10 +99,32 @@ class _BottomComponentMapMarkerWidgetState
                           child: Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 12.0, 0.0),
-                            child: Text(
-                              cardModalBasicHostsAdsRecord.comments,
-                              style:
-                                  FlutterFlowTheme.of(context).headlineMedium,
+                            child: StreamBuilder<List<HostsAdsRecord>>(
+                              stream: queryHostsAdsRecord(),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          FlutterFlowTheme.of(context).primary,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                List<HostsAdsRecord> textHostsAdsRecordList =
+                                    snapshot.data!;
+                                return Text(
+                                  textHostsAdsRecordList.first.comments,
+                                  style: FlutterFlowTheme.of(context)
+                                      .headlineMedium,
+                                );
+                              },
                             ),
                           ),
                         ),
@@ -167,7 +193,21 @@ class _BottomComponentMapMarkerWidgetState
                           ),
                           FFButtonWidget(
                             onPressed: () async {
-                              context.pushNamed('UserDatePicker');
+                              context.pushNamed(
+                                'UserSummary',
+                                queryParameters: {
+                                  'dateFrom': serializeParam(
+                                    random_data.randomDate().toString(),
+                                    ParamType.String,
+                                  ),
+                                  'dateTo': serializeParam(
+                                    random_data.randomDate().toString(),
+                                    ParamType.String,
+                                  ),
+                                }.withoutNulls,
+                              );
+
+                              setState(() {});
                             },
                             text: 'Book',
                             options: FFButtonOptions(

@@ -45,6 +45,11 @@ class HostsAdsRecord extends FirestoreRecord {
   String get hostData => _hostData ?? '';
   bool hasHostData() => _hostData != null;
 
+  // "ad_userId" field.
+  String? _adUserId;
+  String get adUserId => _adUserId ?? '';
+  bool hasAdUserId() => _adUserId != null;
+
   void _initializeFields() {
     _hostPlace = getDataList(snapshotData['host_place']);
     _servicesIncluded = getDataList(snapshotData['services_included']);
@@ -52,6 +57,7 @@ class HostsAdsRecord extends FirestoreRecord {
     _comments = snapshotData['comments'] as String?;
     _hostPlaceLocation = snapshotData['host_place_location'] as LatLng?;
     _hostData = snapshotData['host_data'] as String?;
+    _adUserId = snapshotData['ad_userId'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -92,12 +98,14 @@ Map<String, dynamic> createHostsAdsRecordData({
   String? comments,
   LatLng? hostPlaceLocation,
   String? hostData,
+  String? adUserId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'comments': comments,
       'host_place_location': hostPlaceLocation,
       'host_data': hostData,
+      'ad_userId': adUserId,
     }.withoutNulls,
   );
 
@@ -115,7 +123,8 @@ class HostsAdsRecordDocumentEquality implements Equality<HostsAdsRecord> {
         listEquality.equals(e1?.petsAllowed, e2?.petsAllowed) &&
         e1?.comments == e2?.comments &&
         e1?.hostPlaceLocation == e2?.hostPlaceLocation &&
-        e1?.hostData == e2?.hostData;
+        e1?.hostData == e2?.hostData &&
+        e1?.adUserId == e2?.adUserId;
   }
 
   @override
@@ -125,7 +134,8 @@ class HostsAdsRecordDocumentEquality implements Equality<HostsAdsRecord> {
         e?.petsAllowed,
         e?.comments,
         e?.hostPlaceLocation,
-        e?.hostData
+        e?.hostData,
+        e?.adUserId
       ]);
 
   @override

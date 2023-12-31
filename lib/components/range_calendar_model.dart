@@ -1,14 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dates_widget.dart' show DatesWidget;
-import 'package:flutter/cupertino.dart';
+import 'range_calendar_widget.dart' show RangeCalendarWidget;
 import 'package:flutter/material.dart';
 
-class DatesModel extends FlutterFlowModel<DatesWidget> {
-  ///  State fields for stateful widgets in this component.
-
-  DateTime? datePicked1;
-  DateTime? datePicked2;
-
+class RangeCalendarModel extends FlutterFlowModel<RangeCalendarWidget> {
   /// Initialization and disposal methods.
 
   @override

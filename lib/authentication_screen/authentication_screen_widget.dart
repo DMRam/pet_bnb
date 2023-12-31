@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'authentication_screen_model.dart';
 export 'authentication_screen_model.dart';
 
@@ -77,6 +78,8 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
         ),
       );
     }
+
+    context.watch<FFAppState>();
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -1059,21 +1062,7 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                                   location:
                                                       currentUserLocationValue,
                                                 ));
-
-                                            context.goNamedAuth(
-                                              'AuthenticationScreen',
-                                              context.mounted,
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    const TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                  duration: Duration(
-                                                      milliseconds: 500),
-                                                ),
-                                              },
-                                            );
+                                            context.safePop();
                                           },
                                           text: 'Create Account',
                                           options: FFButtonOptions(

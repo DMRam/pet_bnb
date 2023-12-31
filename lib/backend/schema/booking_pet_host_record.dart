@@ -35,11 +35,35 @@ class BookingPetHostRecord extends FirestoreRecord {
   String get petId => _petId ?? '';
   bool hasPetId() => _petId != null;
 
+  // "start_date_text" field.
+  String? _startDateText;
+  String get startDateText => _startDateText ?? '';
+  bool hasStartDateText() => _startDateText != null;
+
+  // "end_date_text" field.
+  String? _endDateText;
+  String get endDateText => _endDateText ?? '';
+  bool hasEndDateText() => _endDateText != null;
+
+  // "owner_ref" field.
+  DocumentReference? _ownerRef;
+  DocumentReference? get ownerRef => _ownerRef;
+  bool hasOwnerRef() => _ownerRef != null;
+
+  // "pet_ref" field.
+  DocumentReference? _petRef;
+  DocumentReference? get petRef => _petRef;
+  bool hasPetRef() => _petRef != null;
+
   void _initializeFields() {
     _startDate = snapshotData['start_date'] as DateTime?;
     _endDate = snapshotData['end_date'] as DateTime?;
     _ownerId = snapshotData['owner_id'] as String?;
     _petId = snapshotData['pet_id'] as String?;
+    _startDateText = snapshotData['start_date_text'] as String?;
+    _endDateText = snapshotData['end_date_text'] as String?;
+    _ownerRef = snapshotData['owner_ref'] as DocumentReference?;
+    _petRef = snapshotData['pet_ref'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -81,6 +105,10 @@ Map<String, dynamic> createBookingPetHostRecordData({
   DateTime? endDate,
   String? ownerId,
   String? petId,
+  String? startDateText,
+  String? endDateText,
+  DocumentReference? ownerRef,
+  DocumentReference? petRef,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -88,6 +116,10 @@ Map<String, dynamic> createBookingPetHostRecordData({
       'end_date': endDate,
       'owner_id': ownerId,
       'pet_id': petId,
+      'start_date_text': startDateText,
+      'end_date_text': endDateText,
+      'owner_ref': ownerRef,
+      'pet_ref': petRef,
     }.withoutNulls,
   );
 
@@ -103,12 +135,24 @@ class BookingPetHostRecordDocumentEquality
     return e1?.startDate == e2?.startDate &&
         e1?.endDate == e2?.endDate &&
         e1?.ownerId == e2?.ownerId &&
-        e1?.petId == e2?.petId;
+        e1?.petId == e2?.petId &&
+        e1?.startDateText == e2?.startDateText &&
+        e1?.endDateText == e2?.endDateText &&
+        e1?.ownerRef == e2?.ownerRef &&
+        e1?.petRef == e2?.petRef;
   }
 
   @override
-  int hash(BookingPetHostRecord? e) => const ListEquality()
-      .hash([e?.startDate, e?.endDate, e?.ownerId, e?.petId]);
+  int hash(BookingPetHostRecord? e) => const ListEquality().hash([
+        e?.startDate,
+        e?.endDate,
+        e?.ownerId,
+        e?.petId,
+        e?.startDateText,
+        e?.endDateText,
+        e?.ownerRef,
+        e?.petRef
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is BookingPetHostRecord;

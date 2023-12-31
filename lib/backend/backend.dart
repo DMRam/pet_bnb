@@ -7,6 +7,8 @@ import 'schema/hosts_ads_record.dart';
 import 'schema/booking_pet_host_record.dart';
 import 'schema/host_info_record.dart';
 import 'schema/pet_info_record.dart';
+import 'schema/booking_petbnb_record.dart';
+import 'schema/owners_pet_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,6 +21,8 @@ export 'schema/hosts_ads_record.dart';
 export 'schema/booking_pet_host_record.dart';
 export 'schema/host_info_record.dart';
 export 'schema/pet_info_record.dart';
+export 'schema/booking_petbnb_record.dart';
+export 'schema/owners_pet_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -206,6 +210,80 @@ Future<List<PetInfoRecord>> queryPetInfoRecordOnce({
     queryCollectionOnce(
       PetInfoRecord.collection(parent),
       PetInfoRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query BookingPetbnbRecords (as a Stream and as a Future).
+Future<int> queryBookingPetbnbRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      BookingPetbnbRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<BookingPetbnbRecord>> queryBookingPetbnbRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      BookingPetbnbRecord.collection,
+      BookingPetbnbRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<BookingPetbnbRecord>> queryBookingPetbnbRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      BookingPetbnbRecord.collection,
+      BookingPetbnbRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query OwnersPetRecords (as a Stream and as a Future).
+Future<int> queryOwnersPetRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      OwnersPetRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<OwnersPetRecord>> queryOwnersPetRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      OwnersPetRecord.collection,
+      OwnersPetRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<OwnersPetRecord>> queryOwnersPetRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      OwnersPetRecord.collection,
+      OwnersPetRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

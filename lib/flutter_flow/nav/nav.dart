@@ -170,22 +170,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const HostCreateAdsWidget(),
         ),
         FFRoute(
-          name: 'UserDatePicker',
-          path: '/userDatePicker',
-          builder: (context, params) => const UserDatePickerWidget(),
-        ),
-        FFRoute(
           name: 'UserSummary',
           path: '/userSummary',
           builder: (context, params) => UserSummaryWidget(
-            dateFrom: params.getParam('dateFrom', ParamType.DateTime),
-            dateTo: params.getParam('dateTo', ParamType.DateTime),
+            dateFrom: params.getParam('dateFrom', ParamType.String),
+            dateTo: params.getParam('dateTo', ParamType.String),
           ),
         ),
         FFRoute(
           name: 'CalendarRange',
           path: '/calendarRange',
           builder: (context, params) => const CalendarRangeWidget(),
+        ),
+        FFRoute(
+          name: 'SecondCalendarRangePicker',
+          path: '/secondCalendarRangePicker',
+          builder: (context, params) => const SecondCalendarRangePickerWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

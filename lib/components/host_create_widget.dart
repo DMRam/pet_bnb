@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -13,6 +14,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:provider/provider.dart';
 import 'host_create_model.dart';
 export 'host_create_model.dart';
 
@@ -92,6 +94,8 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return BackdropFilter(
       filter: ImageFilter.blur(
         sigmaX: 5.0,
@@ -108,6 +112,12 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              ListView(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                children: const [],
+              ),
               FutureBuilder<ApiCallResponse>(
                 future: GeocodeAPICall.call(
                   address: _model.textController1.text,
@@ -732,15 +742,6 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                       ],
                                                     ),
                                                   ),
-                                                  Container(
-                                                    width: 100.0,
-                                                    height: 100.0,
-                                                    decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                    ),
-                                                  ),
                                                 ],
                                               ),
                                               Container(
@@ -787,10 +788,10 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                                         String>(
                                                                     null),
                                                             options: const [
-                                                              'Option 1',
-                                                              'Option 2',
-                                                              'Option 3',
-                                                              'Option 4'
+                                                              'Dog',
+                                                              'Cat',
+                                                              'Ferret',
+                                                              'Iguana'
                                                             ],
                                                             onChanged: null,
                                                             width: 300.0,
@@ -1047,6 +1048,8 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                                   hostData: _model
                                                                       .descriptionController
                                                                       .text,
+                                                                  adUserId:
+                                                                      currentUserUid,
                                                                 ),
                                                                 ...mapToFirestore(
                                                                   {

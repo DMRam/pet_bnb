@@ -22,3 +22,32 @@ LatLng? latLngFromDouble(
   }
   return LatLng(apiLat, apiLong);
 }
+
+DateTime? stringToDateTime(String? dateSelected) {
+  // convert a string value to DateTime
+  if (dateSelected == null) {
+    return null;
+  }
+  try {
+    return DateTime.parse(dateSelected);
+  } catch (e) {
+    return null;
+  }
+}
+
+DateTimeRange? stringToTimestamp(
+  String? startDateInString,
+  String? endDateInString,
+) {
+  // convert string to Timestamp and return Timestamp type
+  if (startDateInString == null || endDateInString == null) {
+    return null;
+  }
+  try {
+    final startDate = DateTime.parse(startDateInString);
+    final endDate = DateTime.parse(endDateInString);
+    return DateTimeRange(start: startDate, end: endDate);
+  } catch (e) {
+    return null;
+  }
+}
