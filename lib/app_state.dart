@@ -45,6 +45,12 @@ class FFAppState extends ChangeNotifier {
   set endDateGloVar(DateTime? value) {
     _endDateGloVar = value;
   }
+
+  String _petSelected = '';
+  String get petSelected => _petSelected;
+  set petSelected(String value) {
+    _petSelected = value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

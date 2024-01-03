@@ -50,6 +50,26 @@ class HostsAdsRecord extends FirestoreRecord {
   String get adUserId => _adUserId ?? '';
   bool hasAdUserId() => _adUserId != null;
 
+  // "pets_allowed_strAds" field.
+  String? _petsAllowedStrAds;
+  String get petsAllowedStrAds => _petsAllowedStrAds ?? '';
+  bool hasPetsAllowedStrAds() => _petsAllowedStrAds != null;
+
+  // "ad_category" field.
+  String? _adCategory;
+  String get adCategory => _adCategory ?? '';
+  bool hasAdCategory() => _adCategory != null;
+
+  // "adOwnersName" field.
+  String? _adOwnersName;
+  String get adOwnersName => _adOwnersName ?? '';
+  bool hasAdOwnersName() => _adOwnersName != null;
+
+  // "ad_id" field.
+  String? _adId;
+  String get adId => _adId ?? '';
+  bool hasAdId() => _adId != null;
+
   void _initializeFields() {
     _hostPlace = getDataList(snapshotData['host_place']);
     _servicesIncluded = getDataList(snapshotData['services_included']);
@@ -58,6 +78,10 @@ class HostsAdsRecord extends FirestoreRecord {
     _hostPlaceLocation = snapshotData['host_place_location'] as LatLng?;
     _hostData = snapshotData['host_data'] as String?;
     _adUserId = snapshotData['ad_userId'] as String?;
+    _petsAllowedStrAds = snapshotData['pets_allowed_strAds'] as String?;
+    _adCategory = snapshotData['ad_category'] as String?;
+    _adOwnersName = snapshotData['adOwnersName'] as String?;
+    _adId = snapshotData['ad_id'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -99,6 +123,10 @@ Map<String, dynamic> createHostsAdsRecordData({
   LatLng? hostPlaceLocation,
   String? hostData,
   String? adUserId,
+  String? petsAllowedStrAds,
+  String? adCategory,
+  String? adOwnersName,
+  String? adId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -106,6 +134,10 @@ Map<String, dynamic> createHostsAdsRecordData({
       'host_place_location': hostPlaceLocation,
       'host_data': hostData,
       'ad_userId': adUserId,
+      'pets_allowed_strAds': petsAllowedStrAds,
+      'ad_category': adCategory,
+      'adOwnersName': adOwnersName,
+      'ad_id': adId,
     }.withoutNulls,
   );
 
@@ -124,7 +156,11 @@ class HostsAdsRecordDocumentEquality implements Equality<HostsAdsRecord> {
         e1?.comments == e2?.comments &&
         e1?.hostPlaceLocation == e2?.hostPlaceLocation &&
         e1?.hostData == e2?.hostData &&
-        e1?.adUserId == e2?.adUserId;
+        e1?.adUserId == e2?.adUserId &&
+        e1?.petsAllowedStrAds == e2?.petsAllowedStrAds &&
+        e1?.adCategory == e2?.adCategory &&
+        e1?.adOwnersName == e2?.adOwnersName &&
+        e1?.adId == e2?.adId;
   }
 
   @override
@@ -135,7 +171,11 @@ class HostsAdsRecordDocumentEquality implements Equality<HostsAdsRecord> {
         e?.comments,
         e?.hostPlaceLocation,
         e?.hostData,
-        e?.adUserId
+        e?.adUserId,
+        e?.petsAllowedStrAds,
+        e?.adCategory,
+        e?.adOwnersName,
+        e?.adId
       ]);
 
   @override

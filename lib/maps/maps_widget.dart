@@ -160,6 +160,8 @@ class _MapsWidgetState extends State<MapsWidget> {
                                             MediaQuery.viewInsetsOf(context),
                                         child: BottomComponentMapMarkerWidget(
                                           refLocation: googleMapHostsAdsRecord,
+                                          adOwnId:
+                                              googleMapHostsAdsRecord.adUserId,
                                         ),
                                       ),
                                     );

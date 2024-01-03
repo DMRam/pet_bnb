@@ -35,11 +35,6 @@ class BookingPetbnbRecord extends FirestoreRecord {
   String get petName => _petName ?? '';
   bool hasPetName() => _petName != null;
 
-  // "pet_type" field.
-  String? _petType;
-  String get petType => _petType ?? '';
-  bool hasPetType() => _petType != null;
-
   // "owner_name" field.
   String? _ownerName;
   String get ownerName => _ownerName ?? '';
@@ -50,14 +45,19 @@ class BookingPetbnbRecord extends FirestoreRecord {
   String get adHostId => _adHostId ?? '';
   bool hasAdHostId() => _adHostId != null;
 
+  // "pet_type" field.
+  String? _petType;
+  String get petType => _petType ?? '';
+  bool hasPetType() => _petType != null;
+
   void _initializeFields() {
     _startDateString = snapshotData['start_date_string'] as String?;
     _endDateString = snapshotData['end_date_string'] as String?;
     _ownerId = snapshotData['owner_id'] as String?;
     _petName = snapshotData['pet_name'] as String?;
-    _petType = snapshotData['pet_type'] as String?;
     _ownerName = snapshotData['owner_name'] as String?;
     _adHostId = snapshotData['ad_host_id'] as String?;
+    _petType = snapshotData['pet_type'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -99,9 +99,9 @@ Map<String, dynamic> createBookingPetbnbRecordData({
   String? endDateString,
   String? ownerId,
   String? petName,
-  String? petType,
   String? ownerName,
   String? adHostId,
+  String? petType,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -109,9 +109,9 @@ Map<String, dynamic> createBookingPetbnbRecordData({
       'end_date_string': endDateString,
       'owner_id': ownerId,
       'pet_name': petName,
-      'pet_type': petType,
       'owner_name': ownerName,
       'ad_host_id': adHostId,
+      'pet_type': petType,
     }.withoutNulls,
   );
 
@@ -128,9 +128,9 @@ class BookingPetbnbRecordDocumentEquality
         e1?.endDateString == e2?.endDateString &&
         e1?.ownerId == e2?.ownerId &&
         e1?.petName == e2?.petName &&
-        e1?.petType == e2?.petType &&
         e1?.ownerName == e2?.ownerName &&
-        e1?.adHostId == e2?.adHostId;
+        e1?.adHostId == e2?.adHostId &&
+        e1?.petType == e2?.petType;
   }
 
   @override
@@ -139,9 +139,9 @@ class BookingPetbnbRecordDocumentEquality
         e?.endDateString,
         e?.ownerId,
         e?.petName,
-        e?.petType,
         e?.ownerName,
-        e?.adHostId
+        e?.adHostId,
+        e?.petType
       ]);
 
   @override

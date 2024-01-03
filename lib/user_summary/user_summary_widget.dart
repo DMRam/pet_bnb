@@ -1,6 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/range_calendar_widget.dart';
+import '/components/pets_dropdown_widget.dart';
 import '/components/simple_calendar_for_booking_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -21,10 +21,18 @@ class UserSummaryWidget extends StatefulWidget {
     super.key,
     required this.dateFrom,
     required this.dateTo,
+    required this.adOwnerIdFromMapCard,
+    this.petSelected,
+    this.adCategory,
+    this.adIdRequiredFromSum,
   });
 
   final String? dateFrom;
   final String? dateTo;
+  final String? adOwnerIdFromMapCard;
+  final String? petSelected;
+  final String? adCategory;
+  final String? adIdRequiredFromSum;
 
   @override
   _UserSummaryWidgetState createState() => _UserSummaryWidgetState();
@@ -45,11 +53,8 @@ class _UserSummaryWidgetState extends State<UserSummaryWidget> {
       setState(() {});
     });
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
-
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.textController ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -181,34 +186,6 @@ class _UserSummaryWidgetState extends State<UserSummaryWidget> {
                       children: [
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              1.0, 15.0, 0.0, 5.0),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              await showModalBottomSheet(
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
-                                enableDrag: false,
-                                context: context,
-                                builder: (context) {
-                                  return Padding(
-                                    padding: MediaQuery.viewInsetsOf(context),
-                                    child: const RangeCalendarWidget(),
-                                  );
-                                },
-                              ).then((value) => safeSetState(() {}));
-                            },
-                            child: Text(
-                              'Dates',
-                              style: FlutterFlowTheme.of(context).titleLarge,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 15.0, 0.0, 8.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -233,9 +210,10 @@ class _UserSummaryWidgetState extends State<UserSummaryWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Inter',
-                                    color: const Color(0xFF040AEF),
-                                    fontSize: 12.0,
-                                    fontWeight: FontWeight.w600,
+                                    color:
+                                        FlutterFlowTheme.of(context).secondary,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w500,
                                   ),
                             ),
                           ),
@@ -244,11 +222,11 @@ class _UserSummaryWidgetState extends State<UserSummaryWidget> {
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 8.0, 0.0, 0.0),
+                              10.0, 8.0, 0.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
                             focusColor: Colors.transparent,
@@ -351,126 +329,129 @@ class _UserSummaryWidgetState extends State<UserSummaryWidget> {
                             ),
                           ],
                         ),
+                        Container(
+                          height: 62.0,
+                          decoration: const BoxDecoration(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              controller: _model.textController,
+                              focusNode: _model.textFieldFocusNode,
+                              autofocus: true,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'your pet\'s name...',
+                                labelStyle:
+                                    FlutterFlowTheme.of(context).labelMedium,
+                                hintStyle:
+                                    FlutterFlowTheme.of(context).labelMedium,
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(0.0),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(0.0),
+                                ),
+                                errorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).error,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(0.0),
+                                ),
+                                focusedErrorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).error,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(0.0),
+                                ),
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              validator: _model.textControllerValidator
+                                  .asValidator(context),
+                            ),
+                          ),
+                        ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  controller: _model.textController1,
-                                  focusNode: _model.textFieldFocusNode1,
-                                  autofocus: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: 'your pet\'s name...',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(0.0),
+                            Align(
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
+                              child: Text(
+                                'Pet type',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      color: const Color(0xAC002FF1),
+                                      fontSize: 18.0,
                                     ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(0.0),
-                                    ),
-                                    errorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(0.0),
-                                    ),
-                                    focusedErrorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(0.0),
-                                    ),
-                                  ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
-                                  validator: _model.textController1Validator
-                                      .asValidator(context),
-                                ),
                               ),
                             ),
                           ],
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 0.0, 8.0, 0.0),
-                                child: TextFormField(
-                                  controller: _model.textController2,
-                                  focusNode: _model.textFieldFocusNode2,
-                                  autofocus: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: 'Pet\'s type',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(0.0),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(0.0),
-                                    ),
-                                    errorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(0.0),
-                                    ),
-                                    focusedErrorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(0.0),
+                      ],
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        StreamBuilder<List<HostsAdsRecord>>(
+                          stream: queryHostsAdsRecord(
+                            queryBuilder: (hostsAdsRecord) => hostsAdsRecord
+                                .where(
+                                  'ad_userId',
+                                  isEqualTo: widget.adOwnerIdFromMapCard,
+                                )
+                                .where(
+                                  'ad_id',
+                                  isEqualTo: widget.adIdRequiredFromSum,
+                                ),
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      FlutterFlowTheme.of(context).primary,
                                     ),
                                   ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
-                                  validator: _model.textController2Validator
-                                      .asValidator(context),
                                 ),
-                              ),
-                            ),
-                          ],
+                              );
+                            }
+                            List<HostsAdsRecord> listViewHostsAdsRecordList =
+                                snapshot.data!;
+                            return ListView.builder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: listViewHostsAdsRecordList.length,
+                              itemBuilder: (context, listViewIndex) {
+                                final listViewHostsAdsRecord =
+                                    listViewHostsAdsRecordList[listViewIndex];
+                                return PetsDropdownWidget(
+                                  key: Key(
+                                      'Key786_${listViewIndex}_of_${listViewHostsAdsRecordList.length}'),
+                                  parameter1:
+                                      listViewHostsAdsRecord.petsAllowed,
+                                );
+                              },
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -565,20 +546,18 @@ class _UserSummaryWidgetState extends State<UserSummaryWidget> {
               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 34.0),
               child: FFButtonWidget(
                 onPressed: () async {
-                  setState(() {
-                    FFAppState().endDateGloVar = _model.endDatePageVar;
-                    FFAppState().startDateGloVar = _model.startDatePageVar;
-                  });
+                  setState(() {});
 
                   await BookingPetbnbRecord.collection
                       .doc()
                       .set(createBookingPetbnbRecordData(
                         ownerId: currentUserUid,
-                        startDateString: widget.dateFrom,
-                        endDateString: widget.dateTo,
-                        petName: _model.textController1.text,
-                        petType: _model.textController2.text,
+                        startDateString: FFAppState().startDate,
+                        endDateString: FFAppState().endDate,
+                        petName: _model.textController.text,
                         ownerName: currentUserDisplayName,
+                        adHostId: widget.adOwnerIdFromMapCard,
+                        petType: FFAppState().petSelected,
                       ));
 
                   context.pushNamed('DashboardScreen');

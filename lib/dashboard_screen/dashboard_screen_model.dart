@@ -10,6 +10,10 @@ class DashboardScreenModel extends FlutterFlowModel<DashboardScreenWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  // State field(s) for TabBar widget.
+  TabController? tabBarController;
+  int get tabBarCurrentIndex =>
+      tabBarController != null ? tabBarController!.index : 0;
 
   /// Initialization and disposal methods.
 
@@ -21,6 +25,8 @@ class DashboardScreenModel extends FlutterFlowModel<DashboardScreenWidget> {
     unfocusNode.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();
+
+    tabBarController?.dispose();
   }
 
   /// Action blocks are added here.

@@ -5,22 +5,26 @@ import 'host_create_widget.dart' show HostCreateWidget;
 import 'package:flutter/material.dart';
 
 class HostCreateModel extends FlutterFlowModel<HostCreateWidget> {
+  ///  Local state fields for this component.
+
+  String adOwnerId = '';
+
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
   // Stores action output result for [Backend Call - API (Geocode API)] action in Column widget.
   ApiCallResponse? apiResult6k0;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  // Stores action output result for [Backend Call - API (Geocode API)] action in TextField widget.
+  // State field(s) for hostAddress widget.
+  FocusNode? hostAddressFocusNode;
+  TextEditingController? hostAddressController;
+  String? Function(BuildContext, String?)? hostAddressControllerValidator;
+  // Stores action output result for [Backend Call - API (Geocode API)] action in hostAddress widget.
   ApiCallResponse? apiResult9w1;
   // Stores action output result for [Backend Call - API (Geocode API)] action in Button widget.
   ApiCallResponse? apiResultr9w;
-  // State field(s) for CheckboxGroup widget.
-  List<String>? checkboxGroupValues;
-  FormFieldController<List<String>>? checkboxGroupValueController;
+  // State field(s) for DropDownCategory widget.
+  String? dropDownCategoryValue;
+  FormFieldController<String>? dropDownCategoryValueController;
   // State field(s) for DropDown widget.
   List<String>? dropDownValue;
   FormFieldController<String>? dropDownValueController;
@@ -36,8 +40,8 @@ class HostCreateModel extends FlutterFlowModel<HostCreateWidget> {
 
   @override
   void dispose() {
-    textFieldFocusNode?.dispose();
-    textController1?.dispose();
+    hostAddressFocusNode?.dispose();
+    hostAddressController?.dispose();
 
     descriptionFocusNode?.dispose();
     descriptionController?.dispose();

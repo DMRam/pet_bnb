@@ -2,7 +2,6 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_checkbox_group.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -11,6 +10,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -69,8 +69,8 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
     super.initState();
     _model = createModel(context, () => HostCreateModel());
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.hostAddressController ??= TextEditingController();
+    _model.hostAddressFocusNode ??= FocusNode();
 
     _model.descriptionController ??= TextEditingController();
     _model.descriptionFocusNode ??= FocusNode();
@@ -120,7 +120,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
               ),
               FutureBuilder<ApiCallResponse>(
                 future: GeocodeAPICall.call(
-                  address: _model.textController1.text,
+                  address: _model.hostAddressController.text,
                 ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
@@ -171,7 +171,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                               children: [
                                 FutureBuilder<ApiCallResponse>(
                                   future: GeocodeAPICall.call(
-                                    address: _model.textController1.text,
+                                    address: _model.hostAddressController.text,
                                   ),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
@@ -205,8 +205,8 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                           onTap: () async {
                                             _model.apiResult6k0 =
                                                 await GeocodeAPICall.call(
-                                              address:
-                                                  _model.textController1.text,
+                                              address: _model
+                                                  .hostAddressController.text,
                                             );
 
                                             setState(() {});
@@ -214,7 +214,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                                CrossAxisAlignment.center,
                                             children: [
                                               Padding(
                                                 padding: const EdgeInsetsDirectional
@@ -244,7 +244,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                                         0.0,
                                                                         4.0),
                                                             child: Text(
-                                                              'Create an AD',
+                                                              'Ad creation',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .headlineMedium,
@@ -432,9 +432,9 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                                   0.0),
                                                       child: TextFormField(
                                                         controller: _model
-                                                            .textController1,
+                                                            .hostAddressController,
                                                         focusNode: _model
-                                                            .textFieldFocusNode,
+                                                            .hostAddressFocusNode,
                                                         onFieldSubmitted:
                                                             (_) async {
                                                           var shouldSetState =
@@ -443,7 +443,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                               await GeocodeAPICall
                                                                   .call(
                                                             address: _model
-                                                                .textController1
+                                                                .hostAddressController
                                                                 .text,
                                                           );
                                                           shouldSetState =
@@ -542,7 +542,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                                     context)
                                                                 .bodyMedium,
                                                         validator: _model
-                                                            .textController1Validator
+                                                            .hostAddressControllerValidator
                                                             .asValidator(
                                                                 context),
                                                       ),
@@ -558,7 +558,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                       future:
                                                           GeocodeAPICall.call(
                                                         address: _model
-                                                            .textController1
+                                                            .hostAddressController
                                                             .text,
                                                       ),
                                                       builder:
@@ -592,25 +592,48 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                                 await GeocodeAPICall
                                                                     .call(
                                                               address: _model
-                                                                  .textController1
+                                                                  .hostAddressController
                                                                   .text,
                                                             );
                                                             shouldSetState =
                                                                 true;
                                                             if ((_model
-                                                                    .apiResultr9w
+                                                                    .apiResult6k0
                                                                     ?.succeeded ??
                                                                 true)) {
+                                                              await showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (alertDialogContext) {
+                                                                  return AlertDialog(
+                                                                    title: const Text(
+                                                                        'Address confirmed'),
+                                                                    content: const Text(
+                                                                        'Your address has been confirmed!'),
+                                                                    actions: [
+                                                                      TextButton(
+                                                                        onPressed:
+                                                                            () =>
+                                                                                Navigator.pop(alertDialogContext),
+                                                                        child: const Text(
+                                                                            'Ok'),
+                                                                      ),
+                                                                    ],
+                                                                  );
+                                                                },
+                                                              );
+                                                              if (shouldSetState) {
+                                                                setState(() {});
+                                                              }
+                                                              return;
+                                                            } else {
                                                               if (shouldSetState) {
                                                                 setState(() {});
                                                               }
                                                               return;
                                                             }
 
-                                                            if (shouldSetState) {
-                                                              setState(() {});
-                                                            }
-                                                            return;
                                                             if (shouldSetState) {
                                                               setState(() {});
                                                             }
@@ -663,10 +686,6 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                       },
                                                     ),
                                                   ),
-                                                  const Divider(
-                                                    thickness: 2.0,
-                                                    color: Color(0xFF616264),
-                                                  ),
                                                 ],
                                               ),
                                               Column(
@@ -674,6 +693,8 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceEvenly,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Padding(
                                                     padding:
@@ -681,7 +702,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                             .fromSTEB(0.0, 20.0,
                                                                 0.0, 0.0),
                                                     child: Text(
-                                                      'Services to offer',
+                                                      'Service category',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -692,52 +713,58 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                     decoration: const BoxDecoration(),
                                                     child: Stack(
                                                       children: [
-                                                        Align(
-                                                          alignment:
-                                                              const AlignmentDirectional(
-                                                                  0.0, 1.0),
-                                                          child:
-                                                              FlutterFlowCheckboxGroup(
-                                                            options: const [
-                                                              'Servicio 1',
-                                                              'Servicio 2',
-                                                              'Servicio 3'
-                                                            ],
-                                                            onChanged: (val) =>
-                                                                setState(() =>
-                                                                    _model.checkboxGroupValues =
-                                                                        val),
-                                                            controller: _model
-                                                                    .checkboxGroupValueController ??=
-                                                                FormFieldController<
-                                                                    List<
-                                                                        String>>(
-                                                              [],
-                                                            ),
-                                                            activeColor:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                            checkColor:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .info,
-                                                            checkboxBorderColor:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                            textStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium,
-                                                            checkboxBorderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4.0),
-                                                            initialized: _model
-                                                                    .checkboxGroupValues !=
-                                                                null,
+                                                        FlutterFlowDropDown<
+                                                            String>(
+                                                          controller: _model
+                                                                  .dropDownCategoryValueController ??=
+                                                              FormFieldController<
+                                                                  String>(null),
+                                                          options: const [
+                                                            'Pet Hosting',
+                                                            'Pet Products',
+                                                            'Pet Services'
+                                                          ],
+                                                          onChanged: (val) =>
+                                                              setState(() =>
+                                                                  _model.dropDownCategoryValue =
+                                                                      val),
+                                                          width: 300.0,
+                                                          height: 50.0,
+                                                          textStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium,
+                                                          hintText:
+                                                              'Please select category...',
+                                                          icon: Icon(
+                                                            Icons
+                                                                .keyboard_arrow_down_rounded,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryText,
+                                                            size: 24.0,
                                                           ),
+                                                          fillColor: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          elevation: 2.0,
+                                                          borderColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .alternate,
+                                                          borderWidth: 2.0,
+                                                          borderRadius: 8.0,
+                                                          margin:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      16.0,
+                                                                      4.0,
+                                                                      16.0,
+                                                                      4.0),
+                                                          hidesUnderline: true,
+                                                          isOverButton: true,
+                                                          isSearchable: false,
+                                                          isMultiSelect: false,
                                                         ),
                                                       ],
                                                     ),
@@ -756,7 +783,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                         padding:
                                                             const EdgeInsetsDirectional
                                                                 .fromSTEB(
-                                                                    0.0,
+                                                                    8.0,
                                                                     20.0,
                                                                     0.0,
                                                                     0.0),
@@ -779,70 +806,97 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                                       60.0,
                                                                       0.0,
                                                                       0.0),
-                                                          child:
-                                                              FlutterFlowDropDown<
+                                                          child: StreamBuilder<
+                                                              List<
+                                                                  PetsListRecord>>(
+                                                            stream:
+                                                                queryPetsListRecord(),
+                                                            builder: (context,
+                                                                snapshot) {
+                                                              // Customize what your widget looks like when it's loading.
+                                                              if (!snapshot
+                                                                  .hasData) {
+                                                                return Center(
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 50.0,
+                                                                    height:
+                                                                        50.0,
+                                                                    child:
+                                                                        CircularProgressIndicator(
+                                                                      valueColor:
+                                                                          AlwaysStoppedAnimation<
+                                                                              Color>(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              }
+                                                              List<PetsListRecord>
+                                                                  dropDownPetsListRecordList =
+                                                                  snapshot
+                                                                      .data!;
+                                                              return FlutterFlowDropDown<
                                                                   String>(
-                                                            controller: _model
-                                                                    .dropDownValueController ??=
-                                                                FormFieldController<
-                                                                        String>(
-                                                                    null),
-                                                            options: const [
-                                                              'Dog',
-                                                              'Cat',
-                                                              'Ferret',
-                                                              'Iguana'
-                                                            ],
-                                                            onChanged: null,
-                                                            width: 300.0,
-                                                            height: 50.0,
-                                                            searchHintTextStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium,
-                                                            textStyle:
-                                                                FlutterFlowTheme.of(
+                                                                controller: _model
+                                                                        .dropDownValueController ??=
+                                                                    FormFieldController<
+                                                                            String>(
+                                                                        null),
+                                                                options: dropDownPetsListRecordList
+                                                                    .map((e) =>
+                                                                        e.pets)
+                                                                    .toList(),
+                                                                onChanged: null,
+                                                                width: 300.0,
+                                                                height: 50.0,
+                                                                textStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium,
-                                                            hintText:
-                                                                'Please select...',
-                                                            searchHintText:
-                                                                'Search for an item...',
-                                                            icon: Icon(
-                                                              Icons
-                                                                  .keyboard_arrow_down_rounded,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryText,
-                                                              size: 24.0,
-                                                            ),
-                                                            fillColor: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                            elevation: 2.0,
-                                                            borderColor:
-                                                                FlutterFlowTheme.of(
+                                                                hintText:
+                                                                    'Please select...',
+                                                                icon: Icon(
+                                                                  Icons
+                                                                      .keyboard_arrow_down_rounded,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  size: 24.0,
+                                                                ),
+                                                                fillColor: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .alternate,
-                                                            borderWidth: 2.0,
-                                                            borderRadius: 8.0,
-                                                            margin:
-                                                                const EdgeInsetsDirectional
+                                                                    .secondaryBackground,
+                                                                elevation: 2.0,
+                                                                borderColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .alternate,
+                                                                borderWidth:
+                                                                    2.0,
+                                                                borderRadius:
+                                                                    8.0,
+                                                                margin: const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         16.0,
                                                                         4.0,
                                                                         16.0,
                                                                         4.0),
-                                                            hidesUnderline:
-                                                                true,
-                                                            isOverButton: true,
-                                                            isSearchable: true,
-                                                            isMultiSelect: true,
-                                                            onChangedForMultiSelect:
-                                                                (val) => setState(
-                                                                    () => _model
-                                                                            .dropDownValue =
-                                                                        val),
+                                                                hidesUnderline:
+                                                                    true,
+                                                                isOverButton:
+                                                                    true,
+                                                                isSearchable:
+                                                                    false,
+                                                                isMultiSelect:
+                                                                    true,
+                                                                onChangedForMultiSelect: (val) =>
+                                                                    setState(() =>
+                                                                        _model.dropDownValue =
+                                                                            val),
+                                                              );
+                                                            },
                                                           ),
                                                         ),
                                                       ),
@@ -982,145 +1036,117 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                                   0.0,
                                                                   4.0,
                                                                   0.0),
-                                                      child: StreamBuilder<
-                                                          List<UsersRecord>>(
-                                                        stream:
-                                                            queryUsersRecord(
-                                                          singleRecord: true,
-                                                        ),
-                                                        builder: (context,
-                                                            snapshot) {
-                                                          // Customize what your widget looks like when it's loading.
-                                                          if (!snapshot
-                                                              .hasData) {
-                                                            return Center(
-                                                              child: SizedBox(
-                                                                width: 50.0,
-                                                                height: 50.0,
-                                                                child:
-                                                                    CircularProgressIndicator(
-                                                                  valueColor:
-                                                                      AlwaysStoppedAnimation<
-                                                                          Color>(
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            );
-                                                          }
-                                                          List<UsersRecord>
-                                                              buttonUsersRecordList =
-                                                              snapshot.data!;
-                                                          // Return an empty Container when the item does not exist.
-                                                          if (snapshot
-                                                              .data!.isEmpty) {
-                                                            return Container();
-                                                          }
-                                                          final buttonUsersRecord =
-                                                              buttonUsersRecordList
-                                                                      .isNotEmpty
-                                                                  ? buttonUsersRecordList
-                                                                      .first
-                                                                  : null;
-                                                          return FFButtonWidget(
-                                                            onPressed:
-                                                                () async {
-                                                              await HostsAdsRecord
-                                                                  .collection
-                                                                  .doc()
-                                                                  .set({
-                                                                ...createHostsAdsRecordData(
-                                                                  comments: _model
-                                                                      .descriptionController
-                                                                      .text,
-                                                                  hostPlaceLocation: functions
-                                                                      .latLngFromDouble(
-                                                                          GeocodeAPICall
-                                                                              .apiLat(
-                                                                            formGeocodeAPIResponse.jsonBody,
-                                                                          ),
-                                                                          GeocodeAPICall
-                                                                              .apiLng(
-                                                                            formGeocodeAPIResponse.jsonBody,
-                                                                          )),
-                                                                  hostData: _model
-                                                                      .descriptionController
-                                                                      .text,
-                                                                  adUserId:
-                                                                      currentUserUid,
-                                                                ),
-                                                                ...mapToFirestore(
-                                                                  {
-                                                                    'pets_allowed':
-                                                                        _model
-                                                                            .dropDownValue,
-                                                                    'host_place':
-                                                                        [
-                                                                      '../kjhkjhkjhk'
-                                                                    ],
-                                                                    'services_included':
-                                                                        _model
-                                                                            .checkboxGroupValues,
-                                                                  },
-                                                                ),
-                                                              });
-                                                              if (formGeocodeAPIResponse
-                                                                  .succeeded) {
-                                                                context.pushNamed(
-                                                                    'HostDashb');
-
-                                                                return;
-                                                              } else {
-                                                                return;
-                                                              }
-                                                            },
-                                                            text: 'Create Ad',
-                                                            options:
-                                                                FFButtonOptions(
-                                                              height: 50.0,
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          32.0,
-                                                                          0.0,
-                                                                          32.0,
-                                                                          0.0),
-                                                              iconPadding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primary,
-                                                              textStyle:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmall
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        color: Colors
-                                                                            .white,
+                                                      child: FFButtonWidget(
+                                                        onPressed: () async {
+                                                          await HostsAdsRecord
+                                                              .collection
+                                                              .doc()
+                                                              .set({
+                                                            ...createHostsAdsRecordData(
+                                                              comments: _model
+                                                                  .descriptionController
+                                                                  .text,
+                                                              hostPlaceLocation: functions
+                                                                  .latLngFromDouble(
+                                                                      GeocodeAPICall
+                                                                          .apiLat(
+                                                                        formGeocodeAPIResponse
+                                                                            .jsonBody,
                                                                       ),
-                                                              elevation: 2.0,
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                color: Colors
-                                                                    .transparent,
-                                                                width: 1.0,
+                                                                      GeocodeAPICall
+                                                                          .apiLng(
+                                                                        formGeocodeAPIResponse
+                                                                            .jsonBody,
+                                                                      )),
+                                                              hostData: _model
+                                                                  .descriptionController
+                                                                  .text,
+                                                              adUserId:
+                                                                  currentUserUid,
+                                                              petsAllowedStrAds: (_model
+                                                                              .dropDownValue !=
+                                                                          null &&
+                                                                      _model
+                                                                          .dropDownValue!
+                                                                          .isNotEmpty)
+                                                                  .toString(),
+                                                              adCategory: _model
+                                                                  .dropDownCategoryValue,
+                                                              adOwnersName:
+                                                                  currentUserDisplayName,
+                                                              adId: random_data
+                                                                  .randomString(
+                                                                20,
+                                                                20,
+                                                                true,
+                                                                false,
+                                                                true,
                                                               ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          40.0),
                                                             ),
-                                                          );
+                                                            ...mapToFirestore(
+                                                              {
+                                                                'host_place': [
+                                                                  '../kjhkjhkjhk'
+                                                                ],
+                                                                'pets_allowed':
+                                                                    _model
+                                                                        .dropDownValue,
+                                                              },
+                                                            ),
+                                                          });
+                                                          if (formGeocodeAPIResponse
+                                                              .succeeded) {
+                                                            context.pushNamed(
+                                                                'HostDashb');
+
+                                                            return;
+                                                          } else {
+                                                            return;
+                                                          }
                                                         },
+                                                        text: 'Create Ad',
+                                                        options:
+                                                            FFButtonOptions(
+                                                          height: 50.0,
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      32.0,
+                                                                      0.0,
+                                                                      32.0,
+                                                                      0.0),
+                                                          iconPadding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          textStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Inter',
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                          elevation: 2.0,
+                                                          borderSide:
+                                                              const BorderSide(
+                                                            color: Colors
+                                                                .transparent,
+                                                            width: 1.0,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      40.0),
+                                                        ),
                                                       ),
                                                     ),
                                                   ],

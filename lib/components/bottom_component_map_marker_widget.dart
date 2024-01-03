@@ -13,9 +13,11 @@ class BottomComponentMapMarkerWidget extends StatefulWidget {
   const BottomComponentMapMarkerWidget({
     super.key,
     required this.refLocation,
+    required this.adOwnId,
   });
 
   final HostsAdsRecord? refLocation;
+  final String? adOwnId;
 
   @override
   _BottomComponentMapMarkerWidgetState createState() =>
@@ -120,7 +122,7 @@ class _BottomComponentMapMarkerWidgetState
                                 List<HostsAdsRecord> textHostsAdsRecordList =
                                     snapshot.data!;
                                 return Text(
-                                  textHostsAdsRecordList.first.comments,
+                                  cardModalBasicHostsAdsRecord.adOwnersName,
                                   style: FlutterFlowTheme.of(context)
                                       .headlineMedium,
                                 );
@@ -150,12 +152,40 @@ class _BottomComponentMapMarkerWidgetState
                       thickness: 2.0,
                       color: FlutterFlowTheme.of(context).primaryBackground,
                     ),
-                    Text(
-                      (cardModalBasicHostsAdsRecord.servicesIncluded
-                              .sortedList()
-                              .isNotEmpty)
-                          .toString(),
-                      style: FlutterFlowTheme.of(context).labelMedium,
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
+                      child: Text(
+                        'Pets accepted for this hoster',
+                        style:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Inter',
+                                  fontSize: 18.0,
+                                ),
+                      ),
+                    ),
+                    Builder(
+                      builder: (context) {
+                        final listOfPetsAccepted =
+                            cardModalBasicHostsAdsRecord.petsAllowed.toList();
+                        return ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: listOfPetsAccepted.length,
+                          itemBuilder: (context, listOfPetsAcceptedIndex) {
+                            final listOfPetsAcceptedItem =
+                                listOfPetsAccepted[listOfPetsAcceptedIndex];
+                            return Text(
+                              (cardModalBasicHostsAdsRecord.servicesIncluded
+                                      .sortedList()
+                                      .isNotEmpty)
+                                  .toString(),
+                              style: FlutterFlowTheme.of(context).labelMedium,
+                            );
+                          },
+                        );
+                      },
                     ),
                     Padding(
                       padding:
@@ -165,8 +195,8 @@ class _BottomComponentMapMarkerWidgetState
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
+                            onPressed: () async {
+                              Navigator.pop(context);
                             },
                             text: 'Cancel',
                             options: FFButtonOptions(
@@ -204,10 +234,20 @@ class _BottomComponentMapMarkerWidgetState
                                     random_data.randomDate().toString(),
                                     ParamType.String,
                                   ),
+                                  'adOwnerIdFromMapCard': serializeParam(
+                                    widget.adOwnId,
+                                    ParamType.String,
+                                  ),
+                                  'adCategory': serializeParam(
+                                    cardModalBasicHostsAdsRecord.adCategory,
+                                    ParamType.String,
+                                  ),
+                                  'adIdRequiredFromSum': serializeParam(
+                                    cardModalBasicHostsAdsRecord.adId,
+                                    ParamType.String,
+                                  ),
                                 }.withoutNulls,
                               );
-
-                              setState(() {});
                             },
                             text: 'Book',
                             options: FFButtonOptions(

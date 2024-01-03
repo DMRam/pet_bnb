@@ -175,6 +175,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => UserSummaryWidget(
             dateFrom: params.getParam('dateFrom', ParamType.String),
             dateTo: params.getParam('dateTo', ParamType.String),
+            adOwnerIdFromMapCard:
+                params.getParam('adOwnerIdFromMapCard', ParamType.String),
+            petSelected: params.getParam('petSelected', ParamType.String),
+            adCategory: params.getParam('adCategory', ParamType.String),
+            adIdRequiredFromSum:
+                params.getParam('adIdRequiredFromSum', ParamType.String),
           ),
         ),
         FFRoute(

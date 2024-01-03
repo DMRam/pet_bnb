@@ -164,49 +164,54 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 12.0),
-                child: StreamBuilder<List<UsersRecord>>(
-                  stream: queryUsersRecord(
-                    singleRecord: true,
+              StreamBuilder<List<UsersRecord>>(
+                stream: queryUsersRecord(
+                  queryBuilder: (usersRecord) => usersRecord.where(
+                    'email',
+                    isEqualTo: currentUserEmail,
                   ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primary,
-                            ),
+                ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            FlutterFlowTheme.of(context).primary,
                           ),
                         ),
-                      );
-                    }
-                    List<UsersRecord> textUsersRecordList = snapshot.data!;
-                    // Return an empty Container when the item does not exist.
-                    if (snapshot.data!.isEmpty) {
-                      return Container();
-                    }
-                    final textUsersRecord = textUsersRecordList.isNotEmpty
-                        ? textUsersRecordList.first
-                        : null;
-                    return Text(
-                      valueOrDefault<String>(
-                        textUsersRecord?.displayName,
-                        'USER',
                       ),
-                      textAlign: TextAlign.center,
-                      style:
-                          FlutterFlowTheme.of(context).headlineSmall.override(
+                    );
+                  }
+                  List<UsersRecord> listViewUsersRecordList = snapshot.data!;
+                  return ListView.builder(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: listViewUsersRecordList.length,
+                    itemBuilder: (context, listViewIndex) {
+                      final listViewUsersRecord =
+                          listViewUsersRecordList[listViewIndex];
+                      return Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 16.0, 0.0, 12.0),
+                        child: Text(
+                          listViewUsersRecord.displayName,
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context)
+                              .headlineSmall
+                              .override(
                                 fontFamily: 'Readex Pro',
                                 color: FlutterFlowTheme.of(context).info,
                               ),
-                    );
-                  },
-                ),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
               Text(
                 currentUserEmail,

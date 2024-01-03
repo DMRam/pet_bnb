@@ -135,26 +135,7 @@ class _CalendarRangeWidgetState extends State<CalendarRangeWidget> {
                                 0.0, 40.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                context.pushNamed(
-                                  'UserSummary',
-                                  queryParameters: {
-                                    'dateFrom': serializeParam(
-                                      valueOrDefault<String>(
-                                        FFAppState().startDate,
-                                        'Value from calendar',
-                                      ),
-                                      ParamType.String,
-                                    ),
-                                    'dateTo': serializeParam(
-                                      valueOrDefault<String>(
-                                        FFAppState().endDate,
-                                        'Value from calendar',
-                                      ),
-                                      ParamType.String,
-                                    ),
-                                  }.withoutNulls,
-                                );
-
+                                context.safePop();
                                 FFAppState().update(() {});
                               },
                               text: 'Confirm',

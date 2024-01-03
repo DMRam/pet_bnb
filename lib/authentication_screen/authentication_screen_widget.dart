@@ -1054,15 +1054,22 @@ class _AuthenticationScreenWidgetState extends State<AuthenticationScreenWidget>
                                             }
 
                                             await UsersRecord.collection
-                                                .doc()
-                                                .set(createUsersRecordData(
-                                                  email: widget.email,
+                                                .doc(user.uid)
+                                                .update(createUsersRecordData(
+                                                  email: _model
+                                                      .emailAddressController
+                                                      .text,
                                                   displayName: _model
                                                       .nameController.text,
+                                                  createdTime:
+                                                      getCurrentTimestamp,
                                                   location:
                                                       currentUserLocationValue,
                                                 ));
-                                            context.safePop();
+
+                                            context.pushNamedAuth(
+                                                'AuthenticationScreen',
+                                                context.mounted);
                                           },
                                           text: 'Create Account',
                                           options: FFButtonOptions(
