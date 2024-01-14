@@ -14,9 +14,7 @@ class HostCalendarModel extends FlutterFlowModel<HostCalendarWidget> {
       tabBarController != null ? tabBarController!.index : 0;
 
   // State field(s) for Calendar widget.
-  DateTimeRange? calendarSelectedDay1;
-  // State field(s) for Calendar widget.
-  DateTimeRange? calendarSelectedDay2;
+  DateTimeRange? calendarSelectedDay;
   // Model for HostNavBar component.
   late HostNavBarModel hostNavBarModel;
 
@@ -24,11 +22,7 @@ class HostCalendarModel extends FlutterFlowModel<HostCalendarWidget> {
 
   @override
   void initState(BuildContext context) {
-    calendarSelectedDay1 = DateTimeRange(
-      start: DateTime.now().startOfDay,
-      end: DateTime.now().endOfDay,
-    );
-    calendarSelectedDay2 = DateTimeRange(
+    calendarSelectedDay = DateTimeRange(
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );

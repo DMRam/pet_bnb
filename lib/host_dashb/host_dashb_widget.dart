@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/host_create_widget.dart';
 import '/components/host_nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -193,14 +194,16 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(2.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(40.0),
-                                        child: Image.network(
-                                          'https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzh8fHVzZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-                                          width: 40.0,
-                                          height: 40.0,
-                                          fit: BoxFit.cover,
+                                      child: AuthUserStreamWidget(
+                                        builder: (context) => ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(40.0),
+                                          child: Image.network(
+                                            currentUserPhoto,
+                                            width: 40.0,
+                                            height: 40.0,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -239,8 +242,8 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                     child: FlutterFlowIconButton(
                                       borderRadius: 20.0,
                                       borderWidth: 1.0,
-                                      buttonSize: 50.0,
-                                      fillColor: const Color(0xFF18AA99),
+                                      buttonSize: 40.0,
+                                      fillColor: const Color(0xC318AA99),
                                       hoverColor: const Color(0xAC4494F3),
                                       icon: Icon(
                                         Icons.add,
@@ -249,18 +252,29 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                         size: 20.0,
                                       ),
                                       onPressed: () async {
-                                        context.pushNamed(
-                                          'HostCreateAds',
-                                          extra: <String, dynamic>{
-                                            kTransitionInfoKey: const TransitionInfo(
-                                              hasTransition: true,
-                                              transitionType:
-                                                  PageTransitionType.fade,
-                                              duration:
-                                                  Duration(milliseconds: 200),
-                                            ),
+                                        await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          enableDrag: false,
+                                          context: context,
+                                          builder: (context) {
+                                            return GestureDetector(
+                                              onTap: () => _model.unfocusNode
+                                                      .canRequestFocus
+                                                  ? FocusScope.of(context)
+                                                      .requestFocus(
+                                                          _model.unfocusNode)
+                                                  : FocusScope.of(context)
+                                                      .unfocus(),
+                                              child: Padding(
+                                                padding:
+                                                    MediaQuery.viewInsetsOf(
+                                                        context),
+                                                child: const HostCreateWidget(),
+                                              ),
+                                            );
                                           },
-                                        );
+                                        ).then((value) => safeSetState(() {}));
                                       },
                                     ),
                                   ),
@@ -732,6 +746,13 @@ class _HostDashbWidgetState extends State<HostDashbWidget>
                                                 ],
                                                 controller:
                                                     _model.tabBarController,
+                                                onTap: (i) async {
+                                                  [
+                                                    () async {},
+                                                    () async {},
+                                                    () async {}
+                                                  ][i]();
+                                                },
                                               ),
                                             ),
                                             Expanded(

@@ -162,6 +162,8 @@ class _MapsWidgetState extends State<MapsWidget> {
                                           refLocation: googleMapHostsAdsRecord,
                                           adOwnId:
                                               googleMapHostsAdsRecord.adUserId,
+                                          adImage:
+                                              googleMapHostsAdsRecord.adImage,
                                         ),
                                       ),
                                     );

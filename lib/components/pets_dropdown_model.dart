@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class PetsDropdownModel extends FlutterFlowModel<PetsDropdownWidget> {
   ///  State fields for stateful widgets in this component.
 
+  final formKey = GlobalKey<FormState>();
   // State field(s) for DropDown widget.
   String? dropDownValue;
   FormFieldController<String>? dropDownValueController;

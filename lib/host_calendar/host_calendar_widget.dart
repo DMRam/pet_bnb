@@ -1,8 +1,11 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/components/host_nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -152,6 +155,9 @@ class _HostCalendarWidgetState extends State<HostCalendarWidget>
                             ),
                           ],
                           controller: _model.tabBarController,
+                          onTap: (i) async {
+                            [() async {}, () async {}][i]();
+                          },
                         ),
                       ),
                       Expanded(
@@ -183,34 +189,62 @@ class _HostCalendarWidgetState extends State<HostCalendarWidget>
                                           )
                                         ],
                                       ),
-                                      child: FlutterFlowCalendar(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        iconColor: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        weekFormat: false,
-                                        weekStartsMonday: true,
-                                        onChange:
-                                            (DateTimeRange? newSelectedDate) {
-                                          setState(() =>
-                                              _model.calendarSelectedDay1 =
-                                                  newSelectedDate);
+                                      child: StreamBuilder<
+                                          List<BookingPetbnbRecord>>(
+                                        stream: queryBookingPetbnbRecord(
+                                          queryBuilder: (bookingPetbnbRecord) =>
+                                              bookingPetbnbRecord.where(
+                                            'ad_host_id',
+                                            isEqualTo: currentUserUid,
+                                          ),
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50.0,
+                                                height: 50.0,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                          Color>(
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          List<BookingPetbnbRecord>
+                                              customVerticalCalendarBookingPetbnbRecordList =
+                                              snapshot.data!;
+                                          return SizedBox(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                1.0,
+                                            height: 500.0,
+                                            child: custom_widgets
+                                                .CustomVerticalCalendar(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 500.0,
+                                              disabledStartDate:
+                                                  customVerticalCalendarBookingPetbnbRecordList
+                                                      .map((e) =>
+                                                          e.startDateString)
+                                                      .toList(),
+                                              disabledEndDate:
+                                                  customVerticalCalendarBookingPetbnbRecordList
+                                                      .map((e) =>
+                                                          e.endDateString)
+                                                      .toList(),
+                                              updatePageUI: () async {},
+                                            ),
+                                          );
                                         },
-                                        titleStyle: FlutterFlowTheme.of(context)
-                                            .titleLarge,
-                                        dayOfWeekStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .labelMedium,
-                                        dateStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                        selectedDateStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .titleSmall,
-                                        inactiveDateStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .labelMedium,
-                                        locale: FFLocalizations.of(context)
-                                            .languageCode,
                                       ),
                                     ),
                                     Column(
@@ -625,7 +659,7 @@ class _HostCalendarWidgetState extends State<HostCalendarWidget>
                                         onChange:
                                             (DateTimeRange? newSelectedDate) {
                                           setState(() =>
-                                              _model.calendarSelectedDay2 =
+                                              _model.calendarSelectedDay =
                                                   newSelectedDate);
                                         },
                                         titleStyle: FlutterFlowTheme.of(context)

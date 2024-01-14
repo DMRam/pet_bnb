@@ -47,39 +47,43 @@ class _PetsDropdownWidgetState extends State<PetsDropdownWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-      child: FlutterFlowDropDown<String>(
-        controller: _model.dropDownValueController ??=
-            FormFieldController<String>(
-          _model.dropDownValue ??= 'None',
+    return Form(
+      key: _model.formKey,
+      autovalidateMode: AutovalidateMode.disabled,
+      child: Padding(
+        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+        child: FlutterFlowDropDown<String>(
+          controller: _model.dropDownValueController ??=
+              FormFieldController<String>(
+            _model.dropDownValue ??= 'None',
+          ),
+          options: widget.parameter1!,
+          onChanged: (val) async {
+            setState(() => _model.dropDownValue = val);
+            _model.updatePage(() {
+              FFAppState().petSelected = _model.dropDownValue!;
+            });
+          },
+          width: 300.0,
+          height: 50.0,
+          textStyle: FlutterFlowTheme.of(context).bodyMedium,
+          hintText: 'Please select...',
+          icon: Icon(
+            Icons.keyboard_arrow_down_rounded,
+            color: FlutterFlowTheme.of(context).secondaryText,
+            size: 24.0,
+          ),
+          fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+          elevation: 2.0,
+          borderColor: FlutterFlowTheme.of(context).alternate,
+          borderWidth: 2.0,
+          borderRadius: 8.0,
+          margin: const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
+          hidesUnderline: true,
+          isOverButton: true,
+          isSearchable: false,
+          isMultiSelect: false,
         ),
-        options: widget.parameter1!,
-        onChanged: (val) async {
-          setState(() => _model.dropDownValue = val);
-          _model.updatePage(() {
-            FFAppState().petSelected = _model.dropDownValue!;
-          });
-        },
-        width: 300.0,
-        height: 50.0,
-        textStyle: FlutterFlowTheme.of(context).bodyMedium,
-        hintText: 'Please select...',
-        icon: Icon(
-          Icons.keyboard_arrow_down_rounded,
-          color: FlutterFlowTheme.of(context).secondaryText,
-          size: 24.0,
-        ),
-        fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-        elevation: 2.0,
-        borderColor: FlutterFlowTheme.of(context).alternate,
-        borderWidth: 2.0,
-        borderRadius: 8.0,
-        margin: const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
-        hidesUnderline: true,
-        isOverButton: true,
-        isSearchable: false,
-        isMultiSelect: false,
       ),
     );
   }

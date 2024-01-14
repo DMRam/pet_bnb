@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -8,6 +9,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/upload_data.dart';
 import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
@@ -371,28 +373,112 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                               padding:
                                                                   const EdgeInsets
                                                                       .all(8.0),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10.0),
+                                                              child: InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                onTap:
+                                                                    () async {
+                                                                  final selectedMedia =
+                                                                      await selectMediaWithSourceBottomSheet(
+                                                                    context:
+                                                                        context,
+                                                                    allowPhoto:
+                                                                        true,
+                                                                  );
+                                                                  if (selectedMedia !=
+                                                                          null &&
+                                                                      selectedMedia.every((m) => validateFileFormat(
+                                                                          m.storagePath,
+                                                                          context))) {
+                                                                    setState(() =>
+                                                                        _model.isDataUploading =
+                                                                            true);
+                                                                    var selectedUploadedFiles =
+                                                                        <FFUploadedFile>[];
+
+                                                                    var downloadUrls =
+                                                                        <String>[];
+                                                                    try {
+                                                                      selectedUploadedFiles = selectedMedia
+                                                                          .map((m) => FFUploadedFile(
+                                                                                name: m.storagePath.split('/').last,
+                                                                                bytes: m.bytes,
+                                                                                height: m.dimensions?.height,
+                                                                                width: m.dimensions?.width,
+                                                                                blurHash: m.blurHash,
+                                                                              ))
+                                                                          .toList();
+
+                                                                      downloadUrls = (await Future
+                                                                              .wait(
+                                                                        selectedMedia
+                                                                            .map(
+                                                                          (m) async => await uploadData(
+                                                                              m.storagePath,
+                                                                              m.bytes),
+                                                                        ),
+                                                                      ))
+                                                                          .where((u) =>
+                                                                              u !=
+                                                                              null)
+                                                                          .map((u) =>
+                                                                              u!)
+                                                                          .toList();
+                                                                    } finally {
+                                                                      _model.isDataUploading =
+                                                                          false;
+                                                                    }
+                                                                    if (selectedUploadedFiles.length ==
+                                                                            selectedMedia
+                                                                                .length &&
+                                                                        downloadUrls.length ==
+                                                                            selectedMedia.length) {
+                                                                      setState(
+                                                                          () {
+                                                                        _model.uploadedLocalFile =
+                                                                            selectedUploadedFiles.first;
+                                                                        _model.uploadedFileUrl =
+                                                                            downloadUrls.first;
+                                                                      });
+                                                                    } else {
+                                                                      setState(
+                                                                          () {});
+                                                                      return;
+                                                                    }
+                                                                  }
+                                                                },
                                                                 child:
-                                                                    CachedNetworkImage(
-                                                                  fadeInDuration:
-                                                                      const Duration(
-                                                                          milliseconds:
-                                                                              500),
-                                                                  fadeOutDuration:
-                                                                      const Duration(
-                                                                          milliseconds:
-                                                                              500),
-                                                                  imageUrl: '',
-                                                                  width: double
-                                                                      .infinity,
-                                                                  height: double
-                                                                      .infinity,
-                                                                  fit: BoxFit
-                                                                      .cover,
+                                                                    ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              10.0),
+                                                                  child:
+                                                                      CachedNetworkImage(
+                                                                    fadeInDuration:
+                                                                        const Duration(
+                                                                            milliseconds:
+                                                                                500),
+                                                                    fadeOutDuration:
+                                                                        const Duration(
+                                                                            milliseconds:
+                                                                                500),
+                                                                    imageUrl:
+                                                                        '',
+                                                                    width: double
+                                                                        .infinity,
+                                                                    height: double
+                                                                        .infinity,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
@@ -405,17 +491,23 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                               ),
                                               Column(
                                                 mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   Align(
                                                     alignment:
                                                         const AlignmentDirectional(
                                                             0.0, 0.0),
                                                     child: Text(
-                                                      'Host address',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleLarge,
+                                                      'Enter your host address',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelLarge
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            fontSize: 22.0,
+                                                          ),
                                                     ),
                                                   ),
                                                   Align(
@@ -427,7 +519,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                           const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   8.0,
-                                                                  0.0,
+                                                                  15.0,
                                                                   8.0,
                                                                   0.0),
                                                       child: TextFormField(
@@ -471,7 +563,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                         decoration:
                                                             InputDecoration(
                                                           labelText:
-                                                              'Enter host address...',
+                                                              '123 street, your city...',
                                                           labelStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -492,7 +584,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
-                                                                        0.0),
+                                                                        8.0),
                                                           ),
                                                           focusedBorder:
                                                               UnderlineInputBorder(
@@ -506,7 +598,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
-                                                                        0.0),
+                                                                        8.0),
                                                           ),
                                                           errorBorder:
                                                               UnderlineInputBorder(
@@ -520,7 +612,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
-                                                                        0.0),
+                                                                        8.0),
                                                           ),
                                                           focusedErrorBorder:
                                                               UnderlineInputBorder(
@@ -534,7 +626,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
-                                                                        0.0),
+                                                                        8.0),
                                                           ),
                                                         ),
                                                         style:
@@ -639,9 +731,14 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                             }
                                                           },
                                                           text:
-                                                              'Confirm your address',
+                                                              'Click to validate your address',
                                                           options:
                                                               FFButtonOptions(
+                                                            width: MediaQuery
+                                                                        .sizeOf(
+                                                                            context)
+                                                                    .width *
+                                                                1.0,
                                                             height: 40.0,
                                                             padding:
                                                                 const EdgeInsetsDirectional
@@ -657,9 +754,8 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                                         0.0,
                                                                         0.0,
                                                                         0.0),
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary,
+                                                            color: const Color(
+                                                                0xFF18AA99),
                                                             textStyle:
                                                                 FlutterFlowTheme.of(
                                                                         context)
@@ -702,11 +798,14 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                             .fromSTEB(0.0, 20.0,
                                                                 0.0, 0.0),
                                                     child: Text(
-                                                      'Service category',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleLarge,
+                                                      'Service category ',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleLarge
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            fontSize: 20.0,
+                                                          ),
                                                     ),
                                                   ),
                                                   Container(
@@ -735,7 +834,7 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                                       context)
                                                                   .bodyMedium,
                                                           hintText:
-                                                              'Please select category...',
+                                                              'Host, product, service...',
                                                           icon: Icon(
                                                             Icons
                                                                 .keyboard_arrow_down_rounded,
@@ -835,21 +934,20 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                                 );
                                                               }
                                                               List<PetsListRecord>
-                                                                  dropDownPetsListRecordList =
+                                                                  dropDownPetPetsListRecordList =
                                                                   snapshot
                                                                       .data!;
                                                               return FlutterFlowDropDown<
                                                                   String>(
-                                                                controller: _model
-                                                                        .dropDownValueController ??=
+                                                                multiSelectController: _model
+                                                                        .dropDownPetValueController ??=
                                                                     FormFieldController<
-                                                                            String>(
+                                                                            List<String>>(
                                                                         null),
-                                                                options: dropDownPetsListRecordList
+                                                                options: dropDownPetPetsListRecordList
                                                                     .map((e) =>
                                                                         e.pets)
                                                                     .toList(),
-                                                                onChanged: null,
                                                                 width: 300.0,
                                                                 height: 50.0,
                                                                 textStyle: FlutterFlowTheme.of(
@@ -891,9 +989,9 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                                     false,
                                                                 isMultiSelect:
                                                                     true,
-                                                                onChangedForMultiSelect: (val) =>
+                                                                onMultiSelectChanged: (val) =>
                                                                     setState(() =>
-                                                                        _model.dropDownValue =
+                                                                        _model.dropDownPetValue =
                                                                             val),
                                                               );
                                                             },
@@ -1018,139 +1116,135 @@ class _HostCreateWidgetState extends State<HostCreateWidget>
                                                       .asValidator(context),
                                                 ),
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 16.0, 0.0, 0.0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  4.0,
-                                                                  0.0),
-                                                      child: FFButtonWidget(
-                                                        onPressed: () async {
-                                                          await HostsAdsRecord
-                                                              .collection
-                                                              .doc()
-                                                              .set({
-                                                            ...createHostsAdsRecordData(
-                                                              comments: _model
-                                                                  .descriptionController
-                                                                  .text,
-                                                              hostPlaceLocation: functions
-                                                                  .latLngFromDouble(
-                                                                      GeocodeAPICall
-                                                                          .apiLat(
-                                                                        formGeocodeAPIResponse
-                                                                            .jsonBody,
-                                                                      ),
-                                                                      GeocodeAPICall
-                                                                          .apiLng(
-                                                                        formGeocodeAPIResponse
-                                                                            .jsonBody,
-                                                                      )),
-                                                              hostData: _model
-                                                                  .descriptionController
-                                                                  .text,
-                                                              adUserId:
-                                                                  currentUserUid,
-                                                              petsAllowedStrAds: (_model
-                                                                              .dropDownValue !=
-                                                                          null &&
-                                                                      _model
-                                                                          .dropDownValue!
-                                                                          .isNotEmpty)
-                                                                  .toString(),
-                                                              adCategory: _model
-                                                                  .dropDownCategoryValue,
-                                                              adOwnersName:
-                                                                  currentUserDisplayName,
-                                                              adId: random_data
-                                                                  .randomString(
-                                                                20,
-                                                                20,
-                                                                true,
-                                                                false,
-                                                                true,
-                                                              ),
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                4.0, 0.0),
+                                                    child: FFButtonWidget(
+                                                      onPressed: () async {
+                                                        await HostsAdsRecord
+                                                            .collection
+                                                            .doc()
+                                                            .set({
+                                                          ...createHostsAdsRecordData(
+                                                            comments: _model
+                                                                .descriptionController
+                                                                .text,
+                                                            hostPlaceLocation: functions
+                                                                .latLngFromDouble(
+                                                                    GeocodeAPICall
+                                                                        .apiLat(
+                                                                      formGeocodeAPIResponse
+                                                                          .jsonBody,
+                                                                    ),
+                                                                    GeocodeAPICall
+                                                                        .apiLng(
+                                                                      formGeocodeAPIResponse
+                                                                          .jsonBody,
+                                                                    )),
+                                                            hostData: _model
+                                                                .descriptionController
+                                                                .text,
+                                                            adUserId:
+                                                                currentUserUid,
+                                                            petsAllowedStrAds:
+                                                                (_model.dropDownPetValue !=
+                                                                            null &&
+                                                                        (_model.dropDownPetValue)!
+                                                                            .isNotEmpty)
+                                                                    .toString(),
+                                                            adCategory: _model
+                                                                .dropDownCategoryValue,
+                                                            adOwnersName:
+                                                                currentUserDisplayName,
+                                                            adId: random_data
+                                                                .randomString(
+                                                              20,
+                                                              20,
+                                                              true,
+                                                              false,
+                                                              true,
                                                             ),
-                                                            ...mapToFirestore(
-                                                              {
-                                                                'host_place': [
-                                                                  '../kjhkjhkjhk'
-                                                                ],
-                                                                'pets_allowed':
-                                                                    _model
-                                                                        .dropDownValue,
-                                                              },
-                                                            ),
-                                                          });
-                                                          if (formGeocodeAPIResponse
-                                                              .succeeded) {
-                                                            context.pushNamed(
-                                                                'HostDashb');
-
-                                                            return;
-                                                          } else {
-                                                            return;
-                                                          }
-                                                        },
-                                                        text: 'Create Ad',
-                                                        options:
-                                                            FFButtonOptions(
-                                                          height: 50.0,
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      32.0,
-                                                                      0.0,
-                                                                      32.0,
-                                                                      0.0),
-                                                          iconPadding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          textStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmall
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Inter',
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ),
-                                                          elevation: 2.0,
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors
-                                                                .transparent,
-                                                            width: 1.0,
+                                                            adImage: _model
+                                                                .uploadedFileUrl,
+                                                            hostAddressString:
+                                                                _model
+                                                                    .hostAddressController
+                                                                    .text,
                                                           ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      40.0),
+                                                          ...mapToFirestore(
+                                                            {
+                                                              'host_place': [
+                                                                '../kjhkjhkjhk'
+                                                              ],
+                                                              'pets_allowed': _model
+                                                                  .dropDownPetValue,
+                                                            },
+                                                          ),
+                                                        });
+                                                        if (formGeocodeAPIResponse
+                                                            .succeeded) {
+                                                          context.pushNamed(
+                                                              'HostDashb');
+
+                                                          return;
+                                                        } else {
+                                                          return;
+                                                        }
+                                                      },
+                                                      text: 'Create Ad',
+                                                      options: FFButtonOptions(
+                                                        width:
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .width *
+                                                                1.0,
+                                                        height: 50.0,
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    32.0,
+                                                                    0.0,
+                                                                    32.0,
+                                                                    0.0),
+                                                        iconPadding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                        elevation: 2.0,
+                                                        borderSide: const BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 1.0,
                                                         ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(40.0),
                                                       ),
                                                     ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),

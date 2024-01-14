@@ -70,6 +70,16 @@ class HostsAdsRecord extends FirestoreRecord {
   String get adId => _adId ?? '';
   bool hasAdId() => _adId != null;
 
+  // "ad_image" field.
+  String? _adImage;
+  String get adImage => _adImage ?? '';
+  bool hasAdImage() => _adImage != null;
+
+  // "host_address_string" field.
+  String? _hostAddressString;
+  String get hostAddressString => _hostAddressString ?? '';
+  bool hasHostAddressString() => _hostAddressString != null;
+
   void _initializeFields() {
     _hostPlace = getDataList(snapshotData['host_place']);
     _servicesIncluded = getDataList(snapshotData['services_included']);
@@ -82,6 +92,8 @@ class HostsAdsRecord extends FirestoreRecord {
     _adCategory = snapshotData['ad_category'] as String?;
     _adOwnersName = snapshotData['adOwnersName'] as String?;
     _adId = snapshotData['ad_id'] as String?;
+    _adImage = snapshotData['ad_image'] as String?;
+    _hostAddressString = snapshotData['host_address_string'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -127,6 +139,8 @@ Map<String, dynamic> createHostsAdsRecordData({
   String? adCategory,
   String? adOwnersName,
   String? adId,
+  String? adImage,
+  String? hostAddressString,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -138,6 +152,8 @@ Map<String, dynamic> createHostsAdsRecordData({
       'ad_category': adCategory,
       'adOwnersName': adOwnersName,
       'ad_id': adId,
+      'ad_image': adImage,
+      'host_address_string': hostAddressString,
     }.withoutNulls,
   );
 
@@ -160,7 +176,9 @@ class HostsAdsRecordDocumentEquality implements Equality<HostsAdsRecord> {
         e1?.petsAllowedStrAds == e2?.petsAllowedStrAds &&
         e1?.adCategory == e2?.adCategory &&
         e1?.adOwnersName == e2?.adOwnersName &&
-        e1?.adId == e2?.adId;
+        e1?.adId == e2?.adId &&
+        e1?.adImage == e2?.adImage &&
+        e1?.hostAddressString == e2?.hostAddressString;
   }
 
   @override
@@ -175,7 +193,9 @@ class HostsAdsRecordDocumentEquality implements Equality<HostsAdsRecord> {
         e?.petsAllowedStrAds,
         e?.adCategory,
         e?.adOwnersName,
-        e?.adId
+        e?.adId,
+        e?.adImage,
+        e?.hostAddressString
       ]);
 
   @override

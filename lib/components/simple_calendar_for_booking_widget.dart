@@ -51,7 +51,7 @@ class _SimpleCalendarForBookingWidgetState
 
     return Container(
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).lineColor,
+        color: FlutterFlowTheme.of(context).primaryBtnText,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

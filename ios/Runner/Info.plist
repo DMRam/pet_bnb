@@ -59,6 +59,10 @@
 
 	<key>NSLocationWhenInUseUsageDescription</key>
     <string>Inorder to sarch nearby places, we need to use your current location...</string>
+	<key>NSCameraUsageDescription</key>
+    <string>In order to take a picture Petbnb need access to your device camera...</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>In order to upload data, this app requires permission to access the photo library.</string>
 
 
     <key>LSApplicationQueriesSchemes</key>

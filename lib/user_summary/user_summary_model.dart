@@ -13,22 +13,32 @@ class UserSummaryModel extends FlutterFlowModel<UserSummaryWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  final formKey = GlobalKey<FormState>();
   // State field(s) for RatingBar widget.
   double? ratingBarValue;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
+  // State field(s) for PetsName widget.
+  FocusNode? petsNameFocusNode;
+  TextEditingController? petsNameController;
+  String? Function(BuildContext, String?)? petsNameControllerValidator;
+  String? _petsNameControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
 
   /// Initialization and disposal methods.
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    petsNameControllerValidator = _petsNameControllerValidator;
+  }
 
   @override
   void dispose() {
-    textFieldFocusNode?.dispose();
-    textController?.dispose();
+    petsNameFocusNode?.dispose();
+    petsNameController?.dispose();
   }
 
   /// Action blocks are added here.

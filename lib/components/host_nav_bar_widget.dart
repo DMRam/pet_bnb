@@ -44,7 +44,7 @@ class _HostNavBarWidgetState extends State<HostNavBarWidget> {
     return Align(
       alignment: const AlignmentDirectional(0.0, 1.0),
       child: Container(
-        height: 70.0,
+        height: 80.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
         ),

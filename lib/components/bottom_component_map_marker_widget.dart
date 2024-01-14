@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'bottom_component_map_marker_model.dart';
 export 'bottom_component_map_marker_model.dart';
@@ -14,10 +15,12 @@ class BottomComponentMapMarkerWidget extends StatefulWidget {
     super.key,
     required this.refLocation,
     required this.adOwnId,
+    required this.adImage,
   });
 
   final HostsAdsRecord? refLocation;
   final String? adOwnId;
+  final String? adImage;
 
   @override
   _BottomComponentMapMarkerWidgetState createState() =>
@@ -82,7 +85,7 @@ class _BottomComponentMapMarkerWidgetState
                 maxWidth: 570.0,
               ),
               decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
+                color: FlutterFlowTheme.of(context).primaryBtnText,
                 borderRadius: BorderRadius.circular(12.0),
                 border: Border.all(
                   color: const Color(0xFFE0E3E7),
@@ -92,8 +95,45 @@ class _BottomComponentMapMarkerWidgetState
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Align(
+                      alignment: const AlignmentDirectional(1.0, 0.0),
+                      child: FlutterFlowIconButton(
+                        borderColor:
+                            FlutterFlowTheme.of(context).primaryBackground,
+                        borderRadius: 30.0,
+                        borderWidth: 2.0,
+                        buttonSize: 44.0,
+                        icon: Icon(
+                          Icons.close_rounded,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          size: 24.0,
+                        ),
+                        onPressed: () async {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                    Container(
+                      height: 130.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.network(
+                          valueOrDefault<String>(
+                            widget.adImage,
+                            'NONE',
+                          ),
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          height: 200.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -130,33 +170,80 @@ class _BottomComponentMapMarkerWidgetState
                             ),
                           ),
                         ),
-                        FlutterFlowIconButton(
-                          borderColor:
-                              FlutterFlowTheme.of(context).primaryBackground,
-                          borderRadius: 30.0,
-                          borderWidth: 2.0,
-                          buttonSize: 44.0,
-                          icon: Icon(
-                            Icons.close_rounded,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            Navigator.pop(context);
-                          },
-                        ),
                       ],
                     ),
-                    Divider(
+                    const Divider(
                       height: 24.0,
-                      thickness: 2.0,
-                      color: FlutterFlowTheme.of(context).primaryBackground,
+                      thickness: 1.0,
+                      color: Color(0x85616264),
+                    ),
+                    Align(
+                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Align(
+                            alignment: const AlignmentDirectional(-1.0, 0.0),
+                            child: Text(
+                              'Host comments',
+                              style: FlutterFlowTheme.of(context).labelLarge,
+                            ),
+                          ),
+                          Container(
+                            decoration: const BoxDecoration(),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 10.0, 0.0, 10.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    elevation: 4.0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
+                                    child: Text(
+                                      cardModalBasicHostsAdsRecord.comments,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
+                                  ),
+                                  RatingBar.builder(
+                                    onRatingUpdate: (newValue) => setState(
+                                        () => _model.ratingBarValue = newValue),
+                                    itemBuilder: (context, index) => Icon(
+                                      Icons.star_rounded,
+                                      color:
+                                          FlutterFlowTheme.of(context).tertiary,
+                                    ),
+                                    direction: Axis.horizontal,
+                                    initialRating: _model.ratingBarValue ??=
+                                        3.0,
+                                    unratedColor:
+                                        FlutterFlowTheme.of(context).accent3,
+                                    itemCount: 5,
+                                    itemSize: 20.0,
+                                    glowColor:
+                                        FlutterFlowTheme.of(context).tertiary,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
                       child: Text(
-                        'Pets accepted for this hoster',
+                        'Host\'s accepted pets',
                         style:
                             FlutterFlowTheme.of(context).labelMedium.override(
                                   fontFamily: 'Inter',
@@ -164,63 +251,40 @@ class _BottomComponentMapMarkerWidgetState
                                 ),
                       ),
                     ),
-                    Builder(
-                      builder: (context) {
-                        final listOfPetsAccepted =
-                            cardModalBasicHostsAdsRecord.petsAllowed.toList();
-                        return ListView.builder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: listOfPetsAccepted.length,
-                          itemBuilder: (context, listOfPetsAcceptedIndex) {
-                            final listOfPetsAcceptedItem =
-                                listOfPetsAccepted[listOfPetsAcceptedIndex];
-                            return Text(
-                              (cardModalBasicHostsAdsRecord.servicesIncluded
-                                      .sortedList()
-                                      .isNotEmpty)
-                                  .toString(),
-                              style: FlutterFlowTheme.of(context).labelMedium,
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Builder(
+                          builder: (context) {
+                            final listOfPetsAccepted =
+                                cardModalBasicHostsAdsRecord.petsAllowed
+                                    .toList();
+                            return ListView.builder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: listOfPetsAccepted.length,
+                              itemBuilder: (context, listOfPetsAcceptedIndex) {
+                                final listOfPetsAcceptedItem =
+                                    listOfPetsAccepted[listOfPetsAcceptedIndex];
+                                return Text(
+                                  listOfPetsAcceptedItem,
+                                  style:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                );
+                              },
                             );
                           },
-                        );
-                      },
+                        ),
+                      ],
                     ),
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          FFButtonWidget(
-                            onPressed: () async {
-                              Navigator.pop(context);
-                            },
-                            text: 'Cancel',
-                            options: FFButtonOptions(
-                              height: 40.0,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 0.0, 24.0, 0.0),
-                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              textStyle: FlutterFlowTheme.of(context).bodySmall,
-                              elevation: 0.0,
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                              hoverColor: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              hoverTextColor:
-                                  FlutterFlowTheme.of(context).primaryText,
-                            ),
-                          ),
                           FFButtonWidget(
                             onPressed: () async {
                               context.pushNamed(
@@ -246,12 +310,21 @@ class _BottomComponentMapMarkerWidgetState
                                     cardModalBasicHostsAdsRecord.adId,
                                     ParamType.String,
                                   ),
+                                  'adSelectedPicture': serializeParam(
+                                    widget.adImage,
+                                    ParamType.String,
+                                  ),
+                                  'addressString': serializeParam(
+                                    cardModalBasicHostsAdsRecord
+                                        .hostAddressString,
+                                    ParamType.String,
+                                  ),
                                 }.withoutNulls,
                               );
                             },
                             text: 'Book',
                             options: FFButtonOptions(
-                              width: 130.0,
+                              width: 291.0,
                               height: 40.0,
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),

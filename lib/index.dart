@@ -24,3 +24,5 @@ export '/user_summary/user_summary_widget.dart' show UserSummaryWidget;
 export '/calendar_range/calendar_range_widget.dart' show CalendarRangeWidget;
 export '/second_calendar_range_picker/second_calendar_range_picker_widget.dart'
     show SecondCalendarRangePickerWidget;
+export '/vertical_calendar/vertical_calendar_widget.dart'
+    show VerticalCalendarWidget;

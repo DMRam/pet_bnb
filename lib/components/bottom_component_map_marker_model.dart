@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 
 class BottomComponentMapMarkerModel
     extends FlutterFlowModel<BottomComponentMapMarkerWidget> {
+  ///  State fields for stateful widgets in this component.
+
+  // State field(s) for RatingBar widget.
+  double? ratingBarValue;
+
   /// Initialization and disposal methods.
 
   @override

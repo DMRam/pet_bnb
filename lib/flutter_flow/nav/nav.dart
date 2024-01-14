@@ -181,6 +181,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             adCategory: params.getParam('adCategory', ParamType.String),
             adIdRequiredFromSum:
                 params.getParam('adIdRequiredFromSum', ParamType.String),
+            adSelectedPicture:
+                params.getParam('adSelectedPicture', ParamType.String),
+            addressString: params.getParam('addressString', ParamType.String),
           ),
         ),
         FFRoute(
@@ -192,6 +195,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'SecondCalendarRangePicker',
           path: '/secondCalendarRangePicker',
           builder: (context, params) => const SecondCalendarRangePickerWidget(),
+        ),
+        FFRoute(
+          name: 'VerticalCalendar',
+          path: '/verticalCalendar',
+          builder: (context, params) => VerticalCalendarWidget(
+            adOwnerId: params.getParam('adOwnerId', ParamType.String),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
